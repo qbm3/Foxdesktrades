@@ -272,7 +272,7 @@ html {
     transform: scale(1.12, 0.86);
   }
   50% {
-    transform: translateY(-34px) scale(0.94, 1.08) rotate(-4deg);
+    transform: translateY(calc(var(--fox) * -0.26)) scale(0.94, 1.08) rotate(-4deg); /* jump height scales with fox size */
   }
   75% {
     transform: translateY(0) scale(1.08, 0.92);
