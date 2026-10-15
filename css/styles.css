@@ -58,6 +58,243 @@ html {
   transform: rotate(180deg);
 }
 
+/* ---------- Hero ---------- */
+.hero-inner {
+  min-height: calc(100svh - 105px);
+  padding-block: 56px 48px;
+}
+@media (min-width: 1024px) {
+  .hero-inner {
+    min-height: min(calc(100svh - 105px), 820px);
+    padding-block: 72px 64px;
+  }
+}
+.hero-title {
+  margin-top: 28px;
+  font-size: clamp(40px, 6vw, 84px); /* 77px on a 1280px laptop, 84px on 1440px+ */
+}
+.hero-copy {
+  margin-top: 24px;
+}
+.hero-ctas {
+  margin-top: 36px;
+}
+.hero-bottom {
+  margin-top: 44px;
+}
+@media (min-width: 768px) {
+  .hero-title {
+    margin-top: 36px;
+  }
+  .hero-copy {
+    margin-top: 28px;
+  }
+  .hero-ctas {
+    margin-top: 48px;
+  }
+  .hero-bottom {
+    margin-top: 56px;
+  }
+}
+
+/* trust row separators: 1.5px line, light peach at the top to brand orange at the bottom */
+@media (min-width: 640px) {
+  .trust-divider {
+    position: relative;
+  }
+  .trust-divider::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: -8px;
+    bottom: -8px;
+    width: 1.5px;
+    background: linear-gradient(180deg, #fed7bf 0%, #ff6201 100%);
+  }
+}
+
+/* live investment card progress bar */
+.toast-track {
+  position: relative;
+  height: 3px;
+  border-radius: 3px;
+  background: rgb(255 255 255 / 0.18);
+}
+#toast-bar {
+  position: absolute;
+  inset: 0 auto 0 0;
+  width: 0;
+  border-radius: 3px;
+  background: #ff6201;
+}
+#toast-bar::after {
+  content: "";
+  position: absolute;
+  right: -6px;
+  top: 50%;
+  width: 12px;
+  height: 12px;
+  margin-top: -6px;
+  border-radius: 999px;
+  background: #ff6201;
+  border: 2px solid #ffd2b3;
+  box-shadow: 0 0 10px rgb(255 98 1 / 0.7);
+}
+#toast-bar.run {
+  animation: toastBar var(--toast-ms, 5000ms) linear forwards;
+}
+@keyframes toastBar {
+  to {
+    width: 100%;
+  }
+}
+
+/* ---------- Animated fox mascot (section 11) ---------- */
+.fox-live {
+  --fox: 132px; /* size of the fox; override per placement */
+  position: relative;
+  flex-shrink: 0;
+  width: var(--fox);
+  height: calc(var(--fox) + 18px); /* room for the ground shadow */
+  cursor: pointer;
+}
+/* inline version sitting inside the section 2 headline (no ground shadow) */
+.fox-live.fox-inline {
+  --fox: 48px;
+  height: var(--fox);
+}
+.fox-live.fox-inline .fox-shadow {
+  display: none;
+}
+@media (min-width: 640px) {
+  .fox-live.fox-inline {
+    --fox: 68px;
+  }
+}
+@media (min-width: 1024px) {
+  .fox-live.fox-inline {
+    --fox: 104px;
+  }
+}
+.fox-lean {
+  width: var(--fox);
+  height: var(--fox);
+  transition: transform 0.5s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+.fox-body {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transform-origin: 50% 92%;
+  animation: foxIdle 4.2s ease-in-out infinite;
+}
+.fox-body img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+/* eyelids sit over the eye holes and sweep down for a quick blink */
+.fox-lid {
+  clip-path: inset(0 0 100% 0);
+  animation: foxBlink 5.2s infinite;
+}
+.fox-shadow {
+  position: absolute;
+  left: 50%;
+  bottom: 0;
+  width: 70px;
+  height: 10px;
+  margin-left: -35px;
+  border-radius: 50%;
+  background: rgb(74 28 0 / 0.16);
+  filter: blur(3px);
+  animation: foxShadow 4.2s ease-in-out infinite;
+}
+.fox-live.hop .fox-body {
+  animation: foxHop 0.75s cubic-bezier(0.3, 0, 0.3, 1);
+}
+.fox-live.hop .fox-shadow {
+  animation: foxShadowHop 0.75s cubic-bezier(0.3, 0, 0.3, 1);
+}
+@keyframes foxIdle {
+  0%,
+  100% {
+    transform: rotate(-3deg) scale(1, 1);
+  }
+  25% {
+    transform: translateY(-7px) rotate(0deg) scale(0.98, 1.03);
+  }
+  50% {
+    transform: rotate(3deg) scale(1, 1);
+  }
+  75% {
+    transform: translateY(-7px) rotate(0deg) scale(0.98, 1.03);
+  }
+}
+@keyframes foxShadow {
+  0%,
+  50%,
+  100% {
+    transform: scaleX(1);
+    opacity: 1;
+  }
+  25%,
+  75% {
+    transform: scaleX(0.85);
+    opacity: 0.7;
+  }
+}
+@keyframes foxBlink {
+  0%,
+  88%,
+  100% {
+    clip-path: inset(0 0 100% 0);
+  }
+  90.5% {
+    clip-path: inset(0 0 0 0);
+  }
+  93% {
+    clip-path: inset(0 0 100% 0);
+  }
+  95% {
+    clip-path: inset(0 0 0 0);
+  }
+  97% {
+    clip-path: inset(0 0 100% 0);
+  }
+}
+@keyframes foxHop {
+  0% {
+    transform: scale(1, 1);
+  }
+  20% {
+    transform: scale(1.12, 0.86);
+  }
+  50% {
+    transform: translateY(-34px) scale(0.94, 1.08) rotate(-4deg);
+  }
+  75% {
+    transform: translateY(0) scale(1.08, 0.92);
+  }
+  100% {
+    transform: scale(1, 1);
+  }
+}
+@keyframes foxShadowHop {
+  50% {
+    transform: scaleX(0.55);
+    opacity: 0.4;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .fox-body,
+  .fox-lid,
+  .fox-shadow {
+    animation: none;
+  }
+}
+
 /* ---------- Buttons ---------- */
 .btn-glow {
   box-shadow: 0 10px 40px -6px rgb(255 98 1 / 0.55);
@@ -382,7 +619,7 @@ html {
   color: #ff6201;
   font-size: 34px;
   font-weight: 600;
-  letter-spacing: -0.02em;
+  letter-spacing: -0.05em;
 }
 .plan-list {
   display: flex;
@@ -412,7 +649,7 @@ html {
 }
 .plan-btn {
   margin-top: auto;
-  padding: 18px 0;
+  padding: 12px 0;
   border-radius: 6px;
   background: #ff6201;
   font-size: 16px;

@@ -159,7 +159,7 @@
           <div class="absolute inset-0 bg-black/55 lg:bg-transparent"></div>
         </div>
 
-        <div class="mx-auto flex min-h-[calc(100svh-104px)] max-w-[1440px] flex-col justify-center px-5 py-16 md:px-10 lg:min-h-[760px] lg:py-24 xl:px-14">
+        <div class="hero-inner mx-auto flex max-w-[1440px] flex-col justify-center px-5 md:px-10 xl:px-14">
           <!-- Badge -->
           <div class="fade-up inline-flex w-fit max-w-full items-center gap-3 rounded-full border border-white/25 bg-white/5 p-1 pr-4 text-sm md:gap-5 md:pr-5 md:text-[15px]">
             <span class="flex shrink-0 items-center gap-2 rounded-full bg-brand px-3 py-1.5 md:px-4">
@@ -173,58 +173,59 @@
           </div>
 
           <!-- Headline -->
-          <h1 class="fade-up mt-8 text-[40px] font-bold leading-[1.02] tracking-[-0.04em] sm:text-6xl md:mt-10 lg:text-[88px]" style="--d: 80ms">
+          <h1 class="hero-title fade-up font-bold leading-[1.02] tracking-[-0.04em]" style="--d: 80ms">
             Build Wealth with<br />
             <span class="text-[#a9a9a9]">Smart Trade Insights</span>
           </h1>
 
-          <p class="fade-up mt-6 max-w-[720px] text-base leading-relaxed text-white/80 md:mt-8 md:text-xl" style="--d: 160ms">
+          <p class="hero-copy fade-up max-w-[680px] text-base leading-relaxed text-white/80 md:text-lg" style="--d: 160ms">
             Global platform for funding your wallet, growing through investment plans, following live market movement,
             and copying professional experts accounts.
           </p>
 
           <!-- CTAs -->
-          <div class="fade-up mt-10 flex flex-wrap gap-4 md:mt-16 md:gap-5" style="--d: 240ms">
-            <a href="signup.html" class="btn-glow rounded-md bg-brand px-10 py-3.5 text-base font-medium transition hover:bg-brand-dark md:px-12 md:py-4">
+          <div class="hero-ctas fade-up grid grid-cols-2 gap-3 sm:flex sm:gap-5" style="--d: 240ms">
+            <a href="signup.html" class="btn-glow rounded-md bg-brand px-4 py-3.5 text-center text-[15px] font-medium transition hover:bg-brand-dark sm:px-12 sm:py-4 sm:text-base">
               Start Trading
             </a>
-            <a href="plans.html" class="rounded-md border border-white/30 bg-white/15 px-7 py-3.5 text-base font-medium transition hover:bg-white/25 md:py-4">
+            <a href="plans.html" class="rounded-md border border-white/30 bg-white/15 px-4 py-3.5 text-center text-[15px] font-medium transition hover:bg-white/25 sm:px-7 sm:py-4 sm:text-base">
               Explore Options
             </a>
           </div>
 
-          <!-- Trust points -->
-          <ul class="fade-up mt-12 flex flex-col gap-5 sm:flex-row sm:items-center sm:gap-0 md:mt-16" style="--d: 320ms">
+          <!-- Trust points + live investment card share one row -->
+          <div class="hero-bottom fade-up flex items-center justify-between gap-8" style="--d: 320ms">
+          <ul class="flex flex-col gap-5 sm:flex-row sm:items-center sm:gap-0">
             <li class="flex items-center gap-3 sm:pr-5">
               <img src="assets/icons/secure-trading.svg" alt="" class="-mx-[14px] -my-4 size-[58px] shrink-0" />
               <span class="leading-tight">Secure Trading<br /><span class="text-white/60">Environment</span></span>
             </li>
-            <li class="flex items-center gap-3 sm:border-l sm:border-brand sm:px-5">
+            <li class="trust-divider flex items-center gap-3 sm:px-5">
               <img src="assets/icons/global-trading.svg" alt="" class="-mx-[14px] -my-4 size-[58px] shrink-0" />
               <span class="leading-tight">Global Trading<br /><span class="text-white/60">Market Access</span></span>
             </li>
-            <li class="flex items-center gap-3 sm:border-l sm:border-brand sm:pl-5">
+            <li class="trust-divider flex items-center gap-3 sm:pl-5">
               <img src="assets/icons/support-24-7.svg" alt="" class="-mx-[14px] -my-4 size-[58px] shrink-0" />
               <span class="leading-tight">24/7 Customer<br /><span class="text-white/60">Support</span></span>
             </li>
           </ul>
-        </div>
 
-        <!-- Live investment toast -->
-        <div
-          id="invest-toast"
-          class="toast absolute bottom-8 right-5 hidden items-center gap-4 rounded-xl bg-[#2b2b2b]/90 p-3 pr-4 shadow-2xl backdrop-blur md:right-10 md:flex xl:right-28"
-        >
-          <span
-            id="toast-avatar"
-            class="flex size-14 shrink-0 items-center justify-center rounded-full border-2 border-brand bg-brand-soft text-lg font-bold text-brand"
-            >LD</span
-          >
-          <div class="leading-tight">
-            <p id="toast-name" class="text-lg font-bold">Luiz Donovan</p>
-            <p class="text-sm text-white/70">Just made an investment</p>
+          <!-- Live investment card: names, flags and amounts rotate (edit the list in js/main.js) -->
+          <div id="invest-toast" class="toast hidden w-[336px] shrink-0 rounded-xl bg-[#2b2b2b]/90 p-3 shadow-2xl backdrop-blur lg:block" aria-live="polite">
+            <div class="flex items-center gap-3">
+              <img id="toast-avatar" src="assets/images/avatars/avatar-01.png" alt="" class="size-[50px] shrink-0 rounded-full" />
+              <div class="min-w-0 flex-1 leading-tight">
+                <p class="flex items-center gap-2">
+                  <span id="toast-name" class="truncate text-[17px] font-bold">Emily Carter</span>
+                  <img id="toast-flag" src="https://flagcdn.com/us.svg" alt="" class="h-3 w-[18px] shrink-0 rounded-[2px] object-cover" />
+                </p>
+                <p class="mt-1 text-[13px] text-white/70">Just made an investment</p>
+              </div>
+              <span id="toast-amount" class="self-start rounded-full bg-[#2CFA1F] px-2.5 py-0.5 text-[13px] font-semibold text-[#053d02]">$2,200</span>
+            </div>
+            <div class="toast-track ml-[62px] mt-2"><span id="toast-bar"></span></div>
           </div>
-          <span id="toast-amount" class="ml-4 rounded-full bg-[#2CFA1F] px-3 py-1 text-sm font-semibold text-[#053d02]">$2,200</span>
+          </div>
         </div>
       </section>
 
@@ -235,7 +236,16 @@
             Your trading platform<br />
             <span class="inline-flex items-center gap-3 sm:gap-5 lg:gap-7">
               to grow
-              <img src="assets/logos/icon-orange.png" alt="" class="size-12 sm:size-16 lg:size-[96px]" />
+              <span class="fox-live fox-inline" aria-hidden="true">
+                <span class="fox-lean block">
+                  <span class="fox-body block">
+                    <img src="assets/logos/fox.png" alt="" />
+                    <img src="assets/logos/fox-eye-left-lid.png" alt="" class="fox-lid" />
+                    <img src="assets/logos/fox-eye-right-lid.png" alt="" class="fox-lid" />
+                  </span>
+                </span>
+                <span class="fox-shadow"></span>
+              </span>
               wealth
             </span>
           </h2>
@@ -754,8 +764,18 @@
       <!-- ============ SECTION 11: START IN 3 STEPS ============ -->
       <section id="get-started" class="bg-white text-cocoa">
         <div class="mx-auto flex max-w-[1440px] flex-col items-center px-5 pt-20 text-center md:px-10 lg:pt-28 xl:px-14">
-          <img src="assets/logos/icon-orange.png" alt="" class="reveal size-14" />
-          <h2 class="reveal mt-6 text-[32px] font-semibold tracking-[-0.03em] md:text-[44px]" style="--d: 60ms">Start trading in 3 steps</h2>
+          <!-- Animated fox mascot (idle sway, blinking, leans toward the cursor, hops on hover/tap) -->
+          <div class="fox-live reveal" id="fox-live" aria-hidden="true">
+            <div class="fox-lean">
+              <div class="fox-body">
+                <img src="assets/logos/fox.png" alt="" />
+                <img src="assets/logos/fox-eye-left-lid.png" alt="" class="fox-lid" />
+                <img src="assets/logos/fox-eye-right-lid.png" alt="" class="fox-lid" />
+              </div>
+            </div>
+            <span class="fox-shadow"></span>
+          </div>
+          <h2 class="reveal mt-8text-[32px] font-semibold tracking-[-0.03em] md:text-[44px]" style="--d: 60ms">Start trading in 3 steps</h2>
           <p class="reveal mt-3 max-w-[500px] text-base leading-relaxed md:text-[17px]" style="--d: 120ms">
             Create an account, fund your wallet, grow your wealth. It's as easy as that with Foxdesk Trades.
           </p>
