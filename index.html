@@ -23,7 +23,7 @@
     <style type="text/tailwindcss">
       @theme {
         --font-sans: "Plus Jakarta Sans", ui-sans-serif, system-ui, sans-serif;
-        --color-brand: #ff6a00;
+        --color-brand: #ff6201;
         --color-brand-dark: #e85f00;
         --color-brand-soft: #ffe6d5;
         --color-cocoa: #4a1c00;
@@ -38,7 +38,7 @@
     <!-- ============ HEADER: ticker + nav ============ -->
     <header class="sticky top-0 z-50">
       <!-- Ticker (TradingView ticker tape) -->
-      <div class="ticker h-[44px] overflow-hidden bg-brand">
+      <div class="ticker h-10 overflow-hidden bg-black">
         <div class="tradingview-widget-container">
           <div class="tradingview-widget-container__widget"></div>
           <script
@@ -70,7 +70,7 @@
 
       <!-- Nav -->
       <nav class="border-b border-white/5 bg-panel/90 backdrop-blur-md">
-        <div class="mx-auto flex h-20 max-w-[1440px] items-center justify-between px-5 md:px-10 xl:px-[88px]">
+        <div class="mx-auto flex h-16 max-w-[1440px] items-center justify-between px-5 md:px-10 xl:px-14">
           <a href="index.html" class="shrink-0" aria-label="Foxdesk Trades home">
             <img src="assets/logos/logo-white.png" alt="Foxdesk Trades" class="h-7 w-auto md:h-8" />
           </a>
@@ -117,8 +117,8 @@
           </ul>
 
           <div class="flex items-center gap-3 md:gap-5">
-            <a href="login.html" class="hidden rounded-md bg-white/20 px-6 py-2.5 text-[17px] text-white transition hover:bg-white/30 sm:inline-block">Login</a>
-            <a href="signup.html" class="rounded-md bg-white px-5 py-2.5 text-[15px] font-medium text-ink transition hover:bg-white/90 md:px-6 md:text-[17px]">Sign Up</a>
+            <a href="login.html" class="hidden rounded-md bg-white/20 px-5 py-2 text-[15px] font-medium text-white transition hover:bg-white/30 sm:inline-block">Login</a>
+            <a href="signup.html" class="rounded-md bg-white px-5 py-2 text-[15px] font-medium text-ink transition hover:bg-white/90">Sign Up</a>
             <button id="menu-btn" class="-mr-2 p-2 lg:hidden" aria-label="Open menu" aria-expanded="false" aria-controls="mobile-menu">
               <svg class="size-7" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8"><path stroke-linecap="round" d="M4 7h16M4 12h16M4 17h16" /></svg>
             </button>
@@ -151,16 +151,15 @@
             loop
             playsinline
             preload="metadata"
-            poster="assets/video/hero-poster.jpg"
           >
-            <source src="assets/video/hero.mp4" type="video/mp4" />
+            <source src="assets/video/hero-loop.mp4" type="video/mp4" />
           </video>
           <!-- fades the video into the black on the left/bottom -->
           <div class="absolute inset-0 bg-gradient-to-r from-black via-black/40 to-transparent lg:via-black/10"></div>
           <div class="absolute inset-0 bg-black/55 lg:bg-transparent"></div>
         </div>
 
-        <div class="mx-auto flex min-h-[calc(100svh-124px)] max-w-[1440px] flex-col justify-center px-5 py-16 md:px-10 lg:min-h-[760px] lg:py-24 xl:px-20">
+        <div class="mx-auto flex min-h-[calc(100svh-104px)] max-w-[1440px] flex-col justify-center px-5 py-16 md:px-10 lg:min-h-[760px] lg:py-24 xl:px-14">
           <!-- Badge -->
           <div class="fade-up inline-flex w-fit max-w-full items-center gap-3 rounded-full border border-white/25 bg-white/5 p-1 pr-4 text-sm md:gap-5 md:pr-5 md:text-[15px]">
             <span class="flex shrink-0 items-center gap-2 rounded-full bg-brand px-3 py-1.5 md:px-4">
@@ -186,10 +185,10 @@
 
           <!-- CTAs -->
           <div class="fade-up mt-10 flex flex-wrap gap-4 md:mt-16 md:gap-5" style="--d: 240ms">
-            <a href="signup.html" class="btn-glow rounded-md bg-brand px-10 py-3.5 text-lg font-medium transition hover:bg-brand-dark md:px-14 md:py-4">
+            <a href="signup.html" class="btn-glow rounded-md bg-brand px-10 py-3.5 text-base font-medium transition hover:bg-brand-dark md:px-12 md:py-4">
               Start Trading
             </a>
-            <a href="plans.html" class="rounded-md border border-white/30 bg-white/15 px-7 py-3.5 text-lg font-medium transition hover:bg-white/25 md:py-4">
+            <a href="plans.html" class="rounded-md border border-white/30 bg-white/15 px-7 py-3.5 text-base font-medium transition hover:bg-white/25 md:py-4">
               Explore Options
             </a>
           </div>
@@ -225,12 +224,683 @@
             <p id="toast-name" class="text-lg font-bold">Luiz Donovan</p>
             <p class="text-sm text-white/70">Just made an investment</p>
           </div>
-          <span id="toast-amount" class="ml-4 rounded-full bg-[#14c814] px-3 py-1 text-sm font-semibold text-[#063806]">$2,200</span>
+          <span id="toast-amount" class="ml-4 rounded-full bg-[#2CFA1F] px-3 py-1 text-sm font-semibold text-[#053d02]">$2,200</span>
         </div>
       </section>
 
-      <!-- Sections 2–12 go here -->
+      <!-- ============ SECTION 2: PLATFORM FEATURES ============ -->
+      <section class="bg-[#f3f3f3] text-cocoa">
+        <div class="mx-auto max-w-[1440px] px-5 py-20 md:px-10 md:py-24 xl:px-14">
+          <h2 class="reveal text-center text-[38px] font-medium leading-[1.25] tracking-[-0.03em] sm:text-5xl lg:text-[72px]">
+            Your trading platform<br />
+            <span class="inline-flex items-center gap-3 sm:gap-5 lg:gap-7">
+              to grow
+              <img src="assets/logos/icon-orange.png" alt="" class="size-12 sm:size-16 lg:size-[96px]" />
+              wealth
+            </span>
+          </h2>
+
+          <div class="reveal mt-10 flex justify-center lg:mt-12">
+            <a href="signup.html" class="btn-glow inline-flex items-center gap-3 rounded-full bg-brand px-10 py-4 text-base font-medium text-white transition hover:bg-brand-dark">
+              Get Started
+              <svg class="size-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M5 12h14m-6-6 6 6-6 6" /></svg>
+            </a>
+          </div>
+
+          <div class="mt-16 grid gap-5 md:grid-cols-2 lg:mt-20 lg:grid-cols-3">
+            <article class="reveal card-lift flex min-h-[194px] items-center justify-between gap-4 rounded-3xl bg-white py-6 pl-[30px] pr-5">
+              <div>
+                <h3 class="text-2xl font-medium leading-tight tracking-[-0.02em] xl:text-[28px]">Live Trading</h3>
+                <p class="mt-2.5 max-w-[200px] text-sm leading-[1.65] text-[#6b5a50]">Access real-time market data and execute trades instantly.</p>
+              </div>
+              <img src="assets/3d/live-trading.png" alt="" loading="lazy" class="h-[120px] w-auto shrink-0 xl:h-[136px]" />
+            </article>
+            <article class="reveal card-lift flex min-h-[194px] items-center justify-between gap-4 rounded-3xl bg-white py-6 pl-[30px] pr-5" style="--d: 100ms">
+              <div>
+                <h3 class="text-2xl font-medium leading-tight tracking-[-0.02em] xl:text-[28px]">Wealth Management</h3>
+                <p class="mt-2.5 max-w-[200px] text-sm leading-[1.65] text-[#6b5a50]">Achieve your financial goals with advanced personalized plans.</p>
+              </div>
+              <img src="assets/3d/wealth-management.png" alt="" loading="lazy" class="h-[120px] w-auto shrink-0 xl:h-[136px]" />
+            </article>
+            <article class="reveal card-lift flex min-h-[194px] items-center justify-between gap-4 rounded-3xl bg-white py-6 pl-[30px] pr-5 md:col-span-2 lg:col-span-1" style="--d: 200ms">
+              <div>
+                <h3 class="text-2xl font-medium leading-tight tracking-[-0.02em] xl:text-[28px]">Copy Experts</h3>
+                <p class="mt-2.5 max-w-[200px] text-sm leading-[1.65] text-[#6b5a50]">Follow veteran traders with high success and copy their trades easily.</p>
+              </div>
+              <img src="assets/3d/copy-experts.png" alt="" loading="lazy" class="h-[120px] w-auto shrink-0 xl:h-[136px]" />
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============ SECTION 3: ABOUT / MISSION ============ -->
+      <section id="about" class="bg-white text-cocoa">
+        <div class="mx-auto max-w-[1440px] px-5 py-20 md:px-10 lg:py-28 xl:px-14">
+          <div class="reveal text-center">
+            <h2 class="text-[32px] font-medium leading-[1.2] tracking-[-0.03em] md:text-[44px]">
+              Experience the<br />Foxdesk Trade advantage
+            </h2>
+            <p class="mx-auto mt-4 max-w-[600px] text-base leading-relaxed text-[#5a4a40] md:text-[17px]">
+              Access global instruments, real-time charts and expert insights from one fast, secure platform, no risk, no pressure.
+            </p>
+          </div>
+
+          <!-- Values -->
+          <div class="mt-16 grid items-center gap-12 lg:mt-[120px] lg:grid-cols-2 lg:gap-[110px]">
+            <div class="reveal">
+              <span class="eyebrow">About Foxdesk Trading</span>
+              <h3 class="mt-7 text-[30px] font-medium tracking-[-0.02em] md:text-[36px]">Our values and goals</h3>
+              <p class="mt-5 text-base leading-[1.9] text-[#5a4a40] md:text-lg">
+                Our values are rooted in transparency, security, and user experience. We strive to provide a platform that is easy to use and
+                understand, while ensuring the highest levels of security for your investments. We are committed to empowering our users with
+                knowledge and tools needed to make informed investment decisions. By prioritizing innovation and cutting-edge features.
+              </p>
+              <a href="certificates.html" class="btn-glow mt-10 inline-block rounded-md bg-brand px-11 py-3.5 text-base font-medium text-white transition hover:bg-brand-dark">
+                View certificates
+              </a>
+            </div>
+            <img
+              src="assets/images/about-dashboard.jpg"
+              alt="Foxdesk funding dashboard showing total equity and token balances"
+              loading="lazy"
+              class="reveal w-full rounded-[26px]"
+              style="--d: 120ms"
+            />
+          </div>
+
+          <!-- Mission -->
+          <div class="mt-20 grid items-center gap-12 lg:mt-24 lg:grid-cols-2 lg:gap-[110px]">
+            <img
+              src="assets/images/about-laptop.jpg"
+              alt="Trader funding his Foxdesk wallet on a laptop"
+              loading="lazy"
+              class="reveal order-2 w-full rounded-[26px] lg:order-1"
+            />
+            <div class="reveal order-1 lg:order-2" style="--d: 120ms">
+              <span class="eyebrow">Our Mantra</span>
+              <h3 class="mt-7 text-[30px] font-medium tracking-[-0.02em] md:text-[36px]">Our mission and vision</h3>
+              <p class="mt-5 text-base leading-[1.9] text-[#5a4a40] md:text-lg">
+                Our mission is to make profitable trading accessible. By leveraging the power of copy trading, we enable you to learn from and
+                replicate the trades of experienced investors. We are committed to providing a transparent, secure, and user-friendly platform.
+                Our core values include innovation, integrity, education, and customer focus.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============ SECTION 4: TRADING INSTRUMENTS ============ -->
+      <section id="markets" class="bg-[#f3f3f3] text-cocoa">
+        <div class="mx-auto max-w-[1440px] px-5 py-20 md:px-10 lg:py-24 xl:px-14">
+          <h2 class="reveal text-center text-[32px] font-medium leading-[1.2] tracking-[-0.03em] md:text-[44px]">
+            Explore trading with<br />risk free trading instruments
+          </h2>
+
+          <div class="mt-12 flex flex-col gap-5 lg:mt-[84px]">
+            <!-- Stocks -->
+            <article id="stocks" class="reveal clip-top grid rounded-3xl border border-[#e2e2e2] bg-white lg:min-h-[349px] lg:grid-cols-2">
+              <div class="flex flex-col items-center justify-center px-6 pt-12 text-center lg:pb-12">
+                <h3 class="instrument-title">Trade Stocks<br /><span class="text-[#1a1a1a]">on global market</span></h3>
+                <p class="instrument-text">Access a wide range of stocks from global markets and take advantage of price appreciation.</p>
+                <a href="markets.html#stocks" class="try-btn">Try now <svg class="size-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M5 12h14m-6-6 6 6-6 6" /></svg></a>
+              </div>
+              <div class="relative mt-8 h-[300px] lg:mt-0 lg:h-auto">
+                <img src="assets/images/woman-1.png" alt="Foxdesk Trades support specialist" loading="lazy" class="absolute bottom-0 right-0 h-full w-auto lg:h-[387px]" />
+                <div class="live-widget absolute hidden sm:block left-4 top-6 lg:left-auto lg:right-[290px] lg:top-[50px]" data-widget></div>
+              </div>
+            </article>
+
+            <div class="grid gap-5 lg:grid-cols-2">
+              <!-- Left column -->
+              <div class="flex flex-col gap-5">
+                <!-- Metals -->
+                <article id="metals" class="reveal flex flex-col items-center rounded-3xl border border-[#e2e2e2] bg-white px-6 pt-14 text-center lg:min-h-[448px] lg:pt-[84px]">
+                  <h3 class="instrument-title">Trade Metals</h3>
+                  <p class="instrument-text">Gold (XAU), Silver (XAG), Platinum (XPT) and other highly traded metals</p>
+                  <a href="markets.html#metals" class="try-link">Try now <svg class="size-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M5 12h14m-6-6 6 6-6 6" /></svg></a>
+                  <img src="assets/3d/trade-metals.png" alt="" loading="lazy" class="mb-5 mt-6 w-[230px]" />
+                </article>
+
+                <!-- IPOs -->
+                <article id="ipos" class="reveal flex flex-col items-center rounded-3xl border border-[#e2e2e2] bg-white px-6 pb-10 pt-12 text-center lg:min-h-[228px]">
+                  <h3 class="instrument-title">Trade IPOs</h3>
+                  <p class="instrument-text">Gain early access to high growth companies</p>
+                  <div class="relative mt-6 w-full max-w-[390px]">
+                    <div class="absolute inset-x-5 -bottom-3 h-full rounded-2xl bg-[#f6f6f6]"></div>
+                    <div class="relative flex items-center gap-4 rounded-2xl bg-[#f1f1f1] p-2.5 pr-4 text-left">
+                      <span class="flex size-[52px] shrink-0 items-center justify-center rounded-xl bg-brand">
+                        <img src="assets/logos/icon-white.png" alt="" class="size-8" />
+                      </span>
+                      <div class="min-w-0 flex-1">
+                        <p class="font-semibold text-[#1a1a1a]">SpaceX IPO jumps +40%</p>
+                        <p class="text-[13px] text-[#5a4a40]">Your portfolio increased $2,000</p>
+                      </div>
+                      <span class="self-start pt-1 text-sm text-[#6b6b6b]">8:21 AM</span>
+                    </div>
+                  </div>
+                </article>
+              </div>
+
+              <!-- Right column -->
+              <div class="flex flex-col gap-5">
+                <!-- ETFs -->
+                <article id="etfs" class="reveal flex flex-col items-center justify-center rounded-3xl border border-[#e2e2e2] bg-white px-6 py-12 text-center lg:min-h-[228px]" style="--d: 100ms">
+                  <h3 class="instrument-title">Trade ETFs</h3>
+                  <p class="instrument-text">Diversify your portfolio with Exchange Traded Funds</p>
+                  <a href="markets.html#etfs" class="try-link">Try now <svg class="size-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M5 12h14m-6-6 6 6-6 6" /></svg></a>
+                </article>
+
+                <!-- Securities -->
+                <article id="securities" class="reveal relative flex flex-1 flex-col items-center overflow-hidden rounded-3xl border border-[#e2e2e2] bg-white px-6 pt-14 text-center lg:min-h-[448px] lg:pt-[84px]" style="--d: 100ms">
+                  <h3 class="instrument-title">Trade Securities</h3>
+                  <p class="instrument-text">Access a wide range of stocks from global markets and take advantage of price appreciation.</p>
+                  <a href="markets.html#securities" class="try-link">Try now <svg class="size-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M5 12h14m-6-6 6 6-6 6" /></svg></a>
+                  <img src="assets/3d/trade-securities.png" alt="" loading="lazy" class="mt-6 w-[200px] self-start lg:absolute lg:bottom-3 lg:left-3 lg:mt-0 lg:w-[216px]" />
+                </article>
+              </div>
+            </div>
+
+            <!-- Bonds -->
+            <article id="bonds" class="reveal clip-top grid rounded-3xl border border-[#e2e2e2] bg-white lg:min-h-[349px] lg:grid-cols-2">
+              <div class="relative order-2 mt-8 h-[300px] lg:order-1 lg:mt-0 lg:h-auto">
+                <img src="assets/images/woman-2.png" alt="Foxdesk Trades account manager" loading="lazy" class="absolute bottom-0 left-0 h-full w-auto lg:h-[378px]" />
+                <div class="live-widget absolute hidden sm:block right-4 top-6 lg:left-[290px] lg:right-auto lg:top-[50px]" data-widget></div>
+              </div>
+              <div class="order-1 flex flex-col items-center justify-center px-6 pt-12 text-center lg:order-2 lg:pb-12">
+                <h3 class="instrument-title">Trade Bonds<br /><span class="text-[#1a1a1a]">and fixed income</span></h3>
+                <p class="instrument-text">Access a wide range of bonds and fixed income products for steadier, more predictable returns.</p>
+                <a href="markets.html#bonds" class="try-btn">Try now <svg class="size-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M5 12h14m-6-6 6 6-6 6" /></svg></a>
+              </div>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============ SECTION 5: LIVE MARKET (TradingView) ============ -->
+      <section id="live-market" class="bg-black">
+        <div class="mx-auto max-w-[1440px] px-5 py-20 md:px-10 lg:py-28 xl:px-14">
+          <div class="reveal">
+            <h2 class="text-[40px] font-bold leading-[1.02] tracking-[-0.04em] sm:text-6xl lg:text-[80px]">
+              Trade the market<br />
+              <span class="text-[#a9a9a9]">with better context</span>
+            </h2>
+            <p class="mt-6 max-w-[700px] text-base leading-relaxed text-white/85 md:text-lg">
+              Foxdesk gives you the ability to monitor major technology stocks, active movers, and market heat in a focused trading view.
+            </p>
+          </div>
+
+          <div class="reveal mt-12 rounded-[36px] bg-[#1c1c1c] p-3 md:p-5 lg:mt-16" style="--d: 120ms">
+            <div class="flex flex-col gap-6 rounded-2xl bg-[#262626] p-6 md:flex-row md:items-center md:justify-between md:p-8">
+              <div>
+                <h3 class="text-2xl font-medium md:text-[28px]">Foxdesk Live Market</h3>
+                <p class="mt-1 text-base text-white/65 md:text-lg">Track movers, leaders and the US top market trading activity</p>
+              </div>
+              <a href="signup.html" class="btn-glow shrink-0 self-start rounded-md bg-brand px-12 py-4 text-base font-medium transition hover:bg-brand-dark md:self-auto">Start Trading</a>
+            </div>
+
+            <div class="mt-5 grid gap-5 lg:grid-cols-2">
+              <!-- Hotlists: Active / Gainers / Losers -->
+              <div class="tv-panel h-[460px]">
+                <div class="tradingview-widget-container h-full">
+                  <div class="tradingview-widget-container__widget h-full"></div>
+                  <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-hotlists.js" async>
+                    {
+                      "colorTheme": "dark",
+                      "dateRange": "12M",
+                      "exchange": "US",
+                      "showChart": true,
+                      "locale": "en",
+                      "isTransparent": true,
+                      "showSymbolLogo": true,
+                      "showFloatingTooltip": false,
+                      "width": "100%",
+                      "height": "100%",
+                      "plotLineColorGrowing": "rgba(41, 98, 255, 1)",
+                      "plotLineColorFalling": "rgba(41, 98, 255, 1)",
+                      "gridLineColor": "rgba(240, 243, 250, 0)",
+                      "scaleFontColor": "rgba(160, 160, 170, 1)",
+                      "belowLineFillColorGrowing": "rgba(41, 98, 255, 0.12)",
+                      "belowLineFillColorFalling": "rgba(41, 98, 255, 0.12)",
+                      "belowLineFillColorGrowingBottom": "rgba(41, 98, 255, 0)",
+                      "belowLineFillColorFallingBottom": "rgba(41, 98, 255, 0)",
+                      "symbolActiveColor": "rgba(41, 98, 255, 0.25)"
+                    }
+                  </script>
+                </div>
+              </div>
+
+              <!-- Market overview: big tech -->
+              <div class="tv-panel h-[460px]">
+                <div class="tradingview-widget-container h-full">
+                  <div class="tradingview-widget-container__widget h-full"></div>
+                  <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-market-overview.js" async>
+                    {
+                      "colorTheme": "dark",
+                      "dateRange": "12M",
+                      "showChart": true,
+                      "locale": "en",
+                      "isTransparent": true,
+                      "showSymbolLogo": true,
+                      "showFloatingTooltip": false,
+                      "width": "100%",
+                      "height": "100%",
+                      "plotLineColorGrowing": "rgba(41, 98, 255, 1)",
+                      "plotLineColorFalling": "rgba(41, 98, 255, 1)",
+                      "gridLineColor": "rgba(240, 243, 250, 0)",
+                      "scaleFontColor": "rgba(160, 160, 170, 1)",
+                      "belowLineFillColorGrowing": "rgba(41, 98, 255, 0.12)",
+                      "belowLineFillColorFalling": "rgba(41, 98, 255, 0.12)",
+                      "belowLineFillColorGrowingBottom": "rgba(41, 98, 255, 0)",
+                      "belowLineFillColorFallingBottom": "rgba(41, 98, 255, 0)",
+                      "symbolActiveColor": "rgba(41, 98, 255, 0.25)",
+                      "tabs": [
+                        {
+                          "title": "Big Tech",
+                          "symbols": [
+                            { "s": "NASDAQ:TSLA", "d": "Tesla" },
+                            { "s": "NASDAQ:AAPL", "d": "Apple" },
+                            { "s": "NASDAQ:MSFT", "d": "Microsoft" },
+                            { "s": "NASDAQ:GOOGL", "d": "Alphabet" },
+                            { "s": "NASDAQ:NVDA", "d": "Nvidia" },
+                            { "s": "NASDAQ:AMZN", "d": "Amazon" },
+                            { "s": "NASDAQ:META", "d": "Meta" }
+                          ]
+                        }
+                      ]
+                    }
+                  </script>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============ SECTION 6: TRUST ============ -->
+      <section class="bg-[#f3f3f3] text-cocoa">
+        <div class="mx-auto max-w-[1440px] px-5 py-20 md:px-10 lg:py-28 xl:px-14">
+          <h2 class="reveal text-center text-[32px] font-medium leading-[1.2] tracking-[-0.03em] md:text-[44px]">
+            Trusted by millions of users<br />globally
+          </h2>
+
+          <!-- PLACEHOLDER: regulator / bank names pending client legal confirmation -->
+          <div class="mt-12 grid gap-5 md:grid-cols-2 lg:mt-14 lg:grid-cols-3">
+            <article class="reveal trust-card">
+              <div class="flex gap-6 lg:gap-[30px]">
+                <img src="assets/icons/regulated-entities.svg" alt="" class="size-[60px] shrink-0" />
+                <div>
+                  <h3 class="trust-title">Regulated entities</h3>
+                  <p class="trust-text">We follow regulations and rules by local regulators put in place to secure clients investments. No compromise in keeping your investment safe.</p>
+                </div>
+              </div>
+              <div class="trust-pills"><span>RCA</span><span>CySEC</span><span>ASIC</span></div>
+            </article>
+            <article class="reveal trust-card" style="--d: 100ms">
+              <div class="flex gap-6 lg:gap-[30px]">
+                <img src="assets/icons/segregated-accounts.svg" alt="" class="size-[60px] shrink-0" />
+                <div>
+                  <h3 class="trust-title">Segregated account</h3>
+                  <p class="trust-text">Your money is held separately in some of the world's largest, most secure banks. Not a cent sits on our balance sheet.</p>
+                </div>
+              </div>
+              <div class="trust-pills"><span>Charles Schwab Bank</span><span>Morgan Stanley Bank</span><span>Citigroup</span></div>
+            </article>
+            <article class="reveal trust-card md:col-span-2 lg:col-span-1" style="--d: 200ms">
+              <div class="flex gap-6 lg:gap-[30px]">
+                <img src="assets/icons/investor-protection.svg" alt="" class="size-[60px] shrink-0" />
+                <div>
+                  <h3 class="trust-title">Investor protection</h3>
+                  <p class="trust-text">Our customers and clients are highly protected with deposits of investment ranging from hundreds to millions daily.</p>
+                </div>
+              </div>
+              <div class="trust-pills"><span>ICF</span><span>FATF</span><span>IOSCO</span></div>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============ SECTION 7: TESTIMONIAL ============ -->
+      <section id="testimonials" class="overflow-hidden bg-white text-cocoa">
+        <div class="t-section">
+          <!-- <span class="reveal rounded-md bg-brand px-7 py-2.5 text-[15px] font-medium text-white">Client Experience</span> -->
+
+          <!-- Slider: each <figure> is one testimonial. Add/remove figures freely; js/main.js handles the rest. -->
+          <div class="t-viewport reveal w-full" style="--d: 100ms" aria-roledescription="carousel" aria-label="Client testimonials">
+            <div class="t-track" aria-live="polite">
+              <figure class="t-slide">
+                <blockquote class="t-quote" style="--qw: 16.78em">The dashboard makes it easier to keep my wallet, plans, and market activity in one place. It feels focused and easy to use.</blockquote>
+                <figcaption class="t-person">
+                  <span class="t-avatar"><img src="assets/images/testimonials/maria-burton.png" alt="" /></span>
+                  <span class="leading-tight"><span class="t-name">Maria Burton</span><span class="t-role">New Trader</span></span>
+                </figcaption>
+              </figure>
+              <figure class="t-slide">
+                <blockquote class="t-quote" style="--qw: 20.07em">I wanted a platform that made it easier to explore different markets without feeling overwhelmed. Having the information and tools in one place has made my trading experience more organised.</blockquote>
+                <figcaption class="t-person">
+                  <span class="t-avatar"><img src="assets/images/testimonials/daniel-ozcan.png" alt="" /></span>
+                  <span class="leading-tight"><span class="t-name">Daniel Ozcan</span><span class="t-role">Investor / Trader</span></span>
+                </figcaption>
+              </figure>
+              <figure class="t-slide">
+                <blockquote class="t-quote" style="--qw: 16.73em">I like having a platform where I can monitor the markets I'm interested in and make decisions based on my own research. It helps me approach trading with more structure.</blockquote>
+                <figcaption class="t-person">
+                  <span class="t-avatar"><img src="assets/images/testimonials/rohan-mehta.png" alt="" /></span>
+                  <span class="leading-tight"><span class="t-name">Rohan Mehta</span><span class="t-role">Institutional Trader</span></span>
+                </figcaption>
+              </figure>
+              <figure class="t-slide">
+                <blockquote class="t-quote" style="--qw: 20.57em">I used to find the terminology around trading intimidating. Having access to market information and trading tools in one place gives me a better starting point for learning.</blockquote>
+                <figcaption class="t-person">
+                  <span class="t-avatar"><img src="assets/images/testimonials/oliver-bennett.png" alt="" /></span>
+                  <span class="leading-tight"><span class="t-name">Oliver Bennett</span><span class="t-role">Venture Capitalist</span></span>
+                </figcaption>
+              </figure>
+              <figure class="t-slide">
+                <blockquote class="t-quote" style="--qw: 16.03em">I wanted to understand more than just one market. Being able to explore different trading opportunities to make money on Foxdesk has made me so happy.</blockquote>
+                <figcaption class="t-person">
+                  <span class="t-avatar"><img src="assets/images/testimonials/layla-reid.png" alt="" /></span>
+                  <span class="leading-tight"><span class="t-name">Layla Reid</span><span class="t-role">Market Trader</span></span>
+                </figcaption>
+              </figure>
+            </div>
+          </div>
+
+          <div class="t-buttons flex gap-5">
+            <button type="button" id="t-prev" class="flex items-center gap-2 rounded bg-[#f3f3f3] px-3.5 py-1.5 text-[15px] font-medium text-brand transition hover:bg-[#ebebeb]" aria-label="Previous testimonial">
+              <svg class="size-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M19 12H5m6 6-6-6 6-6" /></svg>
+              Prev
+            </button>
+            <button type="button" id="t-next" class="flex items-center gap-2 rounded bg-brand px-4 py-1.5 text-[15px] font-medium text-white transition hover:bg-brand-dark" aria-label="Next testimonial">
+              Next
+              <svg class="size-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M5 12h14m-6-6 6 6-6 6" /></svg>
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============ SECTION 8: COPY TRADING ============ -->
+      <section id="copy-trading" class="overflow-hidden bg-white text-cocoa">
+        <div class="mx-auto grid max-w-[1440px] items-center gap-16 px-5 py-20 md:px-10 lg:grid-cols-2 lg:gap-10 lg:py-[120px] xl:px-14">
+          <div class="reveal">
+            <span class="eyebrow">Discover the power of copy trading</span>
+            <h2 class="mt-7 text-[30px] font-medium tracking-[-0.02em] md:text-[36px]">Let the experts trade for you</h2>
+            <p class="mt-5 max-w-[420px] text-base leading-[1.9] text-[#5a4a40] md:text-lg">
+              Access a diverse range of trading strategies and copy skilled traders whose strategies align with your risk tolerance and investment
+              goals. Their trades are automatically replicated in your account, providing a hands-off approach to investing. Save time and grow
+              your portfolio more by letting experts trade for you.
+            </p>
+          </div>
+
+          <div class="reveal relative mx-auto w-full max-w-[405px] lg:mr-[110px] lg:ml-auto" style="--d: 120ms">
+            <img src="assets/images/copy-trading-expert.jpg" alt="Foxdesk Trades expert trader" loading="lazy" class="w-full rounded-[28px]" />
+            <div class="float-card float-y right-2 top-[18%] lg:-right-[110px]">
+              <img src="assets/icons/advanced-analysis.svg" alt="" class="size-9 shrink-0" />
+              <div>
+                <p class="text-base font-semibold lg:text-lg">Advanced analysis</p>
+                <p class="text-[13px] text-[#5a4a40] lg:text-sm">Access to advanced charts</p>
+              </div>
+            </div>
+            <div class="float-card float-y left-2 top-[57%] lg:-left-[100px]" style="--float-delay: -2s">
+              <img src="assets/icons/expert-accuracy.svg" alt="" class="size-9 shrink-0" />
+              <div>
+                <p class="text-base font-semibold lg:text-lg">Expert accuracy</p>
+                <p class="text-[13px] text-[#5a4a40] lg:text-sm">Sharp hits on all trades</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============ SECTION 9: PRICING / PLANS ============ -->
+      <section id="plans" class="bg-black">
+        <div class="mx-auto max-w-[1440px] px-5 py-20 md:px-10 lg:py-28 xl:px-14">
+          <div class="reveal">
+            <h2 class="text-[40px] font-bold leading-[1.02] tracking-[-0.04em] sm:text-6xl lg:text-[80px]">
+              A personalized growth<br />
+              <span class="text-[#a9a9a9]">to build wealth for you</span>
+            </h2>
+            <p class="mt-6 max-w-[660px] text-base leading-relaxed text-white/85 md:text-lg">
+              Select a plan built around your money goals, capital, investment tolerance level and market access.
+            </p>
+          </div>
+
+          <div class="reveal mt-12 grid gap-5 rounded-[36px] bg-[#1c1c1c] p-3 sm:grid-cols-2 md:p-5 lg:mt-16 xl:grid-cols-4" style="--d: 120ms">
+            <article class="plan-card">
+              <h3 class="plan-name">Standard plan</h3>
+              <p class="plan-sub">Investment package</p>
+              <p class="plan-price">$1,000–$4,999</p>
+              <ul class="plan-list">
+                <li>Access to available investment instruments.</li>
+                <li>Portfolio tracking from your dashboard.</li>
+                <li>Market tools and account access.</li>
+                <li>Support when you need assistance.</li>
+              </ul>
+              <a href="plans.html#standard" class="plan-btn btn-glow">Select Plan</a>
+            </article>
+            <article class="plan-card">
+              <h3 class="plan-name">Classic plan</h3>
+              <p class="plan-sub">Investment package</p>
+              <p class="plan-price">$5,000–$9,999</p>
+              <ul class="plan-list">
+                <li>Access to available investment instruments.</li>
+                <li>Portfolio tracking from your dashboard.</li>
+                <li>Market tools and account access.</li>
+                <li>Support when you need assistance.</li>
+              </ul>
+              <a href="plans.html#classic" class="plan-btn btn-glow">Select Plan</a>
+            </article>
+            <article class="plan-card">
+              <h3 class="plan-name">Premium plan</h3>
+              <p class="plan-sub">Investment package</p>
+              <p class="plan-price">$10,000–$50k</p>
+              <ul class="plan-list">
+                <li>Access to available investment instruments.</li>
+                <li>Portfolio tracking from your dashboard.</li>
+                <li>Market tools and account access.</li>
+                <li>Support when you need assistance.</li>
+              </ul>
+              <a href="plans.html#premium" class="plan-btn btn-glow">Select Plan</a>
+            </article>
+            <article class="plan-card">
+              <h3 class="plan-name">Elite plan</h3>
+              <p class="plan-sub">Investment package</p>
+              <p class="plan-price">$50k–$500k</p>
+              <ul class="plan-list">
+                <li>Access to available investment instruments.</li>
+                <li>Portfolio tracking from your dashboard.</li>
+                <li>Market tools and account access.</li>
+                <li>Support when you need assistance.</li>
+              </ul>
+              <a href="plans.html#elite" class="plan-btn btn-glow">Select Plan</a>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============ SECTION 10: NEWS (TradingView Top Stories) ============ -->
+      <section id="news" class="bg-black">
+        <div class="mx-auto max-w-[1440px] px-5 pb-20 md:px-10 lg:pb-28 xl:px-14">
+          <div class="reveal">
+            <h2 class="text-[40px] font-bold leading-[1.02] tracking-[-0.04em] sm:text-6xl lg:text-[80px]">
+              Stay updated with news<br />
+              <span class="text-[#a9a9a9]">moving the market</span>
+            </h2>
+            <p class="mt-6 max-w-[660px] text-base leading-relaxed text-white/85 md:text-lg">
+              Stay close to the headlines shaping the money market and investor sentiment.
+            </p>
+          </div>
+
+          <div class="reveal mt-12 rounded-[36px] bg-[#1c1c1c] p-3 md:p-5 lg:mt-16" style="--d: 120ms">
+            <div class="tv-panel h-[460px] lg:h-[420px]">
+              <div class="tradingview-widget-container h-full">
+                <div class="tradingview-widget-container__widget h-full"></div>
+                <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-timeline.js" async>
+                  {
+                    "feedMode": "all_symbols",
+                    "isTransparent": true,
+                    "displayMode": "regular",
+                    "width": "100%",
+                    "height": "100%",
+                    "colorTheme": "dark",
+                    "locale": "en"
+                  }
+                </script>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============ SECTION 11: START IN 3 STEPS ============ -->
+      <section id="get-started" class="bg-white text-cocoa">
+        <div class="mx-auto flex max-w-[1440px] flex-col items-center px-5 pt-20 text-center md:px-10 lg:pt-28 xl:px-14">
+          <img src="assets/logos/icon-orange.png" alt="" class="reveal size-14" />
+          <h2 class="reveal mt-6 text-[32px] font-semibold tracking-[-0.03em] md:text-[44px]" style="--d: 60ms">Start trading in 3 steps</h2>
+          <p class="reveal mt-3 max-w-[500px] text-base leading-relaxed md:text-[17px]" style="--d: 120ms">
+            Create an account, fund your wallet, grow your wealth. It's as easy as that with Foxdesk Trades.
+          </p>
+
+          <ol class="mt-14 grid w-full max-w-[720px] gap-12 sm:grid-cols-3 sm:gap-6 lg:mt-16">
+            <li class="reveal step" style="--d: 0ms">
+              <span class="step-num">1</span>
+              <h3 class="step-title">Create</h3>
+              <p class="step-text">Open your account and set up your profile.</p>
+            </li>
+            <li class="reveal step" style="--d: 120ms">
+              <span class="step-num">2</span>
+              <h3 class="step-title">Fund</h3>
+              <p class="step-text">Fund your wallet to choose a trading plan.</p>
+            </li>
+            <li class="reveal step" style="--d: 240ms">
+              <span class="step-num">3</span>
+              <h3 class="step-title">Grow</h3>
+              <p class="step-text">Invest, copy trades and grow your portfolio.</p>
+            </li>
+          </ol>
+
+          <a href="signup.html" class="reveal btn-glow mt-12 inline-flex items-center gap-3 rounded-full bg-brand px-10 py-4 text-base font-medium text-white transition hover:bg-brand-dark lg:mt-14">
+            Get Started
+            <svg class="size-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M5 12h14m-6-6 6 6-6 6" /></svg>
+          </a>
+        </div>
+      </section>
+
+      <!-- Live account widget (cloned into every [data-widget] by js/main.js) -->
+      <template id="live-widget-tpl">
+        <div class="flex items-center gap-2.5 px-1">
+          <svg class="h-4 w-6 shrink-0 rounded-[3px]" viewBox="0 0 24 16" aria-hidden="true">
+            <rect width="24" height="16" fill="#fff" />
+            <g fill="#d22f27"><rect y="0" width="24" height="1.25" /><rect y="2.5" width="24" height="1.25" /><rect y="5" width="24" height="1.25" /><rect y="7.5" width="24" height="1.25" /><rect y="10" width="24" height="1.25" /><rect y="12.5" width="24" height="1.25" /><rect y="15" width="24" height="1" /></g>
+            <rect width="10.5" height="8.75" fill="#2b3a8c" />
+          </svg>
+          <span class="text-[17px] text-[#6b6b6b]">Live account</span>
+          <span class="ml-auto text-[#9a9a9a]">&#8942;</span>
+        </div>
+        <div class="mt-4 flex items-center gap-3 rounded-xl bg-white px-3.5 py-3 shadow-sm">
+          <img src="https://cdn.simpleicons.org/apple/000000" alt="" class="size-5" />
+          <div class="flex-1 leading-tight">
+            <p class="text-[13px] font-semibold text-cocoa">Apple Inc.</p>
+            <p class="text-[11px] text-[#1a1a1a]">$248.13 USD</p>
+          </div>
+          <svg class="size-4 text-[#1a1a1a]" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M20 12a8 8 0 1 1-2.34-5.66M20 4v5h-5" /></svg>
+        </div>
+        <div class="mt-2 flex items-center gap-3 px-3.5 py-3 opacity-55">
+          <img src="https://cdn.simpleicons.org/nvidia/76B900" alt="" class="size-5" />
+          <div class="flex-1 leading-tight">
+            <p class="text-[13px] font-semibold text-cocoa">Nvidia Corp.</p>
+            <p class="text-[11px] text-[#1a1a1a]">$182.46 USD</p>
+          </div>
+          <span class="text-[#9a9a9a]">&#8942;</span>
+        </div>
+        <div class="flex items-center gap-3 px-3.5 py-3 opacity-55">
+          <img src="https://cdn.simpleicons.org/netflix/E50914" alt="" class="size-5" />
+          <div class="flex-1 leading-tight">
+            <p class="text-[13px] font-semibold text-cocoa">Netflix Inc.</p>
+            <p class="text-[11px] text-[#1a1a1a]">$1,204.30 USD</p>
+          </div>
+          <span class="text-[#9a9a9a]">&#8942;</span>
+        </div>
+      </template>
     </main>
+
+    <!-- ============ SECTION 12: FOOTER ============ -->
+    <footer class="footer-gradient text-cocoa">
+      <div class="mx-auto max-w-[1440px] px-5 pb-10 pt-40 md:px-10 lg:pt-[200px] xl:px-14">
+        <div class="grid gap-12 lg:grid-cols-[1.15fr_1fr_420px] lg:gap-10">
+          <!-- Brand -->
+          <div>
+            <a href="index.html" class="flex items-center gap-3" aria-label="Foxdesk Trades home">
+              <img src="assets/logos/icon-black.png" alt="" class="size-9" />
+              <span class="text-[28px] font-bold tracking-[-0.03em] lg:text-[30px]">Foxdesk Trading</span>
+            </a>
+            <p class="mt-6 max-w-[290px] leading-relaxed">Trade global markets, follow live price movement and copy expert traders, all from one secure platform.</p>
+            <div class="mt-10 flex items-center gap-6">
+              <a href="#" aria-label="Facebook" class="social"><img src="assets/icons/facebook.svg" alt="" /></a>
+              <a href="#" aria-label="Instagram" class="social"><img src="assets/icons/instagram.svg" alt="" /></a>
+              <a href="#" aria-label="X (Twitter)" class="social"><img src="assets/icons/x.svg" alt="" /></a>
+              <a href="#" aria-label="YouTube" class="social"><img src="assets/icons/youtube.svg" alt="" /></a>
+            </div>
+          </div>
+
+          <!-- Resources -->
+          <div>
+            <h2 class="text-[28px] font-bold tracking-[-0.02em] lg:text-[30px]">Resources</h2>
+            <ul class="footer-links mt-7">
+              <li><a href="partners.html">Partners and advertising</a></li>
+              <li><a href="about.html">About us and the company</a></li>
+              <li><a href="services.html">Services and projects</a></li>
+              <li><a href="contact.html">Contact us online</a></li>
+            </ul>
+          </div>
+
+          <!-- Contact + regulators -->
+          <div>
+            <dl class="contact-card">
+              <div><dt>Address:</dt><dd>Kemp House, City Road, London</dd></div>
+              <div><dt>Email:</dt><dd><a href="mailto:contact@foxdesktrades.com">contact@foxdesktrades.com</a></dd></div>
+              <div><dt>Phone:</dt><dd><a href="tel:+15673432446">+1 (567) 343 2446</a></dd></div>
+              <div><dt>Opening Hours:</dt><dd>8am - 5pm | Mon - Fri</dd></div>
+            </dl>
+            <!-- PLACEHOLDER: regulator badges pending client legal confirmation — swap for official logo files -->
+            <div class="mt-10 flex items-center justify-center gap-8 rounded-xl bg-[#fdebe0] px-5 py-3.5 text-[#6b5a50]">
+              <div class="flex items-center gap-2">
+                <svg class="size-9 shrink-0" viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><circle cx="20" cy="20" r="18" /><circle cx="20" cy="20" r="13" /><path d="M14 22c2-4 4-6 6-6s4 2 6 6M20 16v-3M15 24h10" /></svg>
+                <span class="border-l border-current pl-1.5 text-[11px] leading-tight">US Securities<br />And Exchange<br />Commission</span>
+              </div>
+              <div class="flex items-center gap-2">
+                <svg class="size-8 shrink-0" viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><circle cx="20" cy="20" r="18" /><path d="M11 15h18M13 15v12M18 15v12M22 15v12M27 15v12M10 28h20M20 9l9 5H11z" /></svg>
+                <span class="border-l border-current pl-1.5 text-[11px] font-semibold leading-tight">The<br />Financial<br />Commission</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <hr class="mt-16 border-cocoa/20 lg:mt-20" />
+
+        <!-- Legal text -->
+        <div class="legal mt-14 lg:mt-24">
+          <h3>Regulatory Information</h3>
+          <p>Foxdesk Trades is committed to providing traders with access to financial markets in a transparent and responsible trading environment. Our services are designed to support both beginner and experienced traders as they explore opportunities across multiple financial markets.</p>
+          <h3>Our Markets</h3>
+          <p>Foxdesk Trades provides access to a range of financial markets, including foreign exchange (Forex), cryptocurrencies, indices, and commodities, through a single trading account. The availability of specific instruments, trading conditions, and account features may vary depending on your jurisdiction and account type.</p>
+          <h3>Important Risk Disclosure</h3>
+          <p>Trading financial instruments involves significant risk and may not be suitable for every investor. Forex, cryptocurrencies, indices, and commodities can experience substantial price fluctuations, and you may lose some or all of your invested capital. Trading with leverage or on margin can amplify both profits and losses.</p>
+          <p>Before opening an account or entering into any transaction, you should carefully consider your financial circumstances, investment objectives, level of experience, and risk tolerance. You should only trade with money you can afford to lose and seek independent financial advice if necessary.</p>
+          <h3>General Disclaimer</h3>
+          <p>All information provided on this website is for informational purposes only and does not constitute investment advice, a recommendation, an offer, or a solicitation to buy or sell any financial instrument or trading service. Information on this website should not be interpreted as a guarantee of future performance or returns.</p>
+          <p>Market data, prices, analysis, and other information may change without notice. Past performance is not indicative of future results. You are responsible for your own trading decisions and should ensure that you understand the risks associated with the financial products and services you use.</p>
+          <h3>Regulatory Status and Memberships</h3>
+          <p>Foxdesk Trades' regulatory status, applicable licences, and memberships in relevant financial organisations should be confirmed through the appropriate regulatory authorities. Any regulatory or membership claims displayed on this website must accurately reflect the legal entity providing the services and the jurisdictions in which it is authorised to operate.</p>
+          <h3>Company Information</h3>
+          <p>Foxdesk Trades is a trading brand operated by Foxdesk LLC, registered in [insert jurisdiction] under registration number [insert number, if applicable]. The services available to clients depend on the operating entity, applicable regulations, and the client's country of residence.</p>
+        </div>
+
+        <div class="mt-24 flex flex-col justify-between gap-2 text-white/40 sm:flex-row lg:mt-32">
+          <p>Foxdesk Trading &copy; <span id="year">2026</span></p>
+          <p>All rights reserved</p>
+        </div>
+      </div>
+    </footer>
 
     <script src="js/main.js"></script>
   </body>
