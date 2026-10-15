@@ -1,0 +1,96 @@
+/* Custom styles that are cleaner here than as Tailwind classes */
+
+html {
+  scroll-behavior: smooth;
+}
+
+/* ---------- Ticker ---------- */
+/* TradingView renders inside an iframe; keep it vertically centred in the orange bar */
+.ticker .tradingview-widget-container {
+  margin-top: -1px;
+}
+
+/* ---------- Nav dropdowns ---------- */
+.dropdown-menu {
+  position: absolute;
+  top: calc(100% + 18px);
+  left: -16px;
+  min-width: 200px;
+  display: flex;
+  flex-direction: column;
+  padding: 8px;
+  border-radius: 12px;
+  background: #1c1c1c;
+  border: 1px solid rgb(255 255 255 / 0.08);
+  box-shadow: 0 20px 40px rgb(0 0 0 / 0.45);
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(6px);
+  transition: opacity 0.18s, transform 0.18s, visibility 0.18s;
+}
+/* invisible bridge so the menu doesn't close while the mouse travels to it */
+.dropdown-menu::before {
+  content: "";
+  position: absolute;
+  inset: -20px 0 auto 0;
+  height: 20px;
+}
+.dropdown-menu a {
+  padding: 10px 12px;
+  border-radius: 8px;
+  font-size: 15px;
+  color: rgb(255 255 255 / 0.8);
+  transition: background 0.15s, color 0.15s;
+}
+.dropdown-menu a:hover {
+  background: rgb(255 255 255 / 0.08);
+  color: #fff;
+}
+.dropdown:hover .dropdown-menu,
+.dropdown.open .dropdown-menu {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+.dropdown:hover .chev,
+.dropdown.open .chev {
+  transform: rotate(180deg);
+}
+
+/* ---------- Buttons ---------- */
+.btn-glow {
+  box-shadow: 0 10px 40px -6px rgb(255 106 0 / 0.55);
+}
+
+/* ---------- Entrance animation ---------- */
+.fade-up {
+  animation: fadeUp 0.7s cubic-bezier(0.2, 0.7, 0.2, 1) both;
+  animation-delay: var(--d, 0ms);
+}
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* ---------- Investment toast ---------- */
+.toast {
+  transition: opacity 0.4s, transform 0.4s;
+}
+.toast.is-hidden {
+  opacity: 0;
+  transform: translateY(12px);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .fade-up,
+  .toast {
+    animation: none;
+    transition: none;
+  }
+}

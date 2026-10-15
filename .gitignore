@@ -1,0 +1,9 @@
+# OS / editor junk
+.DS_Store
+Thumbs.db
+desktop.ini
+.vscode/
+.claude/
+
+# dependencies (if we add the Tailwind CLI later)
+node_modules/
