@@ -1,7 +1,7 @@
 /* Custom styles that are cleaner here than as Tailwind classes */
 
 html {
-  scroll-behavior: smooth;
+  /* smooth scrolling is handled by Lenis (js/main.js); native smooth-scroll would fight it */
   scroll-padding-top: 110px; /* keeps anchored sections clear of the sticky header */
 }
 

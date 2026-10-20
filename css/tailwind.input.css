@@ -1,0 +1,19 @@
+/* Tailwind source file. Don't link this in the HTML — it gets compiled into css/tailwind.css.
+   Build once:   .tools\tailwindcss.exe -i css/tailwind.input.css -o css/tailwind.css --minify
+   While editing: .tools\tailwindcss.exe -i css/tailwind.input.css -o css/tailwind.css --watch   */
+
+@import "tailwindcss" source(none);
+
+/* files Tailwind scans for class names */
+@source "../index.html";
+@source "../js";
+
+@theme {
+  --font-sans: "Plus Jakarta Sans", ui-sans-serif, system-ui, sans-serif;
+  --color-brand: #ff6201;
+  --color-brand-dark: #e85f00;
+  --color-brand-soft: #ffe6d5;
+  --color-cocoa: #4a1c00;
+  --color-ink: #0b0b0b;
+  --color-panel: #262626;
+}
