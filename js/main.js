@@ -147,7 +147,7 @@ function showNextInvestor() {
 toastBar.style.setProperty("--toast-ms", TOAST_MS + "ms");
 showNextInvestor();
 
-// ---------- Animated foxes (section 2 headline + section 11) ----------
+// ---------- Animated Civa logo marks (section 2 headline + section 11) ----------
 const foxes = [...document.querySelectorAll(".fox-live")];
 const calmMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
@@ -174,7 +174,7 @@ window.addEventListener("pointermove", (e) => {
 if (window.Lenis && !calmMotion) {
   const lenis = new Lenis({
     lerp: 0, // 0 = use the timed glide below instead of Lenis's default follow mode
-    duration: 1.35, // seconds each scroll glides for — raise for floatier, lower for snappier
+    duration: 1.0, // seconds each scroll glides for — raise for floatier, lower for snappier
     easing: (t) => 1 - Math.pow(1 - t, 4), // fast start, long soft landing at the end
     wheelMultiplier: 1,
   });

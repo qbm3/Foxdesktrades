@@ -1,4 +1,4 @@
-# Foxdesk Trades — landing page
+# Civa Trades — landing page
 
 Static site: `index.html` + Tailwind CSS v4 (compiled) + `css/styles.css` + vanilla JS (`js/main.js`).
 

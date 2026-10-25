@@ -1,5 +1,26 @@
 /* Custom styles that are cleaner here than as Tailwind classes */
 
+/* ---------- Plus Jakarta Sans (variable font, weights 300–800, self-hosted) ---------- */
+/* font-display: block = hold text back for the moment it takes to load, instead of flashing Segoe UI/Arial first */
+@font-face {
+  font-family: "Plus Jakarta Sans";
+  font-style: normal;
+  font-weight: 300 800;
+  font-display: block;
+  src: url("../assets/fonts/plus-jakarta-sans-latin.woff2") format("woff2");
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122,
+    U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: "Plus Jakarta Sans";
+  font-style: normal;
+  font-weight: 300 800;
+  font-display: block;
+  src: url("../assets/fonts/plus-jakarta-sans-latin-ext.woff2") format("woff2");
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF,
+    U+2020, U+20A0-20AB, U+20AD-20C4, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+
 html {
   /* smooth scrolling is handled by Lenis (js/main.js); native smooth-scroll would fight it */
   scroll-padding-top: 110px; /* keeps anchored sections clear of the sticky header */
@@ -149,7 +170,7 @@ html {
   }
 }
 
-/* ---------- Animated fox mascot (section 11) ---------- */
+/* ---------- Animated Civa logo mark (section 2 headline + section 11) ---------- */
 .fox-live {
   --fox: 132px; /* size of the fox; override per placement */
   position: relative;
@@ -193,11 +214,7 @@ html {
   inset: 0;
   width: 100%;
   height: 100%;
-}
-/* eyelids sit over the eye holes and sweep down for a quick blink */
-.fox-lid {
-  clip-path: inset(0 0 100% 0);
-  animation: foxBlink 5.2s infinite;
+  object-fit: contain;
 }
 .fox-shadow {
   position: absolute;
@@ -245,25 +262,6 @@ html {
     opacity: 0.7;
   }
 }
-@keyframes foxBlink {
-  0%,
-  88%,
-  100% {
-    clip-path: inset(0 0 100% 0);
-  }
-  90.5% {
-    clip-path: inset(0 0 0 0);
-  }
-  93% {
-    clip-path: inset(0 0 100% 0);
-  }
-  95% {
-    clip-path: inset(0 0 0 0);
-  }
-  97% {
-    clip-path: inset(0 0 100% 0);
-  }
-}
 @keyframes foxHop {
   0% {
     transform: scale(1, 1);
@@ -289,7 +287,6 @@ html {
 }
 @media (prefers-reduced-motion: reduce) {
   .fox-body,
-  .fox-lid,
   .fox-shadow {
     animation: none;
   }
@@ -390,6 +387,9 @@ html {
 }
 .try-link {
   color: #ff6201;
+  /* bigger tap area on phones without changing the look */
+  margin-top: 4px;
+  padding: 10px 6px;
 }
 .try-btn:hover,
 .try-link:hover {
@@ -666,36 +666,45 @@ html {
   }
 }
 
-/* ---------- Section 11: steps ---------- */
-.step {
+/* ---------- Section 11: step cards with phone mockups ---------- */
+.step-card {
+  position: relative;
   display: flex;
   flex-direction: column;
-  align-items: center;
-}
-.step-num {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 64px;
-  height: 64px;
-  border-radius: 999px;
-  border: 2px solid #ff6201;
-  background: #ffe6d5;
-  color: #ff6201;
-  font-size: 30px;
-  font-weight: 600;
+  align-items: flex-start;
+  height: 360px;
+  padding: 30px 30px 0;
+  overflow: hidden; /* phone is cropped by the card bottom */
+  border-radius: 28px;
+  background: #f3f3f3;
+  text-align: left;
 }
 .step-title {
-  margin-top: 22px;
   font-size: 26px;
   font-weight: 700;
   letter-spacing: -0.02em;
 }
 .step-text {
-  margin-top: 6px;
-  max-width: 190px;
+  margin-top: 8px;
+  max-width: 220px;
   font-size: 16px;
   line-height: 1.4;
+}
+.step-phone {
+  position: absolute;
+  left: 30px;
+  top: 138px;
+  width: 214px;
+  transition: transform 0.5s cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+.step-card:hover .step-phone {
+  transform: translateY(-12px);
+}
+@media (max-width: 639px) {
+  .step-phone {
+    left: 50%;
+    margin-left: -107px; /* centre the phone on single-column phones */
+  }
 }
 
 /* ---------- Section 12: footer ---------- */
@@ -712,6 +721,12 @@ html {
     #120602 91%,
     #000000 100%
   );
+}
+.social {
+  /* 44px tap area around the 24px icon */
+  display: inline-flex;
+  padding: 10px;
+  margin: -10px;
 }
 .social img {
   width: 24px;
