@@ -21,7 +21,7 @@ html {
   flex-direction: column;
   padding: 8px;
   border-radius: 12px;
-  background: #1c1c1c;
+  background: #363636;
   border: 1px solid rgb(255 255 255 / 0.08);
   box-shadow: 0 20px 40px rgb(0 0 0 / 0.45);
   opacity: 0;
@@ -412,7 +412,7 @@ html {
   /* height is set per panel in the HTML (h-[...]) */
   overflow: hidden;
   border-radius: 16px;
-  background: #0e0e11;
+  background: #3d3d3d;
   border: 1px solid rgb(255 255 255 / 0.05);
 }
 
@@ -422,11 +422,12 @@ html {
   flex-direction: column;
   justify-content: space-between;
   gap: 28px;
-  min-height: 250px;
-  padding: 24px;
+  min-height: 0;
+  padding: 32px;
   border-radius: 24px;
   background: #fff;
-  border: 1px solid #d9d9d9;
+  border: 1px solid #e4e4e4;
+  box-shadow: 0 8px 24px -14px rgb(74 28 0 / 0.18);
 }
 .trust-title {
   font-size: 26px;
@@ -459,106 +460,132 @@ html {
   font-weight: 500;
 }
 
-/* ---------- Section 7: testimonial slider ---------- */
-/* The whole section fits the screen below the sticky ticker + nav (105px),
-   so tag, quote, person and buttons are always visible in one frame. */
-.t-section {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  min-height: calc(100svh - 105px);
-  padding-block: clamp(32px, 5svh, 80px);
+/* ---------- Section 7: testimonial cards ---------- */
+/* Mobile: rating card on top, one card (plus a peek of the next) per view.
+   md+: rating card pinned on the left; testimonial cards slide in beside it and
+   tuck underneath it as they leave. */
+.tc-wrap {
+  --gap: 16px;
+  --cw: 85cqw; /* card width */
+  position: relative;
+  container-type: inline-size;
 }
-/* gap under the "Client Experience" tag — only applies while the tag is in the page */
-.t-section > span + .t-viewport {
-  margin-top: clamp(24px, 4svh, 48px);
-}
-.t-buttons {
-  margin-top: clamp(16px, 3svh, 36px);
-}
-.t-viewport {
-  --slide-w: min(1100px, 88vw);
-  --gap: 24px;
-  /* fades the neighbouring testimonials out at the far left/right */
-  -webkit-mask-image: linear-gradient(90deg, transparent 0, #000 14%, #000 86%, transparent 100%);
-  mask-image: linear-gradient(90deg, transparent 0, #000 14%, #000 86%, transparent 100%);
-}
-@media (min-width: 1024px) {
-  .t-viewport {
-    --gap: 120px;
+@media (min-width: 768px) {
+  .tc-wrap {
+    --cw: calc((100cqw - 2 * var(--gap)) / 3);
   }
 }
-.t-track {
-  position: relative; /* height is set by js to the tallest testimonial */
+@media (min-width: 1280px) {
+  .tc-wrap {
+    --cw: calc((100cqw - 3 * var(--gap)) / 4);
+  }
 }
-.t-slide {
-  position: absolute;
-  top: 0;
-  left: 50%;
-  width: var(--slide-w);
-  margin-left: calc(var(--slide-w) / -2);
+.tc-rating {
   display: flex;
   flex-direction: column;
-  align-items: center;
-  text-align: center;
-  transform: translateX(calc(var(--offset, 0) * (var(--slide-w) + var(--gap))));
-  opacity: 0.25;
-  transition: transform 0.7s cubic-bezier(0.65, 0, 0.35, 1), opacity 0.7s;
+  justify-content: space-between;
+  gap: 40px;
+  margin-bottom: var(--gap);
+  padding: 24px;
+  border-radius: 12px;
+  background: #ff6201;
+  color: #fff;
 }
-.t-slide.is-active {
-  opacity: 1;
+.tc-stack {
+  width: 40px;
+  height: 40px;
+  border: 2px solid #ff6201;
+  border-radius: 999px;
+  object-fit: cover;
 }
-.t-slide.is-far {
-  opacity: 0;
+.tc-viewport {
+  overflow: hidden;
 }
-.t-slide:not(.is-active) .t-person {
-  opacity: 0;
+@media (min-width: 768px) {
+  .tc-rating {
+    position: absolute;
+    inset: 0 auto 0 0;
+    z-index: 1;
+    width: var(--cw);
+    margin: 0;
+    box-shadow: 16px 0 32px -12px rgb(74 28 0 / 0.18);
+  }
+  .tc-viewport {
+    padding-left: calc(var(--cw) + var(--gap));
+  }
 }
-.t-quote {
-  /* per-quote width in em (set inline) so the line breaks match the design at any font size */
-  max-width: var(--qw, 100%);
-  /* scales with screen height AND width: 50px on big screens, smaller on short laptop screens */
-  font-size: clamp(24px, min(13.3svh - 46px, 3.6vw), 50px);
-  line-height: 1.5;
-  letter-spacing: -0.02em;
+.tc-track {
+  display: flex;
+  gap: var(--gap);
+  transition: transform 0.6s cubic-bezier(0.65, 0, 0.35, 1);
 }
-.t-person {
+.tc-card {
+  display: flex;
+  flex-direction: column;
+  flex: 0 0 var(--cw);
+  min-height: 300px;
+  padding: 24px;
+  border-radius: 12px;
+  background: #fff;
+}
+.tc-mark {
+  height: 22px;
+  color: #ff6201;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 56px;
+  font-weight: 700;
+  line-height: 0.85;
+}
+.tc-quote {
+  margin-top: 20px;
+  color: #5a4a40;
+  font-size: 15px;
+  line-height: 1.65;
+}
+.tc-person {
   display: flex;
   align-items: center;
-  gap: 16px;
-  margin-top: clamp(20px, 3.5svh, 40px);
-  text-align: left;
-  transition: opacity 0.4s;
+  gap: 12px;
+  margin-top: auto;
+  padding-top: 28px;
 }
-.t-avatar {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 80px;
-  height: 80px;
+.tc-avatar {
+  width: 44px;
+  height: 44px;
   flex-shrink: 0;
   border-radius: 999px;
-  background: #ffe6d5;
-}
-.t-avatar img {
-  width: 60px;
-  height: 60px;
-  border-radius: 999px;
-  border: 3px solid #ff6201;
   object-fit: cover;
   object-position: top;
 }
-.t-name {
+.tc-name {
   display: block;
-  font-size: 20px;
+  font-size: 16px;
   font-weight: 600;
 }
-.t-role {
+.tc-role {
   display: block;
-  margin-top: 4px;
+  margin-top: 3px;
   color: #5a4a40;
-  font-size: 16px;
+  font-size: 13px;
+}
+.tc-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 42px;
+  height: 42px;
+  border-radius: 999px;
+  background: #fff;
+  color: #4a1c00;
+  transition: background 0.2s, color 0.2s, opacity 0.2s;
+}
+.tc-btn:hover:not(:disabled) {
+  background: #ff6201;
+  color: #fff;
+}
+.tc-btn:disabled {
+  opacity: 0.4;
+  cursor: default;
 }
 
 /* ---------- Section 8: floating info cards ---------- */
@@ -594,70 +621,85 @@ html {
 .plan-card {
   display: flex;
   flex-direction: column;
-  padding: 40px 20px 20px;
-  border-radius: 20px;
-  background: #262626;
-  text-align: center;
-  transition: transform 0.3s, background 0.3s;
+  overflow: hidden;
+  border: 1px solid #5a3320;
+  border-radius: 32px;
+  background: #363636;
+  transition: transform 0.3s, border-color 0.3s;
 }
 .plan-card:hover {
   transform: translateY(-4px);
-  background: #2c2c2c;
+  border-color: #ee6c2d;
+}
+.plan-head {
+  padding: 40px 24px 36px;
+  background: #35251c;
+  text-align: center;
 }
 .plan-name {
   font-size: 26px;
-  font-weight: 500;
+  font-weight: 700;
   letter-spacing: -0.02em;
 }
-.plan-sub {
-  margin-top: 4px;
-  color: rgb(255 255 255 / 0.6);
-  font-size: 18px;
+.plan-bar {
+  display: block;
+  width: 52px;
+  height: 3px;
+  margin: 14px auto 0;
+  border-radius: 2px;
+  background: #ee6c2d;
 }
 .plan-price {
-  margin-top: 28px;
-  color: #ff6201;
-  font-size: 34px;
-  font-weight: 600;
-  letter-spacing: -0.05em;
+  margin-top: 26px;
+  color: #ee6c2d;
+  font-size: 32px;
+  font-weight: 700;
+  letter-spacing: -0.04em;
+}
+.plan-body {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  padding: 28px 24px 24px;
 }
 .plan-list {
   display: flex;
   flex-direction: column;
-  gap: 20px;
-  margin: 24px 0 40px;
-  padding-left: 8px;
-  text-align: left;
+  gap: 18px;
+  margin-bottom: 36px;
 }
 .plan-list li {
-  position: relative;
-  padding-left: 30px;
-  color: rgb(255 255 255 / 0.88);
-  font-size: 17px;
-  line-height: 1.45;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  color: rgb(255 255 255 / 0.9);
+  font-size: 16px;
+  line-height: 1.4;
 }
-/* orange diamond bullet */
+/* orange check in a dark brown circle */
 .plan-list li::before {
   content: "";
-  position: absolute;
-  left: 2px;
-  top: 0.62em;
-  width: 8px;
-  height: 8px;
-  background: #ff6201;
-  transform: rotate(45deg);
+  flex: none;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: #35251c url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23ff6201' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6.5 12.5 3.5 3.5 7.5-8'/%3E%3C/svg%3E") center / 20px no-repeat;
 }
 .plan-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
   margin-top: auto;
-  padding: 12px 0;
-  border-radius: 6px;
-  background: #ff6201;
+  padding: 15px 0;
+  border-radius: 16px;
+  background: #ee6c2d;
   font-size: 16px;
-  font-weight: 500;
+  font-weight: 700;
   transition: background 0.2s;
 }
 .plan-btn:hover {
-  background: #e85f00;
+  background: #e0601f;
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -667,35 +709,42 @@ html {
 }
 
 /* ---------- Section 11: steps ---------- */
-.step {
+.step-head {
   display: flex;
-  flex-direction: column;
   align-items: center;
+  gap: 14px;
+}
+/* hairline connecting each number to the next column */
+.step-head::after {
+  content: "";
+  flex: 1;
+  height: 1px;
+  background: rgb(74 28 0 / 0.18);
 }
 .step-num {
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 64px;
-  height: 64px;
+  width: 44px;
+  height: 44px;
   border-radius: 999px;
   border: 2px solid #ff6201;
   background: #ffe6d5;
   color: #ff6201;
-  font-size: 30px;
+  font-size: 20px;
   font-weight: 600;
 }
 .step-title {
-  margin-top: 22px;
-  font-size: 26px;
+  margin-top: 16px;
+  font-size: 22px;
   font-weight: 700;
   letter-spacing: -0.02em;
 }
 .step-text {
-  margin-top: 6px;
-  max-width: 190px;
+  margin-top: 4px;
+  max-width: 260px;
   font-size: 16px;
-  line-height: 1.4;
+  line-height: 1.45;
 }
 
 /* ---------- Section 12: footer ---------- */
@@ -710,7 +759,7 @@ html {
     #b84a08 67%,
     #4a1c06 80%,
     #120602 91%,
-    #000000 100%
+    #2b2b2b 100%
   );
 }
 .social img {
@@ -724,8 +773,8 @@ html {
 .footer-links {
   display: flex;
   flex-direction: column;
-  gap: 18px;
-  font-size: 17px;
+  gap: 14px;
+  font-size: 16px;
 }
 .footer-links a {
   display: inline-flex;
@@ -760,16 +809,49 @@ html {
   align-items: baseline;
 }
 .contact-card dt {
-  font-size: 18px;
+  font-size: 16px;
   font-weight: 700;
 }
 .contact-card dd {
   font-size: 16px;
   color: rgb(255 255 255 / 0.92);
 }
+.reg-list {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+  color: #fff;
+}
+.reg-row {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  font-size: 12px;
+  line-height: 1.75;
+}
+.reg-logo {
+  display: flex;
+  flex: none;
+  align-items: center;
+  gap: 10px;
+}
+.reg-logo img {
+  height: 64px;
+  width: auto;
+}
+@media (min-width: 768px) {
+  .reg-row {
+    flex-direction: row;
+    align-items: center;
+    gap: 36px;
+  }
+  .reg-logo {
+    width: 220px;
+  }
+}
 .legal {
   color: #fff;
-  font-size: 15px;
+  font-size: 12px;
   line-height: 1.75;
 }
 .legal h3 {
@@ -817,4 +899,113 @@ html {
     transform: none;
     transition: none;
   }
+}
+
+/* Trade IPOs: autoplaying stacked-card demo */
+.ipo-track {
+  display: grid;
+}
+.ipo-card {
+  grid-area: 1 / 1;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 10px 16px 10px 10px;
+  border-radius: 16px;
+  background: #f1f1f1;
+  text-align: left;
+  opacity: 0;
+  transform: translateY(26px) scale(0.86);
+  transition:
+    transform 0.7s cubic-bezier(0.22, 1, 0.36, 1),
+    opacity 0.7s ease,
+    background-color 0.7s ease;
+  z-index: 0;
+}
+.ipo-card[data-pos="0"] {
+  opacity: 1;
+  transform: none;
+  z-index: 3;
+}
+.ipo-card[data-pos="1"] {
+  opacity: 1;
+  background: #f6f6f6;
+  transform: translateY(12px) scale(0.92);
+  z-index: 2;
+}
+.ipo-card[data-pos="exit"] {
+  transform: translateY(-18px);
+  z-index: 4;
+}
+.ipo-logo {
+  display: flex;
+  flex: none;
+  align-items: center;
+  justify-content: center;
+  width: 52px;
+  height: 52px;
+  border-radius: 12px;
+  background: #fff;
+  box-shadow: inset 0 0 0 1px rgb(0 0 0 / 0.06);
+}
+.ipo-logo img {
+  width: 28px;
+  height: 28px;
+}
+@media (prefers-reduced-motion: reduce) {
+  .ipo-card {
+    transition: none;
+  }
+}
+
+/* Section 6: why choose us */
+.why-card {
+  color: var(--color-cocoa);
+  display: flex;
+  flex-direction: column;
+  padding: 28px;
+  border: 1px solid #e4e4e4;
+  border-radius: 20px;
+  background: #fff;
+  /* hover uses `translate` so it doesn't fight the .reveal transform/delay */
+  transition:
+    opacity 0.7s cubic-bezier(0.2, 0.7, 0.2, 1) var(--d, 0ms),
+    transform 0.7s cubic-bezier(0.2, 0.7, 0.2, 1) var(--d, 0ms),
+    translate 0.3s ease,
+    box-shadow 0.3s ease,
+    border-color 0.3s ease;
+}
+.why-card:hover {
+  translate: 0 -6px;
+  border-color: rgb(255 98 1 / 0.45);
+  box-shadow: 0 18px 36px -16px rgb(255 98 1 / 0.35);
+}
+.why-icon {
+  width: 32px;
+  height: 32px;
+  color: #ff6201;
+  transition: transform 0.3s ease;
+}
+.why-card:hover .why-icon {
+  transform: scale(1.12) rotate(-6deg);
+}
+@media (prefers-reduced-motion: reduce) {
+  .why-card:hover,
+  .why-card:hover .why-icon {
+    translate: none;
+    transform: none;
+  }
+}
+.why-title {
+  margin-top: 22px;
+  font-size: 19px;
+  font-weight: 500;
+  line-height: 1.25;
+  letter-spacing: -0.01em;
+}
+.why-text {
+  margin-top: 10px;
+  color: #5a4a40;
+  font-size: 14px;
+  line-height: 1.7;
 }

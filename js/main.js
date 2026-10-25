@@ -32,36 +32,35 @@ document.querySelectorAll("[data-widget]").forEach((slot) => {
 });
 
 // ---------- Testimonial slider ----------
-const tTrack = document.querySelector(".t-track");
-const tSlides = [...document.querySelectorAll(".t-slide")];
+const tWrap = document.querySelector(".tc-wrap");
+const tViewport = tWrap.querySelector(".tc-viewport");
+const tTrack = tWrap.querySelector(".tc-track");
+const tCards = [...tTrack.children];
+const tPrev = document.getElementById("t-prev");
+const tNext = document.getElementById("t-next");
 let tCurrent = 0;
 
+// how many cards fit beside the rating card decides how far the track can move
 function layoutTestimonials() {
-  const n = tSlides.length;
-  tSlides.forEach((slide, i) => {
-    // shortest distance from the current slide, so the carousel loops both ways
-    let offset = i - tCurrent;
-    if (offset > n / 2) offset -= n;
-    if (offset < -n / 2) offset += n;
-    slide.style.setProperty("--offset", offset);
-    slide.classList.toggle("is-active", offset === 0);
-    slide.classList.toggle("is-far", Math.abs(offset) > 1);
-    slide.setAttribute("aria-hidden", offset !== 0);
-  });
-}
-
-// the track is as tall as the longest testimonial, so the buttons never jump
-function sizeTestimonials() {
-  tTrack.style.height = Math.max(...tSlides.map((s) => s.offsetHeight)) + "px";
+  const gap = parseFloat(getComputedStyle(tTrack).columnGap) || 0;
+  const step = tCards[0].offsetWidth + gap;
+  const room = tViewport.clientWidth - parseFloat(getComputedStyle(tViewport).paddingLeft);
+  const visible = Math.max(1, Math.floor((room + gap + 1) / step));
+  const last = Math.max(0, tCards.length - visible);
+  tCurrent = Math.min(tCurrent, last);
+  tTrack.style.transform = `translateX(${-tCurrent * step}px)`;
+  tCards.forEach((card, i) => card.setAttribute("aria-hidden", i < tCurrent || i >= tCurrent + visible));
+  tPrev.disabled = tCurrent === 0;
+  tNext.disabled = tCurrent === last;
 }
 
 function goTo(step) {
-  tCurrent = (tCurrent + step + tSlides.length) % tSlides.length;
+  tCurrent = Math.max(0, tCurrent + step);
   layoutTestimonials();
 }
 
-document.getElementById("t-prev").addEventListener("click", () => goTo(-1));
-document.getElementById("t-next").addEventListener("click", () => goTo(1));
+tPrev.addEventListener("click", () => goTo(-1));
+tNext.addEventListener("click", () => goTo(1));
 
 // swipe on touch screens
 let touchX = null;
@@ -73,10 +72,7 @@ tTrack.addEventListener("touchend", (e) => {
   touchX = null;
 });
 
-layoutTestimonials();
-new ResizeObserver(sizeTestimonials).observe(document.querySelector(".t-viewport"));
-window.addEventListener("resize", sizeTestimonials);
-document.fonts.ready.then(sizeTestimonials);
+new ResizeObserver(layoutTestimonials).observe(tViewport);
 
 // ---------- Reveal sections as they scroll into view ----------
 const revealObserver = new IntersectionObserver(
@@ -177,4 +173,31 @@ foxes.forEach((fox) => {
   };
   fox.addEventListener("pointerenter", hop);
   fox.addEventListener("click", hop);
+});
+
+// Trade IPOs demo: stacked cards, front card fades up, the next one comes forward
+document.querySelectorAll("[data-ipo-carousel]").forEach((root) => {
+  const cards = [...root.querySelectorAll(".ipo-card")];
+  const count = cards.length;
+  let i = 0;
+  let timer = null;
+  const show = (n) => {
+    i = (n + count) % count;
+    cards.forEach((card, idx) => {
+      const pos = (idx - i + count) % count;
+      card.dataset.pos = pos === count - 1 ? "exit" : pos < 2 ? pos : "back";
+    });
+  };
+  const stop = () => {
+    clearInterval(timer);
+    timer = null;
+  };
+  const start = () => {
+    if (calmMotion || timer) return;
+    timer = setInterval(() => show(i + 1), 3200);
+  };
+  show(0);
+  root.addEventListener("pointerenter", stop);
+  root.addEventListener("pointerleave", start);
+  new IntersectionObserver(([e]) => (e.isIntersecting ? start() : stop())).observe(root);
 });

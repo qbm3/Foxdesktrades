@@ -27,11 +27,15 @@
         --color-brand-dark: #e85f00;
         --color-brand-soft: #ffe6d5;
         --color-cocoa: #4a1c00;
-        --color-ink: #0b0b0b;
-        --color-panel: #262626;
+        --color-ink: #2b2b2b;
+        /* charcoal instead of pure black for every bg-black / text-black (softer contrast) */
+        --color-black: #2b2b2b;
+        --color-panel: #363636;
       }
     </style>
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="css/styles.css" />
+    <link rel="stylesheet" href="css/market-globe.css" />
   </head>
 
   <body class="bg-ink font-sans text-white antialiased">
@@ -211,7 +215,7 @@
           </ul>
 
           <!-- Live investment card: names, flags and amounts rotate (edit the list in js/main.js) -->
-          <div id="invest-toast" class="toast hidden w-[336px] shrink-0 rounded-xl bg-[#2b2b2b]/90 p-3 shadow-2xl backdrop-blur lg:block" aria-live="polite">
+          <div id="invest-toast" class="toast hidden w-[336px] shrink-0 rounded-xl bg-[#3d3d3d]/90 p-3 shadow-2xl backdrop-blur lg:block" aria-live="polite">
             <div class="flex items-center gap-3">
               <img id="toast-avatar" src="assets/images/avatars/avatar-01.png" alt="" class="size-[50px] shrink-0 rounded-full" />
               <div class="min-w-0 flex-1 leading-tight">
@@ -283,6 +287,43 @@
         </div>
       </section>
 
+      <!-- ============ SECTION 4b: MARKET SESSIONS GLOBE ============ -->
+      <section id="market-sessions" class="bg-black">
+        <div class="mx-auto max-w-[1440px] px-5 py-20 md:px-10 lg:py-28 xl:px-14">
+          <div class="reveal">
+            <h2 class="text-[40px] font-bold leading-[1.02] tracking-[-0.04em] sm:text-6xl lg:text-[80px]">
+              Follow the market<br />
+              <span class="text-[#a9a9a9]">around the world</span>
+            </h2>
+            <p class="mt-6 max-w-[700px] text-base leading-relaxed text-white/85 md:text-lg">
+              See which major exchanges are open right now, and when the next session starts, wherever you trade from.
+            </p>
+          </div>
+
+          <div class="reveal mt-12 lg:mt-16" style="--d: 120ms">
+            <!-- globe on the left, market panel always shown on the right (stacks below on smaller screens) -->
+            <div class="ms-layout">
+              <div class="ms-stage text-white" id="ms-stage">
+                <div class="corner tl">Market sessions<span>Major exchanges by trading hours</span></div>
+                <div class="corner tr" id="utc">--:-- UTC</div>
+                <div class="labels" id="labels"></div>
+                <div class="corner bl">Drag to turn, tap a market</div>
+                <div class="corner br" id="status"></div>
+              </div>
+              <div class="ms-side">
+                <aside class="panel" id="panel" aria-live="polite">
+                  <header>
+                    <div><h3 class="ptitle" id="pTitle">Region</h3><p id="pSub"></p></div>
+                  </header>
+                  <div class="body" id="pBody"></div>
+                  <footer>Session times are live from your clock; exchange holidays aren’t applied. Market data by TradingView.</footer>
+                </aside>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
       <!-- ============ SECTION 3: ABOUT / MISSION ============ -->
       <section id="about" class="bg-white text-cocoa">
         <div class="mx-auto max-w-[1440px] px-5 py-20 md:px-10 lg:py-28 xl:px-14">
@@ -339,93 +380,6 @@
         </div>
       </section>
 
-      <!-- ============ SECTION 4: TRADING INSTRUMENTS ============ -->
-      <section id="markets" class="bg-[#f3f3f3] text-cocoa">
-        <div class="mx-auto max-w-[1440px] px-5 py-20 md:px-10 lg:py-24 xl:px-14">
-          <h2 class="reveal text-center text-[32px] font-medium leading-[1.2] tracking-[-0.03em] md:text-[44px]">
-            Explore trading with<br />risk free trading instruments
-          </h2>
-
-          <div class="mt-12 flex flex-col gap-5 lg:mt-[84px]">
-            <!-- Stocks -->
-            <article id="stocks" class="reveal clip-top grid rounded-3xl border border-[#e2e2e2] bg-white lg:min-h-[349px] lg:grid-cols-2">
-              <div class="flex flex-col items-center justify-center px-6 pt-12 text-center lg:pb-12">
-                <h3 class="instrument-title">Trade Stocks<br /><span class="text-[#1a1a1a]">on global market</span></h3>
-                <p class="instrument-text">Access a wide range of stocks from global markets and take advantage of price appreciation.</p>
-                <a href="markets.html#stocks" class="try-btn">Try now <svg class="size-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M5 12h14m-6-6 6 6-6 6" /></svg></a>
-              </div>
-              <div class="relative mt-8 h-[300px] lg:mt-0 lg:h-auto">
-                <img src="assets/images/woman-1.png" alt="Foxdesk Trades support specialist" loading="lazy" class="absolute bottom-0 right-0 h-full w-auto lg:h-[387px]" />
-                <div class="live-widget absolute hidden sm:block left-4 top-6 lg:left-auto lg:right-[290px] lg:top-[50px]" data-widget></div>
-              </div>
-            </article>
-
-            <div class="grid gap-5 lg:grid-cols-2">
-              <!-- Left column -->
-              <div class="flex flex-col gap-5">
-                <!-- Metals -->
-                <article id="metals" class="reveal flex flex-col items-center rounded-3xl border border-[#e2e2e2] bg-white px-6 pt-14 text-center lg:min-h-[448px] lg:pt-[84px]">
-                  <h3 class="instrument-title">Trade Metals</h3>
-                  <p class="instrument-text">Gold (XAU), Silver (XAG), Platinum (XPT) and other highly traded metals</p>
-                  <a href="markets.html#metals" class="try-link">Try now <svg class="size-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M5 12h14m-6-6 6 6-6 6" /></svg></a>
-                  <img src="assets/3d/trade-metals.png" alt="" loading="lazy" class="mb-5 mt-6 w-[230px]" />
-                </article>
-
-                <!-- IPOs -->
-                <article id="ipos" class="reveal flex flex-col items-center rounded-3xl border border-[#e2e2e2] bg-white px-6 pb-10 pt-12 text-center lg:min-h-[228px]">
-                  <h3 class="instrument-title">Trade IPOs</h3>
-                  <p class="instrument-text">Gain early access to high growth companies</p>
-                  <div class="relative mt-6 w-full max-w-[390px]">
-                    <div class="absolute inset-x-5 -bottom-3 h-full rounded-2xl bg-[#f6f6f6]"></div>
-                    <div class="relative flex items-center gap-4 rounded-2xl bg-[#f1f1f1] p-2.5 pr-4 text-left">
-                      <span class="flex size-[52px] shrink-0 items-center justify-center rounded-xl bg-brand">
-                        <img src="assets/logos/icon-white.png" alt="" class="size-8" />
-                      </span>
-                      <div class="min-w-0 flex-1">
-                        <p class="font-semibold text-[#1a1a1a]">SpaceX IPO jumps +40%</p>
-                        <p class="text-[13px] text-[#5a4a40]">Your portfolio increased $2,000</p>
-                      </div>
-                      <span class="self-start pt-1 text-sm text-[#6b6b6b]">8:21 AM</span>
-                    </div>
-                  </div>
-                </article>
-              </div>
-
-              <!-- Right column -->
-              <div class="flex flex-col gap-5">
-                <!-- ETFs -->
-                <article id="etfs" class="reveal flex flex-col items-center justify-center rounded-3xl border border-[#e2e2e2] bg-white px-6 py-12 text-center lg:min-h-[228px]" style="--d: 100ms">
-                  <h3 class="instrument-title">Trade ETFs</h3>
-                  <p class="instrument-text">Diversify your portfolio with Exchange Traded Funds</p>
-                  <a href="markets.html#etfs" class="try-link">Try now <svg class="size-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M5 12h14m-6-6 6 6-6 6" /></svg></a>
-                </article>
-
-                <!-- Securities -->
-                <article id="securities" class="reveal relative flex flex-1 flex-col items-center overflow-hidden rounded-3xl border border-[#e2e2e2] bg-white px-6 pt-14 text-center lg:min-h-[448px] lg:pt-[84px]" style="--d: 100ms">
-                  <h3 class="instrument-title">Trade Securities</h3>
-                  <p class="instrument-text">Access a wide range of stocks from global markets and take advantage of price appreciation.</p>
-                  <a href="markets.html#securities" class="try-link">Try now <svg class="size-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M5 12h14m-6-6 6 6-6 6" /></svg></a>
-                  <img src="assets/3d/trade-securities.png" alt="" loading="lazy" class="mt-6 w-[200px] self-start lg:absolute lg:bottom-3 lg:left-3 lg:mt-0 lg:w-[216px]" />
-                </article>
-              </div>
-            </div>
-
-            <!-- Bonds -->
-            <article id="bonds" class="reveal clip-top grid rounded-3xl border border-[#e2e2e2] bg-white lg:min-h-[349px] lg:grid-cols-2">
-              <div class="relative order-2 mt-8 h-[300px] lg:order-1 lg:mt-0 lg:h-auto">
-                <img src="assets/images/woman-2.png" alt="Foxdesk Trades account manager" loading="lazy" class="absolute bottom-0 left-0 h-full w-auto lg:h-[378px]" />
-                <div class="live-widget absolute hidden sm:block right-4 top-6 lg:left-[290px] lg:right-auto lg:top-[50px]" data-widget></div>
-              </div>
-              <div class="order-1 flex flex-col items-center justify-center px-6 pt-12 text-center lg:order-2 lg:pb-12">
-                <h3 class="instrument-title">Trade Bonds<br /><span class="text-[#1a1a1a]">and fixed income</span></h3>
-                <p class="instrument-text">Access a wide range of bonds and fixed income products for steadier, more predictable returns.</p>
-                <a href="markets.html#bonds" class="try-btn">Try now <svg class="size-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M5 12h14m-6-6 6 6-6 6" /></svg></a>
-              </div>
-            </article>
-          </div>
-        </div>
-      </section>
-
       <!-- ============ SECTION 5: LIVE MARKET (TradingView) ============ -->
       <section id="live-market" class="bg-black">
         <div class="mx-auto max-w-[1440px] px-5 py-20 md:px-10 lg:py-28 xl:px-14">
@@ -439,8 +393,8 @@
             </p>
           </div>
 
-          <div class="reveal mt-12 rounded-[36px] bg-[#1c1c1c] p-3 md:p-5 lg:mt-16" style="--d: 120ms">
-            <div class="flex flex-col gap-6 rounded-2xl bg-[#262626] p-6 md:flex-row md:items-center md:justify-between md:p-8">
+          <div class="reveal mt-12 rounded-[36px] bg-[#333333] p-3 md:p-5 lg:mt-16" style="--d: 120ms">
+            <div class="flex flex-col gap-6 rounded-2xl bg-[#3d3d3d] p-6 md:flex-row md:items-center md:justify-between md:p-8">
               <div>
                 <h3 class="text-2xl font-medium md:text-[28px]">Foxdesk Live Market</h3>
                 <p class="mt-1 text-base text-white/65 md:text-lg">Track movers, leaders and the US top market trading activity</p>
@@ -526,104 +480,167 @@
         </div>
       </section>
 
-      <!-- ============ SECTION 6: TRUST ============ -->
-      <section class="bg-[#f3f3f3] text-cocoa">
-        <div class="mx-auto max-w-[1440px] px-5 py-20 md:px-10 lg:py-28 xl:px-14">
+      <!-- ============ SECTION 4: TRADING INSTRUMENTS ============ -->
+      <section id="markets" class="bg-[#f3f3f3] text-cocoa">
+        <div class="mx-auto max-w-[1440px] px-5 py-20 md:px-10 lg:py-24 xl:px-14">
           <h2 class="reveal text-center text-[32px] font-medium leading-[1.2] tracking-[-0.03em] md:text-[44px]">
-            Trusted by millions of<br class="sm:hidden" /> users<br class="hidden sm:inline" /> globally
+            Explore trading with<br />risk free trading instruments
           </h2>
 
-          <!-- PLACEHOLDER: regulator / bank names pending client legal confirmation -->
-          <div class="mt-12 grid gap-5 md:grid-cols-2 lg:mt-14 lg:grid-cols-3">
-            <article class="reveal trust-card">
-              <div class="flex gap-6 lg:gap-[30px]">
-                <img src="assets/icons/regulated-entities.svg" alt="" class="size-[60px] shrink-0" />
-                <div>
-                  <h3 class="trust-title">Regulated entities</h3>
-                  <p class="trust-text">We follow regulations and rules by local regulators put in place to secure clients investments. No compromise in keeping your investment safe.</p>
-                </div>
+          <div class="mt-12 flex flex-col gap-5 lg:mt-[84px]">
+            <!-- Stocks -->
+            <article id="stocks" class="reveal clip-top grid rounded-3xl border border-[#e2e2e2] bg-white lg:min-h-[349px] lg:grid-cols-2">
+              <div class="flex flex-col items-center justify-center px-6 pt-12 text-center lg:pb-12">
+                <h3 class="instrument-title">Trade Stocks<br /><span class="text-[#1a1a1a]">on global market</span></h3>
+                <p class="instrument-text">Access a wide range of stocks from global markets and take advantage of price appreciation.</p>
+                <a href="markets.html#stocks" class="try-btn">Try now <svg class="size-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M5 12h14m-6-6 6 6-6 6" /></svg></a>
               </div>
-              <div class="trust-pills"><span>RCA</span><span>CySEC</span><span>ASIC</span></div>
+              <div class="relative mt-8 h-[300px] lg:mt-0 lg:h-auto">
+                <img src="assets/images/woman-1.png" alt="Foxdesk Trades support specialist" loading="lazy" class="absolute bottom-0 right-0 h-full w-auto lg:h-[387px]" />
+                <div class="live-widget absolute hidden sm:block left-4 top-6 lg:left-auto lg:right-[290px] lg:top-[50px]" data-widget></div>
+              </div>
             </article>
-            <article class="reveal trust-card" style="--d: 100ms">
-              <div class="flex gap-6 lg:gap-[30px]">
-                <img src="assets/icons/segregated-accounts.svg" alt="" class="size-[60px] shrink-0" />
-                <div>
-                  <h3 class="trust-title">Segregated account</h3>
-                  <p class="trust-text">Your money is held separately in some of the world's largest, most secure banks. Not a cent sits on our balance sheet.</p>
-                </div>
+
+            <div class="grid gap-5 lg:grid-cols-2">
+              <!-- Left column -->
+              <div class="flex flex-col gap-5">
+                <!-- Metals -->
+                <article id="metals" class="reveal flex flex-col items-center rounded-3xl border border-[#e2e2e2] bg-white px-6 pt-14 text-center lg:min-h-[448px] lg:pt-[84px]">
+                  <h3 class="instrument-title">Trade Metals</h3>
+                  <p class="instrument-text">Gold (XAU), Silver (XAG), Platinum (XPT) and other highly traded metals</p>
+                  <a href="markets.html#metals" class="try-link">Try now <svg class="size-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M5 12h14m-6-6 6 6-6 6" /></svg></a>
+                  <img src="assets/3d/trade-metals.png" alt="" loading="lazy" class="mb-5 mt-6 w-[230px]" />
+                </article>
+
+                <!-- IPOs -->
+                <article id="ipos" class="reveal flex flex-col items-center rounded-3xl border border-[#e2e2e2] bg-white px-6 pb-10 pt-12 text-center lg:min-h-[228px]">
+                  <h3 class="instrument-title">Trade IPOs</h3>
+                  <p class="instrument-text">Gain early access to high growth companies</p>
+                  <div class="ipo-carousel relative mt-6 pb-3 w-full max-w-[390px]" data-ipo-carousel>
+                    <div class="ipo-track">
+                        <div class="ipo-card">
+                          <span class="ipo-logo"><img src="assets/logos/brands/spacex.svg" alt="SpaceX logo" /></span>
+                          <div class="min-w-0 flex-1">
+                            <p class="font-semibold text-[#1a1a1a]">SpaceX IPO jumps +40%</p>
+                            <p class="text-[13px] text-[#5a4a40]">Your portfolio increased $2,000</p>
+                          </div>
+                          <span class="self-start pt-1 text-sm text-[#6b6b6b]">8:21 AM</span>
+                        </div>
+                        <div class="ipo-card">
+                          <span class="ipo-logo"><img src="assets/logos/brands/airbnb.svg" alt="Airbnb logo" /></span>
+                          <div class="min-w-0 flex-1">
+                            <p class="font-semibold text-[#1a1a1a]">Airbnb IPO climbs +26%</p>
+                            <p class="text-[13px] text-[#5a4a40]">Your portfolio increased $1,300</p>
+                          </div>
+                          <span class="self-start pt-1 text-sm text-[#6b6b6b]">9:05 AM</span>
+                        </div>
+                        <div class="ipo-card">
+                          <span class="ipo-logo"><img src="assets/logos/brands/coinbase.svg" alt="Coinbase logo" /></span>
+                          <div class="min-w-0 flex-1">
+                            <p class="font-semibold text-[#1a1a1a]">Coinbase IPO surges +31%</p>
+                            <p class="text-[13px] text-[#5a4a40]">Your portfolio increased $1,550</p>
+                          </div>
+                          <span class="self-start pt-1 text-sm text-[#6b6b6b]">9:48 AM</span>
+                        </div>
+                        <div class="ipo-card">
+                          <span class="ipo-logo"><img src="assets/logos/brands/uber.svg" alt="Uber logo" /></span>
+                          <div class="min-w-0 flex-1">
+                            <p class="font-semibold text-[#1a1a1a]">Uber IPO rises +18%</p>
+                            <p class="text-[13px] text-[#5a4a40]">Your portfolio increased $900</p>
+                          </div>
+                          <span class="self-start pt-1 text-sm text-[#6b6b6b]">10:12 AM</span>
+                        </div>
+                        <div class="ipo-card">
+                          <span class="ipo-logo"><img src="assets/logos/brands/spotify.svg" alt="Spotify logo" /></span>
+                          <div class="min-w-0 flex-1">
+                            <p class="font-semibold text-[#1a1a1a]">Spotify IPO gains +22%</p>
+                            <p class="text-[13px] text-[#5a4a40]">Your portfolio increased $1,100</p>
+                          </div>
+                          <span class="self-start pt-1 text-sm text-[#6b6b6b]">10:40 AM</span>
+                        </div>
+                        <div class="ipo-card">
+                          <span class="ipo-logo"><img src="assets/logos/brands/reddit.svg" alt="Reddit logo" /></span>
+                          <div class="min-w-0 flex-1">
+                            <p class="font-semibold text-[#1a1a1a]">Reddit IPO pops +35%</p>
+                            <p class="text-[13px] text-[#5a4a40]">Your portfolio increased $1,750</p>
+                          </div>
+                          <span class="self-start pt-1 text-sm text-[#6b6b6b]">11:03 AM</span>
+                        </div>
+                      </div>
+                  </div>
+                </article>
               </div>
-              <div class="trust-pills"><span>Charles Schwab Bank</span><span>Morgan Stanley Bank</span><span>Citigroup</span></div>
-            </article>
-            <article class="reveal trust-card md:col-span-2 lg:col-span-1" style="--d: 200ms">
-              <div class="flex gap-6 lg:gap-[30px]">
-                <img src="assets/icons/investor-protection.svg" alt="" class="size-[60px] shrink-0" />
-                <div>
-                  <h3 class="trust-title">Investor protection</h3>
-                  <p class="trust-text">Our customers and clients are highly protected with deposits of investment ranging from hundreds to millions daily.</p>
-                </div>
+
+              <!-- Right column -->
+              <div class="flex flex-col gap-5">
+                <!-- ETFs -->
+                <article id="etfs" class="reveal flex flex-col items-center justify-center rounded-3xl border border-[#e2e2e2] bg-white px-6 py-12 text-center lg:min-h-[228px]" style="--d: 100ms">
+                  <h3 class="instrument-title">Trade ETFs</h3>
+                  <p class="instrument-text">Diversify your portfolio with Exchange Traded Funds</p>
+                  <a href="markets.html#etfs" class="try-link">Try now <svg class="size-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M5 12h14m-6-6 6 6-6 6" /></svg></a>
+                </article>
+
+                <!-- Securities -->
+                <article id="securities" class="reveal relative flex flex-1 flex-col items-center overflow-hidden rounded-3xl border border-[#e2e2e2] bg-white px-6 pt-14 text-center lg:min-h-[448px] lg:pt-[84px]" style="--d: 100ms">
+                  <h3 class="instrument-title">Trade Securities</h3>
+                  <p class="instrument-text">Access a wide range of stocks from global markets and take advantage of price appreciation.</p>
+                  <a href="markets.html#securities" class="try-link">Try now <svg class="size-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M5 12h14m-6-6 6 6-6 6" /></svg></a>
+                  <img src="assets/3d/trade-securities.png" alt="" loading="lazy" class="mt-6 w-[200px] self-start lg:absolute lg:bottom-3 lg:left-3 lg:mt-0 lg:w-[216px]" />
+                </article>
               </div>
-              <div class="trust-pills"><span>ICF</span><span>FATF</span><span>IOSCO</span></div>
+            </div>
+
+            <!-- Bonds -->
+            <article id="bonds" class="reveal clip-top grid rounded-3xl border border-[#e2e2e2] bg-white lg:min-h-[349px] lg:grid-cols-2">
+              <div class="relative order-2 mt-8 h-[300px] lg:order-1 lg:mt-0 lg:h-auto">
+                <img src="assets/images/woman-2.png" alt="Foxdesk Trades account manager" loading="lazy" class="absolute bottom-0 left-0 h-full w-auto lg:h-[378px]" />
+                <div class="live-widget absolute hidden sm:block right-4 top-6 lg:left-[290px] lg:right-auto lg:top-[50px]" data-widget></div>
+              </div>
+              <div class="order-1 flex flex-col items-center justify-center px-6 pt-12 text-center lg:order-2 lg:pb-12">
+                <h3 class="instrument-title">Trade Bonds<br /><span class="text-[#1a1a1a]">and fixed income</span></h3>
+                <p class="instrument-text">Access a wide range of bonds and fixed income products for steadier, more predictable returns.</p>
+                <a href="markets.html#bonds" class="try-btn">Try now <svg class="size-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M5 12h14m-6-6 6 6-6 6" /></svg></a>
+              </div>
             </article>
           </div>
         </div>
       </section>
 
-      <!-- ============ SECTION 7: TESTIMONIAL ============ -->
-      <section id="testimonials" class="overflow-hidden bg-white text-cocoa">
-        <div class="t-section">
-          <!-- <span class="reveal rounded-md bg-brand px-7 py-2.5 text-[15px] font-medium text-white">Client Experience</span> -->
-
-          <!-- Slider: each <figure> is one testimonial. Add/remove figures freely; js/main.js handles the rest. -->
-          <div class="t-viewport reveal w-full" style="--d: 100ms" aria-roledescription="carousel" aria-label="Client testimonials">
-            <div class="t-track" aria-live="polite">
-              <figure class="t-slide">
-                <blockquote class="t-quote" style="--qw: 16.78em">The dashboard makes it easier to keep my wallet, plans, and market activity in one place. It feels focused and easy to use.</blockquote>
-                <figcaption class="t-person">
-                  <span class="t-avatar"><img src="assets/images/testimonials/maria-burton.png" alt="" /></span>
-                  <span class="leading-tight"><span class="t-name">Maria Burton</span><span class="t-role">New Trader</span></span>
-                </figcaption>
-              </figure>
-              <figure class="t-slide">
-                <blockquote class="t-quote" style="--qw: 20.07em">I wanted a platform that made it easier to explore different markets without feeling overwhelmed. Having the information and tools in one place has made my trading experience more organised.</blockquote>
-                <figcaption class="t-person">
-                  <span class="t-avatar"><img src="assets/images/testimonials/daniel-ozcan.png" alt="" /></span>
-                  <span class="leading-tight"><span class="t-name">Daniel Ozcan</span><span class="t-role">Investor / Trader</span></span>
-                </figcaption>
-              </figure>
-              <figure class="t-slide">
-                <blockquote class="t-quote" style="--qw: 16.73em">I like having a platform where I can monitor the markets I'm interested in and make decisions based on my own research. It helps me approach trading with more structure.</blockquote>
-                <figcaption class="t-person">
-                  <span class="t-avatar"><img src="assets/images/testimonials/rohan-mehta.png" alt="" /></span>
-                  <span class="leading-tight"><span class="t-name">Rohan Mehta</span><span class="t-role">Institutional Trader</span></span>
-                </figcaption>
-              </figure>
-              <figure class="t-slide">
-                <blockquote class="t-quote" style="--qw: 20.57em">I used to find the terminology around trading intimidating. Having access to market information and trading tools in one place gives me a better starting point for learning.</blockquote>
-                <figcaption class="t-person">
-                  <span class="t-avatar"><img src="assets/images/testimonials/oliver-bennett.png" alt="" /></span>
-                  <span class="leading-tight"><span class="t-name">Oliver Bennett</span><span class="t-role">Venture Capitalist</span></span>
-                </figcaption>
-              </figure>
-              <figure class="t-slide">
-                <blockquote class="t-quote" style="--qw: 16.03em">I wanted to understand more than just one market. Being able to explore different trading opportunities to make money on Foxdesk has made me so happy.</blockquote>
-                <figcaption class="t-person">
-                  <span class="t-avatar"><img src="assets/images/testimonials/layla-reid.png" alt="" /></span>
-                  <span class="leading-tight"><span class="t-name">Layla Reid</span><span class="t-role">Market Trader</span></span>
-                </figcaption>
-              </figure>
+      <!-- ============ SECTION 6: WHY CHOOSE US ============ -->
+      <section class="bg-black text-white">
+        <div class="mx-auto max-w-[1240px] px-5 py-20 md:px-10 lg:py-28">
+          <div class="grid gap-10 lg:grid-cols-[0.9fr_1.1fr] lg:items-stretch lg:gap-20">
+            <div class="reveal relative aspect-[4/3] overflow-hidden rounded-3xl lg:aspect-auto">
+              <img src="assets/images/stock-trading-web.jpg" alt="Live stock prices and charts on a trading screen" loading="lazy" class="absolute inset-0 size-full object-cover" />
             </div>
-          </div>
-
-          <div class="t-buttons flex gap-5">
-            <button type="button" id="t-prev" class="flex items-center gap-2 rounded bg-[#f3f3f3] px-3.5 py-1.5 text-[15px] font-medium text-brand transition hover:bg-[#ebebeb]" aria-label="Previous testimonial">
-              <svg class="size-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M19 12H5m6 6-6-6 6-6" /></svg>
-              Prev
-            </button>
-            <button type="button" id="t-next" class="flex items-center gap-2 rounded bg-brand px-4 py-1.5 text-[15px] font-medium text-white transition hover:bg-brand-dark" aria-label="Next testimonial">
-              Next
-              <svg class="size-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M5 12h14m-6-6 6 6-6 6" /></svg>
-            </button>
+            <div>
+            <div class="reveal">
+              <h2 class="text-[32px] font-medium leading-[1.2] tracking-[-0.03em] md:text-[40px]">Why traders choose Foxdesk</h2>
+              <p class="mt-4 text-base text-white/70 md:text-lg">Built on regulation, speed and support you can rely on.</p>
+            </div>
+            <div class="mt-8 grid gap-5 sm:grid-cols-2">
+            <article class="reveal why-card">
+              <svg class="why-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3 4.5 6v5.5c0 4.6 3.1 8.2 7.5 9.5 4.4-1.3 7.5-4.9 7.5-9.5V6L12 3Z"/><path d="m8.7 12.2 2.4 2.4 4.3-4.6"/></svg>
+              <h3 class="why-title">Regulated and accountable</h3>
+              <p class="why-text">We operate under the rules set by recognised regulators, with no compromise on keeping your investments safe.</p>
+            </article>
+            <article class="reveal why-card" style="--d: 100ms">
+              <svg class="why-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M13 2.5 5 13.5h6l-1 8 8-11h-6l1-8Z"/></svg>
+              <h3 class="why-title">Fast order execution</h3>
+              <p class="why-text">Place trades and see them filled with speed and precision, even when the markets are moving quickly.</p>
+            </article>
+            <article class="reveal why-card" style="--d: 200ms">
+              <svg class="why-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3.5" y="4" width="17" height="15" rx="1.5"/><circle cx="12" cy="11.5" r="3.5"/><circle cx="12" cy="11.5" r=".8"/><path d="M7 19v1.5M17 19v1.5"/></svg>
+              <h3 class="why-title">Your money stays yours</h3>
+              <p class="why-text">Client funds are held separately in some of the world&rsquo;s most secure banks. Not a cent sits on our balance sheet.</p>
+            </article>
+            <article class="reveal why-card" style="--d: 300ms">
+              <svg class="why-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.2 8A9 9 0 1 1 3 12"/><path d="M12 7.5V12l3 1.8"/><path d="M3 4.5V8h3.5"/></svg>
+              <h3 class="why-title">Support around the clock</h3>
+              <p class="why-text">Our dedicated team is available day and night to help with any question or concern about your account.</p>
+            </article>
+            </div>
+            </div>
           </div>
         </div>
       </section>
@@ -641,16 +658,16 @@
             </p>
           </div>
 
-          <div class="reveal relative mx-auto w-full max-w-[405px] lg:mr-[110px] lg:ml-auto" style="--d: 120ms">
-            <img src="assets/images/copy-trading-expert.jpg" alt="Foxdesk Trades expert trader" loading="lazy" class="w-full rounded-[28px]" />
-            <div class="float-card float-y -top-6 right-3 lg:-right-[110px] lg:top-[18%]">
+          <div class="reveal relative mx-auto w-full max-w-[405px] lg:mr-[130px] lg:ml-auto xl:mr-[190px]" style="--d: 120ms">
+            <img src="assets/images/copy-trading-expert.png" alt="Foxdesk Trades expert trader" loading="lazy" class="w-full rounded-[28px]" />
+            <div class="float-card float-y left-0 top-[4%] lg:left-[86%] lg:top-[22%]">
               <img src="assets/icons/advanced-analysis.svg" alt="" class="size-9 shrink-0" />
               <div>
                 <p class="text-base font-semibold lg:text-lg">Advanced analysis</p>
                 <p class="text-[13px] text-[#5a4a40] lg:text-sm">Access to advanced charts</p>
               </div>
             </div>
-            <div class="float-card float-y -bottom-6 left-3 lg:bottom-auto lg:-left-[100px] lg:top-[57%]" style="--float-delay: -2s">
+            <div class="float-card float-y left-0 top-[24%] lg:-left-[125px] lg:top-[43%] xl:-left-[150px]" style="--float-delay: -2s">
               <img src="assets/icons/expert-accuracy.svg" alt="" class="size-9 shrink-0" />
               <div>
                 <p class="text-base font-semibold lg:text-lg">Expert accuracy</p>
@@ -674,62 +691,166 @@
             </p>
           </div>
 
-          <div class="reveal mt-12 grid gap-5 rounded-[36px] bg-[#1c1c1c] p-3 sm:grid-cols-2 md:p-5 lg:mt-16 xl:grid-cols-4" style="--d: 120ms">
+          <div class="reveal mt-12 grid gap-6 sm:grid-cols-2 lg:mt-16 xl:grid-cols-4" style="--d: 120ms">
             <article class="plan-card">
-              <h3 class="plan-name">Standard plan</h3>
-              <p class="plan-sub">Investment package</p>
-              <p class="plan-price">$1,000–$4,999</p>
-              <ul class="plan-list">
+              <div class="plan-head">
+                <h3 class="plan-name">Standard plan</h3>
+                <span class="plan-bar"></span>
+                <p class="plan-price">$1,000–$4,999</p>
+              </div>
+              <div class="plan-body">
+                <ul class="plan-list">
                 <li>Access to available investment instruments.</li>
                 <li>Portfolio tracking from your dashboard.</li>
                 <li>Market tools and account access.</li>
                 <li>Support when you need assistance.</li>
               </ul>
-              <a href="plans.html#standard" class="plan-btn btn-glow">Select Plan</a>
+                <a href="plans.html#standard" class="plan-btn btn-glow">Select Plan</a>
+              </div>
             </article>
             <article class="plan-card">
-              <h3 class="plan-name">Classic plan</h3>
-              <p class="plan-sub">Investment package</p>
-              <p class="plan-price">$5,000–$9,999</p>
-              <ul class="plan-list">
+              <div class="plan-head">
+                <h3 class="plan-name">Classic plan</h3>
+                <span class="plan-bar"></span>
+                <p class="plan-price">$5,000–$9,999</p>
+              </div>
+              <div class="plan-body">
+                <ul class="plan-list">
                 <li>Access to available investment instruments.</li>
                 <li>Portfolio tracking from your dashboard.</li>
                 <li>Market tools and account access.</li>
                 <li>Support when you need assistance.</li>
               </ul>
-              <a href="plans.html#classic" class="plan-btn btn-glow">Select Plan</a>
+                <a href="plans.html#classic" class="plan-btn btn-glow">Select Plan</a>
+              </div>
             </article>
             <article class="plan-card">
-              <h3 class="plan-name">Premium plan</h3>
-              <p class="plan-sub">Investment package</p>
-              <p class="plan-price">$10,000–$50k</p>
-              <ul class="plan-list">
+              <div class="plan-head">
+                <h3 class="plan-name">Premium plan</h3>
+                <span class="plan-bar"></span>
+                <p class="plan-price">$10,000–$50k</p>
+              </div>
+              <div class="plan-body">
+                <ul class="plan-list">
                 <li>Access to available investment instruments.</li>
                 <li>Portfolio tracking from your dashboard.</li>
                 <li>Market tools and account access.</li>
                 <li>Support when you need assistance.</li>
               </ul>
-              <a href="plans.html#premium" class="plan-btn btn-glow">Select Plan</a>
+                <a href="plans.html#premium" class="plan-btn btn-glow">Select Plan</a>
+              </div>
             </article>
             <article class="plan-card">
-              <h3 class="plan-name">Elite plan</h3>
-              <p class="plan-sub">Investment package</p>
-              <p class="plan-price">$50k–$500k</p>
-              <ul class="plan-list">
+              <div class="plan-head">
+                <h3 class="plan-name">Elite plan</h3>
+                <span class="plan-bar"></span>
+                <p class="plan-price">$50k–$500k</p>
+              </div>
+              <div class="plan-body">
+                <ul class="plan-list">
                 <li>Access to available investment instruments.</li>
                 <li>Portfolio tracking from your dashboard.</li>
                 <li>Market tools and account access.</li>
                 <li>Support when you need assistance.</li>
               </ul>
-              <a href="plans.html#elite" class="plan-btn btn-glow">Select Plan</a>
+                <a href="plans.html#elite" class="plan-btn btn-glow">Select Plan</a>
+              </div>
             </article>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============ SECTION 7: TESTIMONIAL ============ -->
+      <section id="testimonials" class="overflow-hidden bg-[#f3f2f0] text-cocoa">
+        <div class="mx-auto max-w-[1240px] px-5 py-20 md:px-10 lg:py-[120px]">
+          <div class="reveal text-center">
+            <h2 class="text-[32px] font-medium leading-[1.2] tracking-[-0.03em] md:text-[44px]">Inspiring Client Experiences</h2>
+            <p class="mt-4 text-base text-[#5a4a40] md:text-lg">Join us and become our next success story</p>
+          </div>
+
+          <!-- Slider: each .tc-card is one testimonial. Add/remove cards freely; js/main.js handles the rest. -->
+          <div class="tc-wrap reveal mt-12" style="--d: 100ms" aria-roledescription="carousel" aria-label="Client testimonials">
+            <div class="tc-rating">
+              <div>
+                <div class="flex gap-1" aria-hidden="true">
+                  <svg class="size-5" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.5l2.9 6.1 6.6.8-4.9 4.6 1.3 6.6L12 17.3l-5.9 3.3 1.3-6.6-4.9-4.6 6.6-.8z" /></svg>
+                  <svg class="size-5" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.5l2.9 6.1 6.6.8-4.9 4.6 1.3 6.6L12 17.3l-5.9 3.3 1.3-6.6-4.9-4.6 6.6-.8z" /></svg>
+                  <svg class="size-5" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.5l2.9 6.1 6.6.8-4.9 4.6 1.3 6.6L12 17.3l-5.9 3.3 1.3-6.6-4.9-4.6 6.6-.8z" /></svg>
+                  <svg class="size-5" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.5l2.9 6.1 6.6.8-4.9 4.6 1.3 6.6L12 17.3l-5.9 3.3 1.3-6.6-4.9-4.6 6.6-.8z" /></svg>
+                  <svg class="size-5" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.5l2.9 6.1 6.6.8-4.9 4.6 1.3 6.6L12 17.3l-5.9 3.3 1.3-6.6-4.9-4.6 6.6-.8z" /></svg>
+                </div>
+                <p class="mt-3 text-[28px] font-medium tracking-[-0.02em]">4.9 Rating</p>
+              </div>
+              <div class="flex items-center gap-3">
+                <div class="flex -space-x-3">
+                  <img src="assets/images/avatars/avatar-02.png" alt="" class="tc-stack" />
+                  <img src="assets/images/avatars/avatar-05.png" alt="" class="tc-stack" />
+                  <img src="assets/images/avatars/avatar-07.png" alt="" class="tc-stack" />
+                </div>
+                <p class="leading-tight"><span class="block text-[26px] font-semibold">15k+</span><span class="text-sm">Trusted Users</span></p>
+              </div>
+            </div>
+
+            <div class="tc-viewport">
+              <div class="tc-track" aria-live="polite">
+                <figure class="tc-card">
+                  <span class="tc-mark" aria-hidden="true">&ldquo;</span>
+                  <blockquote class="tc-quote">The dashboard makes it easier to keep my wallet, plans, and market activity in one place. It feels focused and easy to use.</blockquote>
+                  <figcaption class="tc-person">
+                    <img src="assets/images/testimonials/maria-burton.png" alt="" class="tc-avatar" />
+                    <span class="leading-tight"><span class="tc-name">Maria Burton</span><span class="tc-role">New Trader</span></span>
+                  </figcaption>
+                </figure>
+                <figure class="tc-card">
+                  <span class="tc-mark" aria-hidden="true">&ldquo;</span>
+                  <blockquote class="tc-quote">I wanted a platform that made it easier to explore different markets without feeling overwhelmed. Having the information and tools in one place has made my trading experience more organised.</blockquote>
+                  <figcaption class="tc-person">
+                    <img src="assets/images/testimonials/daniel-ozcan.png" alt="" class="tc-avatar" />
+                    <span class="leading-tight"><span class="tc-name">Daniel Ozcan</span><span class="tc-role">Investor / Trader</span></span>
+                  </figcaption>
+                </figure>
+                <figure class="tc-card">
+                  <span class="tc-mark" aria-hidden="true">&ldquo;</span>
+                  <blockquote class="tc-quote">I like having a platform where I can monitor the markets I'm interested in and make decisions based on my own research. It helps me approach trading with more structure.</blockquote>
+                  <figcaption class="tc-person">
+                    <img src="assets/images/testimonials/rohan-mehta.png" alt="" class="tc-avatar" />
+                    <span class="leading-tight"><span class="tc-name">Rohan Mehta</span><span class="tc-role">Institutional Trader</span></span>
+                  </figcaption>
+                </figure>
+                <figure class="tc-card">
+                  <span class="tc-mark" aria-hidden="true">&ldquo;</span>
+                  <blockquote class="tc-quote">I used to find the terminology around trading intimidating. Having access to market information and trading tools in one place gives me a better starting point for learning.</blockquote>
+                  <figcaption class="tc-person">
+                    <img src="assets/images/testimonials/oliver-bennett.png" alt="" class="tc-avatar" />
+                    <span class="leading-tight"><span class="tc-name">Oliver Bennett</span><span class="tc-role">Venture Capitalist</span></span>
+                  </figcaption>
+                </figure>
+                <figure class="tc-card">
+                  <span class="tc-mark" aria-hidden="true">&ldquo;</span>
+                  <blockquote class="tc-quote">I wanted to understand more than just one market. Being able to explore different trading opportunities to make money on Foxdesk has made me so happy.</blockquote>
+                  <figcaption class="tc-person">
+                    <img src="assets/images/testimonials/layla-reid.png" alt="" class="tc-avatar" />
+                    <span class="leading-tight"><span class="tc-name">Layla Reid</span><span class="tc-role">Market Trader</span></span>
+                  </figcaption>
+                </figure>
+              </div>
+            </div>
+          </div>
+
+          <div class="mt-6 flex justify-center gap-3">
+            <button type="button" id="t-prev" class="tc-btn" aria-label="Previous testimonials">
+              <svg class="size-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="m15 18-6-6 6-6" /></svg>
+            </button>
+            <button type="button" id="t-next" class="tc-btn" aria-label="Next testimonials">
+              <svg class="size-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="m9 18 6-6-6-6" /></svg>
+            </button>
           </div>
         </div>
       </section>
 
       <!-- ============ SECTION 10: NEWS (TradingView Top Stories) ============ -->
       <section id="news" class="bg-black">
-        <div class="mx-auto max-w-[1440px] px-5 pb-20 md:px-10 lg:pb-28 xl:px-14">
+        <div class="mx-auto max-w-[1440px] px-5 py-20 md:px-10 lg:py-28 xl:px-14">
           <div class="reveal">
             <h2 class="text-[40px] font-bold leading-[1.02] tracking-[-0.04em] sm:text-6xl lg:text-[80px]">
               Stay updated with news<br />
@@ -740,7 +861,7 @@
             </p>
           </div>
 
-          <div class="reveal mt-12 rounded-[36px] bg-[#1c1c1c] p-3 md:p-5 lg:mt-16" style="--d: 120ms">
+          <div class="reveal mt-12 rounded-[36px] bg-[#333333] p-3 md:p-5 lg:mt-16" style="--d: 120ms">
             <div class="tv-panel h-[460px] lg:h-[420px]">
               <div class="tradingview-widget-container h-full">
                 <div class="tradingview-widget-container__widget h-full"></div>
@@ -763,45 +884,38 @@
 
       <!-- ============ SECTION 11: START IN 3 STEPS ============ -->
       <section id="get-started" class="bg-white text-cocoa">
-        <div class="mx-auto flex max-w-[1440px] flex-col items-center px-5 pt-20 text-center md:px-10 lg:pt-28 xl:px-14">
-          <!-- Animated fox mascot (idle sway, blinking, leans toward the cursor, hops on hover/tap) -->
-          <div class="fox-live reveal" id="fox-live" aria-hidden="true">
-            <div class="fox-lean">
-              <div class="fox-body">
-                <img src="assets/logos/fox.png" alt="" />
-                <img src="assets/logos/fox-eye-left-lid.png" alt="" class="fox-lid" />
-                <img src="assets/logos/fox-eye-right-lid.png" alt="" class="fox-lid" />
-              </div>
+        <div class="mx-auto max-w-[1100px] px-5 pb-12 pt-16 md:px-10 lg:pb-16 lg:pt-20">
+          <div class="flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
+            <div class="reveal">
+              <span class="eyebrow">Getting started</span>
+              <h2 class="mt-4 text-[32px] font-semibold leading-[1.1] tracking-[-0.03em] md:text-[44px]">Start trading in 3 steps</h2>
+              <p class="mt-3 max-w-[520px] text-base leading-relaxed md:text-[17px]">
+                Create an account, fund your wallet, grow your wealth. It's as easy as that with Foxdesk Trades.
+              </p>
             </div>
-            <span class="fox-shadow"></span>
+            <a href="signup.html" class="reveal btn-glow inline-flex w-fit shrink-0 items-center gap-3 rounded-full bg-brand px-8 py-3.5 text-base font-medium text-white transition hover:bg-brand-dark" style="--d: 60ms">
+              Create Account
+              <svg class="size-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M5 12h14m-6-6 6 6-6 6" /></svg>
+            </a>
           </div>
-          <h2 class="reveal mt-8 text-[32px] font-semibold tracking-[-0.03em] md:text-[44px]" style="--d: 60ms">Start trading in 3 steps</h2>
-          <p class="reveal mt-3 max-w-[500px] text-base leading-relaxed md:text-[17px]" style="--d: 120ms">
-            Create an account, fund your wallet, grow your wealth. It's as easy as that with Foxdesk Trades.
-          </p>
 
-          <ol class="mt-14 grid w-full max-w-[720px] gap-12 sm:grid-cols-3 sm:gap-6 lg:mt-16">
+          <ol class="mt-10 grid gap-8 sm:grid-cols-3 sm:gap-10 lg:mt-12">
             <li class="reveal step" style="--d: 0ms">
-              <span class="step-num">1</span>
+              <div class="step-head"><span class="step-num">1</span></div>
               <h3 class="step-title">Create</h3>
               <p class="step-text">Open your account and set up your profile.</p>
             </li>
             <li class="reveal step" style="--d: 120ms">
-              <span class="step-num">2</span>
+              <div class="step-head"><span class="step-num">2</span></div>
               <h3 class="step-title">Fund</h3>
               <p class="step-text">Fund your wallet to choose a trading plan.</p>
             </li>
             <li class="reveal step" style="--d: 240ms">
-              <span class="step-num">3</span>
+              <div class="step-head"><span class="step-num">3</span></div>
               <h3 class="step-title">Grow</h3>
               <p class="step-text">Invest, copy trades and grow your portfolio.</p>
             </li>
           </ol>
-
-          <a href="signup.html" class="reveal btn-glow mt-12 inline-flex items-center gap-3 rounded-full bg-brand px-10 py-4 text-base font-medium text-white transition hover:bg-brand-dark lg:mt-14">
-            Get Started
-            <svg class="size-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M5 12h14m-6-6 6 6-6 6" /></svg>
-          </a>
         </div>
       </section>
 
@@ -846,14 +960,14 @@
     <!-- ============ SECTION 12: FOOTER ============ -->
     <footer class="footer-gradient text-cocoa">
       <div class="mx-auto max-w-[1440px] px-5 pb-10 pt-40 md:px-10 lg:pt-[200px] xl:px-14">
-        <div class="grid gap-12 lg:grid-cols-[1.15fr_1fr_420px] lg:gap-10">
+        <div class="grid gap-12 lg:grid-cols-[1.15fr_0.8fr_0.8fr_420px] lg:gap-10">
           <!-- Brand -->
           <div>
             <a href="index.html" class="flex items-center gap-3" aria-label="Foxdesk Trades home">
               <img src="assets/logos/icon-black.png" alt="" class="size-9" />
               <span class="text-[28px] font-bold tracking-[-0.03em] lg:text-[30px]">Foxdesk Trading</span>
             </a>
-            <p class="mt-6 max-w-[290px] leading-relaxed">Trade global markets, follow live price movement and copy expert traders, all from one secure platform.</p>
+            <p class="mt-6 max-w-[290px] text-base leading-relaxed">Trade global markets, follow live price movement and copy expert traders, all from one secure platform.</p>
             <div class="mt-10 flex items-center gap-6">
               <a href="#" aria-label="Facebook" class="social"><img src="assets/icons/facebook.svg" alt="" /></a>
               <a href="#" aria-label="Instagram" class="social"><img src="assets/icons/instagram.svg" alt="" /></a>
@@ -873,6 +987,16 @@
             </ul>
           </div>
 
+          <!-- Company -->
+          <div>
+            <h2 class="text-[28px] font-bold tracking-[-0.02em] lg:text-[30px]">Company</h2>
+            <ul class="footer-links mt-7">
+              <li><a href="about.html">About</a></li>
+              <li><a href="contact.html">Contact</a></li>
+              <li><a href="faq.html">FAQ</a></li>
+            </ul>
+          </div>
+
           <!-- Contact + regulators -->
           <div>
             <dl class="contact-card">
@@ -881,24 +1005,25 @@
               <div><dt>Phone:</dt><dd><a href="tel:+15673432446">+1 (567) 343 2446</a></dd></div>
               <div><dt>Opening Hours:</dt><dd>8am - 5pm | Mon - Fri</dd></div>
             </dl>
-            <!-- PLACEHOLDER: regulator badges pending client legal confirmation — swap for official logo files -->
-            <div class="mt-10 flex items-center justify-center gap-8 rounded-xl bg-[#fdebe0] px-5 py-3.5 text-[#6b5a50]">
-              <div class="flex items-center gap-2">
-                <svg class="size-9 shrink-0" viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><circle cx="20" cy="20" r="18" /><circle cx="20" cy="20" r="13" /><path d="M14 22c2-4 4-6 6-6s4 2 6 6M20 16v-3M15 24h10" /></svg>
-                <span class="border-l border-current pl-1.5 text-[11px] leading-tight">US Securities<br />And Exchange<br />Commission</span>
-              </div>
-              <div class="flex items-center gap-2">
-                <svg class="size-8 shrink-0" viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><circle cx="20" cy="20" r="18" /><path d="M11 15h18M13 15v12M18 15v12M22 15v12M27 15v12M10 28h20M20 9l9 5H11z" /></svg>
-                <span class="border-l border-current pl-1.5 text-[11px] font-semibold leading-tight">The<br />Financial<br />Commission</span>
-              </div>
-            </div>
           </div>
         </div>
 
         <hr class="mt-16 border-cocoa/20 lg:mt-20" />
 
+        <!-- Regulators -->
+        <div class="reg-list mt-12 lg:mt-14">
+          <div class="reg-row">
+            <div class="reg-logo"><img src="assets/images/financial-commission.png" alt="The Financial Commission" width="200" height="80" /></div>
+            <p>Foxdesk Trades is a member of The Financial Commission, an international organization engaged in the resolution of disputes within the financial services industry in the Forex market.</p>
+          </div>
+          <div class="reg-row">
+            <div class="reg-logo"><img src="assets/images/securities.png" alt="US Securities and Exchange Commission" width="250" height="80" /></div>
+            <p>Foxdesk Trades is regulated by the US Securities and Exchange Commission. The mission of the SEC is to protect traders; maintain fair, orderly, and efficient markets; and facilitate capital formation.</p>
+          </div>
+        </div>
+
         <!-- Legal text -->
-        <div class="legal mt-14 lg:mt-24">
+        <div class="legal mt-10 lg:mt-12">
           <h3>Regulatory Information</h3>
           <p>Foxdesk Trades is committed to providing traders with access to financial markets in a transparent and responsible trading environment. Our services are designed to support both beginner and experienced traders as they explore opportunities across multiple financial markets.</p>
           <h3>Our Markets</h3>
@@ -915,13 +1040,15 @@
           <p>Foxdesk Trades is a trading brand operated by Foxdesk LLC, registered in [insert jurisdiction] under registration number [insert number, if applicable]. The services available to clients depend on the operating entity, applicable regulations, and the client's country of residence.</p>
         </div>
 
-        <div class="mt-24 flex flex-col justify-between gap-2 text-white/40 sm:flex-row lg:mt-32">
+        <div class="mt-24 flex flex-col justify-between gap-2 text-xs text-white/40 sm:flex-row lg:mt-20">
           <p>Foxdesk Trading &copy; <span id="year">2026</span></p>
           <p>All rights reserved</p>
         </div>
       </div>
     </footer>
 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
     <script src="js/main.js"></script>
+    <script src="js/market-globe.js"></script>
   </body>
 </html>
