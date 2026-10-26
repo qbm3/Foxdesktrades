@@ -3,36 +3,20 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Foxdesk Trades | Build Wealth with Smart Trade Insights</title>
+    <title>Civa Trades | Build Wealth with Smart Trade Insights</title>
     <meta
       name="description"
-      content="Fund your wallet, grow through investment plans, follow live market movement and copy professional traders with Foxdesk Trades."
+      content="Fund your wallet, grow through investment plans, follow live market movement and copy professional traders with Civa Trades."
     />
-    <link rel="icon" type="image/png" href="assets/logos/icon-orange.png" />
+    <link rel="icon" type="image/png" href="assets/brand/icon-orange.png" />
 
-    <!-- Font: Plus Jakarta Sans -->
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap"
-      rel="stylesheet"
-    />
+    <!-- Font: Plus Jakarta Sans, self-hosted (assets/fonts) and fetched first so the page never flashes a fallback font -->
+    <link rel="preload" href="assets/fonts/plus-jakarta-sans-latin.woff2" as="font" type="font/woff2" crossorigin />
 
-    <!-- Tailwind (CDN for development; swapped for a compiled file before launch) -->
-    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4.1.11"></script>
-    <style type="text/tailwindcss">
-      @theme {
-        --font-sans: "Plus Jakarta Sans", ui-sans-serif, system-ui, sans-serif;
-        --color-brand: #ff6201;
-        --color-brand-dark: #e85f00;
-        --color-brand-soft: #ffe6d5;
-        --color-cocoa: #4a1c00;
-        --color-ink: #2b2b2b;
-        /* charcoal instead of pure black for every bg-black / text-black (softer contrast) */
-        --color-black: #2b2b2b;
-        --color-panel: #363636;
-      }
-    </style>
+    <!-- Tailwind, compiled from css/tailwind.input.css (rebuild after adding new classes — see README) -->
+    <link rel="stylesheet" href="css/tailwind.css" />
+    <!-- Lenis smooth scroll -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lenis@1.3.4/dist/lenis.css" />
     <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="css/styles.css" />
     <link rel="stylesheet" href="css/market-globe.css" />
@@ -75,11 +59,11 @@
       <!-- Nav -->
       <nav class="border-b border-white/5 bg-panel/90 backdrop-blur-md">
         <div class="mx-auto flex h-16 max-w-[1440px] items-center justify-between px-5 md:px-10 xl:px-14">
-          <a href="index.html" class="shrink-0" aria-label="Foxdesk Trades home">
-            <img src="assets/logos/logo-white.png" alt="Foxdesk Trades" class="h-7 w-auto md:h-8" />
+          <a href="index.html" class="shrink-0" aria-label="Civa Trades home">
+            <img src="assets/brand/logo-white.png" alt="Civa Trades" class="h-7 w-auto md:h-8" />
           </a>
 
-          <ul class="hidden items-center gap-10 text-[17px] text-white/80 lg:flex">
+          <ul class="hidden items-center gap-6 text-[15px] text-white/80 lg:flex xl:gap-10 xl:text-[17px]">
             <li class="dropdown relative">
               <button class="dropdown-toggle flex items-center gap-1.5 transition hover:text-white" aria-expanded="false">
                 Company
@@ -121,8 +105,8 @@
           </ul>
 
           <div class="flex items-center gap-3 md:gap-5">
-            <a href="login.html" class="hidden rounded-md bg-white/20 px-5 py-2 text-[15px] font-medium text-white transition hover:bg-white/30 sm:inline-block">Login</a>
-            <a href="signup.html" class="rounded-md bg-white px-5 py-2 text-[15px] font-medium text-ink transition hover:bg-white/90">Sign Up</a>
+            <a href="login.html" class="hidden whitespace-nowrap rounded-md bg-white/20 px-5 py-2 text-[15px] font-medium text-white transition hover:bg-white/30 sm:inline-block">Login</a>
+            <a href="signup.html" class="whitespace-nowrap rounded-md bg-white px-5 py-2 text-[15px] font-medium text-ink transition hover:bg-white/90">Sign Up</a>
             <button id="menu-btn" class="-mr-2 p-2 lg:hidden" aria-label="Open menu" aria-expanded="false" aria-controls="mobile-menu">
               <svg class="size-7" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8"><path stroke-linecap="round" d="M4 7h16M4 12h16M4 17h16" /></svg>
             </button>
@@ -171,7 +155,7 @@
                 <span class="absolute inline-flex size-full animate-ping rounded-full bg-white/70"></span>
                 <span class="relative inline-flex size-2.5 rounded-full bg-white"></span>
               </span>
-              Foxdesk Trading
+              Civa Trades
             </span>
             <span class="truncate text-white/90">Trade and grow with trust and security.</span>
           </div>
@@ -243,9 +227,7 @@
               <span class="fox-live fox-inline" aria-hidden="true">
                 <span class="fox-lean block">
                   <span class="fox-body block">
-                    <img src="assets/logos/fox.png" alt="" />
-                    <img src="assets/logos/fox-eye-left-lid.png" alt="" class="fox-lid" />
-                    <img src="assets/logos/fox-eye-right-lid.png" alt="" class="fox-lid" />
+                    <img src="assets/brand/icon-duo.png" alt="" />
                   </span>
                 </span>
                 <span class="fox-shadow"></span>
@@ -267,21 +249,21 @@
                 <h3 class="text-2xl font-medium leading-tight tracking-[-0.02em] xl:text-[28px]">Live Trading</h3>
                 <p class="mt-2.5 max-w-[200px] text-sm leading-[1.65] text-[#6b5a50]">Access real-time market data and execute trades instantly.</p>
               </div>
-              <img src="assets/3d/live-trading.png" alt="" loading="lazy" class="h-[120px] w-auto shrink-0 xl:h-[136px]" />
+              <img src="assets/3d/live-trading.webp" alt="" loading="lazy" class="h-[120px] w-auto shrink-0 xl:h-[136px]" />
             </article>
             <article class="reveal card-lift flex min-h-[194px] items-center justify-between gap-4 rounded-3xl bg-white py-6 pl-[30px] pr-5" style="--d: 100ms">
               <div>
                 <h3 class="text-2xl font-medium leading-tight tracking-[-0.02em] xl:text-[28px]">Wealth Management</h3>
                 <p class="mt-2.5 max-w-[200px] text-sm leading-[1.65] text-[#6b5a50]">Achieve your financial goals with advanced personalized plans.</p>
               </div>
-              <img src="assets/3d/wealth-management.png" alt="" loading="lazy" class="h-[120px] w-auto shrink-0 xl:h-[136px]" />
+              <img src="assets/3d/wealth-management.webp" alt="" loading="lazy" class="h-[120px] w-auto shrink-0 xl:h-[136px]" />
             </article>
             <article class="reveal card-lift flex min-h-[194px] items-center justify-between gap-4 rounded-3xl bg-white py-6 pl-[30px] pr-5 md:col-span-2 lg:col-span-1" style="--d: 200ms">
               <div>
                 <h3 class="text-2xl font-medium leading-tight tracking-[-0.02em] xl:text-[28px]">Copy Experts</h3>
                 <p class="mt-2.5 max-w-[200px] text-sm leading-[1.65] text-[#6b5a50]">Follow veteran traders with high success and copy their trades easily.</p>
               </div>
-              <img src="assets/3d/copy-experts.png" alt="" loading="lazy" class="h-[120px] w-auto shrink-0 xl:h-[136px]" />
+              <img src="assets/3d/copy-experts.webp" alt="" loading="lazy" class="h-[120px] w-auto shrink-0 xl:h-[136px]" />
             </article>
           </div>
         </div>
@@ -329,7 +311,7 @@
         <div class="mx-auto max-w-[1440px] px-5 py-20 md:px-10 lg:py-28 xl:px-14">
           <div class="reveal text-center">
             <h2 class="text-[32px] font-medium leading-[1.2] tracking-[-0.03em] md:text-[44px]">
-              Experience the<br />Foxdesk Trade advantage
+              Experience the<br />Civa Trade advantage
             </h2>
             <p class="mx-auto mt-4 max-w-[600px] text-base leading-relaxed text-[#5a4a40] md:text-[17px]">
               Access global instruments, real-time charts and expert insights from one fast, secure platform, no risk, no pressure.
@@ -339,7 +321,7 @@
           <!-- Values -->
           <div class="mt-16 grid items-center gap-12 lg:mt-[120px] lg:grid-cols-2 lg:gap-[110px]">
             <div class="reveal">
-              <span class="eyebrow">About Foxdesk Trading</span>
+              <span class="eyebrow">About Civa Trades</span>
               <h3 class="mt-7 text-[30px] font-medium tracking-[-0.02em] md:text-[36px]">Our values and goals</h3>
               <p class="mt-5 text-base leading-[1.9] text-[#5a4a40] md:text-lg">
                 Our values are rooted in transparency, security, and user experience. We strive to provide a platform that is easy to use and
@@ -352,7 +334,7 @@
             </div>
             <img
               src="assets/images/about-dashboard.jpg"
-              alt="Foxdesk funding dashboard showing total equity and token balances"
+              alt="Civa Trades funding dashboard showing total equity and token balances"
               loading="lazy"
               class="reveal w-full rounded-[26px]"
               style="--d: 120ms"
@@ -363,7 +345,7 @@
           <div class="mt-20 grid items-center gap-12 lg:mt-24 lg:grid-cols-2 lg:gap-[110px]">
             <img
               src="assets/images/about-laptop.jpg"
-              alt="Trader funding his Foxdesk wallet on a laptop"
+              alt="Trader funding his Civa Trades wallet on a laptop"
               loading="lazy"
               class="reveal order-2 w-full rounded-[26px] lg:order-1"
             />
@@ -389,14 +371,14 @@
               <span class="text-[#a9a9a9]">with better context</span>
             </h2>
             <p class="mt-6 max-w-[700px] text-base leading-relaxed text-white/85 md:text-lg">
-              Foxdesk gives you the ability to monitor major technology stocks, active movers, and market heat in a focused trading view.
+              Civa Trades gives you the ability to monitor major technology stocks, active movers, and market heat in a focused trading view.
             </p>
           </div>
 
           <div class="reveal mt-12 rounded-[36px] bg-[#333333] p-3 md:p-5 lg:mt-16" style="--d: 120ms">
             <div class="flex flex-col gap-6 rounded-2xl bg-[#3d3d3d] p-6 md:flex-row md:items-center md:justify-between md:p-8">
               <div>
-                <h3 class="text-2xl font-medium md:text-[28px]">Foxdesk Live Market</h3>
+                <h3 class="text-2xl font-medium md:text-[28px]">CivaTrades Live Market</h3>
                 <p class="mt-1 text-base text-white/65 md:text-lg">Track movers, leaders and the US top market trading activity</p>
               </div>
               <a href="signup.html" class="btn-glow shrink-0 self-start rounded-md bg-brand px-12 py-4 text-base font-medium transition hover:bg-brand-dark md:self-auto">Start Trading</a>
@@ -489,16 +471,15 @@
 
           <div class="mt-12 flex flex-col gap-5 lg:mt-[84px]">
             <!-- Stocks -->
-            <article id="stocks" class="reveal clip-top grid rounded-3xl border border-[#e2e2e2] bg-white lg:min-h-[349px] lg:grid-cols-2">
-              <div class="flex flex-col items-center justify-center px-6 pt-12 text-center lg:pb-12">
+            <article id="stocks" class="reveal relative flex flex-col items-center overflow-hidden rounded-3xl border border-[#e2e2e2] bg-white lg:min-h-[349px] lg:flex-row lg:justify-center">
+              <!-- decorative bank icon, cropped by the card edge -->
+              <img src="assets/icons/bank-large.webp" alt="" loading="lazy" class="pointer-events-none absolute -bottom-10 -left-10 w-[200px] opacity-70 lg:-left-[70px] lg:bottom-auto lg:top-[10px] lg:w-[380px] lg:opacity-100" />
+              <div class="relative flex flex-col items-center px-6 py-12 text-center lg:py-12">
                 <h3 class="instrument-title">Trade Stocks<br /><span class="text-[#1a1a1a]">on global market</span></h3>
-                <p class="instrument-text">Access a wide range of stocks from global markets and take advantage of price appreciation.</p>
+                <p class="instrument-text lg:max-w-[440px]">Access a wide range of stocks from global markets and take advantage of price appreciation.</p>
                 <a href="markets.html#stocks" class="try-btn">Try now <svg class="size-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M5 12h14m-6-6 6 6-6 6" /></svg></a>
               </div>
-              <div class="relative mt-8 h-[300px] lg:mt-0 lg:h-auto">
-                <img src="assets/images/woman-1.png" alt="Foxdesk Trades support specialist" loading="lazy" class="absolute bottom-0 right-0 h-full w-auto lg:h-[387px]" />
-                <div class="live-widget absolute hidden sm:block left-4 top-6 lg:left-auto lg:right-[290px] lg:top-[50px]" data-widget></div>
-              </div>
+              <div class="live-widget absolute hidden lg:block lg:right-[56px] lg:top-[50px]" data-widget></div>
             </article>
 
             <div class="grid gap-5 lg:grid-cols-2">
@@ -509,7 +490,7 @@
                   <h3 class="instrument-title">Trade Metals</h3>
                   <p class="instrument-text">Gold (XAU), Silver (XAG), Platinum (XPT) and other highly traded metals</p>
                   <a href="markets.html#metals" class="try-link">Try now <svg class="size-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M5 12h14m-6-6 6 6-6 6" /></svg></a>
-                  <img src="assets/3d/trade-metals.png" alt="" loading="lazy" class="mb-5 mt-6 w-[230px]" />
+                  <img src="assets/3d/trade-metals.webp" alt="" loading="lazy" class="mb-5 mt-6 w-[230px]" />
                 </article>
 
                 <!-- IPOs -->
@@ -585,18 +566,16 @@
                   <h3 class="instrument-title">Trade Securities</h3>
                   <p class="instrument-text">Access a wide range of stocks from global markets and take advantage of price appreciation.</p>
                   <a href="markets.html#securities" class="try-link">Try now <svg class="size-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M5 12h14m-6-6 6 6-6 6" /></svg></a>
-                  <img src="assets/3d/trade-securities.png" alt="" loading="lazy" class="mt-6 w-[200px] self-start lg:absolute lg:bottom-3 lg:left-3 lg:mt-0 lg:w-[216px]" />
+                  <img src="assets/3d/trade-securities.webp" alt="" loading="lazy" class="mt-6 w-[200px] self-start lg:absolute lg:bottom-3 lg:left-3 lg:mt-0 lg:w-[216px]" />
                 </article>
               </div>
             </div>
 
             <!-- Bonds -->
-            <article id="bonds" class="reveal clip-top grid rounded-3xl border border-[#e2e2e2] bg-white lg:min-h-[349px] lg:grid-cols-2">
-              <div class="relative order-2 mt-8 h-[300px] lg:order-1 lg:mt-0 lg:h-auto">
-                <img src="assets/images/woman-2.png" alt="Foxdesk Trades account manager" loading="lazy" class="absolute bottom-0 left-0 h-full w-auto lg:h-[378px]" />
-                <div class="live-widget absolute hidden sm:block right-4 top-6 lg:left-[290px] lg:right-auto lg:top-[50px]" data-widget></div>
-              </div>
-              <div class="order-1 flex flex-col items-center justify-center px-6 pt-12 text-center lg:order-2 lg:pb-12">
+            <article id="bonds" class="reveal relative overflow-hidden rounded-3xl border border-[#e2e2e2] bg-white lg:min-h-[349px]">
+              <!-- decorative bonds icon, cropped by the card edge -->
+              <img src="assets/icons/bonds-large.webp" alt="" loading="lazy" class="pointer-events-none absolute -bottom-12 -right-8 w-[200px] opacity-70 lg:-right-[10px] lg:bottom-auto lg:top-[25px] lg:w-[400px] lg:opacity-100" />
+              <div class="relative flex flex-col items-center px-6 py-12 text-center lg:w-1/2 lg:py-[64px]">
                 <h3 class="instrument-title">Trade Bonds<br /><span class="text-[#1a1a1a]">and fixed income</span></h3>
                 <p class="instrument-text">Access a wide range of bonds and fixed income products for steadier, more predictable returns.</p>
                 <a href="markets.html#bonds" class="try-btn">Try now <svg class="size-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M5 12h14m-6-6 6 6-6 6" /></svg></a>
@@ -615,7 +594,7 @@
             </div>
             <div>
             <div class="reveal">
-              <h2 class="text-[32px] font-medium leading-[1.2] tracking-[-0.03em] md:text-[40px]">Why traders choose Foxdesk</h2>
+              <h2 class="text-[32px] font-medium leading-[1.2] tracking-[-0.03em] md:text-[40px]">Why traders choose Civa Trades</h2>
               <p class="mt-4 text-base text-white/70 md:text-lg">Built on regulation, speed and support you can rely on.</p>
             </div>
             <div class="mt-8 grid gap-5 sm:grid-cols-2">
@@ -658,23 +637,7 @@
             </p>
           </div>
 
-          <div class="reveal relative mx-auto w-full max-w-[405px] lg:mr-[130px] lg:ml-auto xl:mr-[190px]" style="--d: 120ms">
-            <img src="assets/images/copy-trading-expert.png" alt="Foxdesk Trades expert trader" loading="lazy" class="w-full rounded-[28px]" />
-            <div class="float-card float-y left-0 top-[4%] lg:left-[86%] lg:top-[22%]">
-              <img src="assets/icons/advanced-analysis.svg" alt="" class="size-9 shrink-0" />
-              <div>
-                <p class="text-base font-semibold lg:text-lg">Advanced analysis</p>
-                <p class="text-[13px] text-[#5a4a40] lg:text-sm">Access to advanced charts</p>
-              </div>
-            </div>
-            <div class="float-card float-y left-0 top-[24%] lg:-left-[125px] lg:top-[43%] xl:-left-[150px]" style="--float-delay: -2s">
-              <img src="assets/icons/expert-accuracy.svg" alt="" class="size-9 shrink-0" />
-              <div>
-                <p class="text-base font-semibold lg:text-lg">Expert accuracy</p>
-                <p class="text-[13px] text-[#5a4a40] lg:text-sm">Sharp hits on all trades</p>
-              </div>
-            </div>
-          </div>
+          <img src="assets/images/copy-trading-trophy.webp" alt="Silver and orange trophy with a star, representing expert traders" loading="lazy" class="reveal float-y mx-auto w-full max-w-[340px] lg:mr-[40px] lg:ml-auto lg:max-w-[470px]" style="--d: 120ms" />
         </div>
       </section>
 
@@ -827,7 +790,7 @@
                 </figure>
                 <figure class="tc-card">
                   <span class="tc-mark" aria-hidden="true">&ldquo;</span>
-                  <blockquote class="tc-quote">I wanted to understand more than just one market. Being able to explore different trading opportunities to make money on Foxdesk has made me so happy.</blockquote>
+                  <blockquote class="tc-quote">I wanted to understand more than just one market. Being able to explore different trading opportunities to make money on Civa Trades has made me so happy.</blockquote>
                   <figcaption class="tc-person">
                     <img src="assets/images/testimonials/layla-reid.png" alt="" class="tc-avatar" />
                     <span class="leading-tight"><span class="tc-name">Layla Reid</span><span class="tc-role">Market Trader</span></span>
@@ -883,39 +846,45 @@
       </section>
 
       <!-- ============ SECTION 11: START IN 3 STEPS ============ -->
-      <section id="get-started" class="bg-white text-cocoa">
-        <div class="mx-auto max-w-[1100px] px-5 pb-12 pt-16 md:px-10 lg:pb-16 lg:pt-20">
-          <div class="flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
-            <div class="reveal">
-              <span class="eyebrow">Getting started</span>
-              <h2 class="mt-4 text-[32px] font-semibold leading-[1.1] tracking-[-0.03em] md:text-[44px]">Start trading in 3 steps</h2>
-              <p class="mt-3 max-w-[520px] text-base leading-relaxed md:text-[17px]">
-                Create an account, fund your wallet, grow your wealth. It's as easy as that with Foxdesk Trades.
-              </p>
+      <section id="get-started" class="bg-white text-[#1a1a1a]">
+        <div class="mx-auto flex max-w-[1440px] flex-col items-center px-5 pt-20 text-center md:px-10 lg:pt-28 xl:px-14">
+          <!-- Animated Civa logo mark (idle sway, leans toward the cursor, hops on hover/tap) -->
+          <div class="fox-live reveal" id="fox-live" aria-hidden="true">
+            <div class="fox-lean">
+              <div class="fox-body">
+                <img src="assets/brand/icon-duo.png" alt="" />
+              </div>
             </div>
-            <a href="signup.html" class="reveal btn-glow inline-flex w-fit shrink-0 items-center gap-3 rounded-full bg-brand px-8 py-3.5 text-base font-medium text-white transition hover:bg-brand-dark" style="--d: 60ms">
-              Create Account
-              <svg class="size-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M5 12h14m-6-6 6 6-6 6" /></svg>
-            </a>
+            <span class="fox-shadow"></span>
           </div>
+          <h2 class="reveal mt-8 text-[32px] font-semibold tracking-[-0.03em] md:text-[44px]" style="--d: 60ms">Start trading in 3 steps</h2>
+          <p class="reveal mt-3 max-w-[500px] text-base leading-relaxed md:text-[17px]" style="--d: 120ms">
+            Create an account, fund your wallet, grow your wealth. It's as easy as that with Civa Trades.
+          </p>
 
-          <ol class="mt-10 grid gap-8 sm:grid-cols-3 sm:gap-10 lg:mt-12">
-            <li class="reveal step" style="--d: 0ms">
-              <div class="step-head"><span class="step-num">1</span></div>
-              <h3 class="step-title">Create</h3>
+          <ol class="mt-12 grid w-full max-w-[880px] gap-5 sm:grid-cols-3 lg:mt-16">
+            <li class="reveal step-card" style="--d: 0ms">
+              <h3 class="step-title">Register</h3>
               <p class="step-text">Open your account and set up your profile.</p>
+              <img src="assets/steps/register.webp" alt="Civa Trades registration screen on a phone" loading="lazy" class="step-phone" />
             </li>
-            <li class="reveal step" style="--d: 120ms">
-              <div class="step-head"><span class="step-num">2</span></div>
-              <h3 class="step-title">Fund</h3>
+            <li class="reveal step-card" style="--d: 120ms">
+              <h3 class="step-title">Deposit</h3>
               <p class="step-text">Fund your wallet to choose a trading plan.</p>
+              <img src="assets/steps/deposit.webp" alt="Select deposit method screen on a phone" loading="lazy" class="step-phone" />
             </li>
-            <li class="reveal step" style="--d: 240ms">
-              <div class="step-head"><span class="step-num">3</span></div>
-              <h3 class="step-title">Grow</h3>
+            <li class="reveal step-card" style="--d: 240ms">
+              <h3 class="step-title">Trade &amp; Invest</h3>
               <p class="step-text">Invest, copy trades and grow your portfolio.</p>
+              <img src="assets/steps/trade-invest.webp" alt="Nvidia stock chart screen on a phone" loading="lazy" class="step-phone" />
             </li>
           </ol>
+
+
+          <a href="signup.html" class="reveal btn-glow mt-12 inline-flex items-center gap-3 rounded-full bg-brand px-10 py-4 text-base font-medium text-white transition hover:bg-brand-dark lg:mt-14">
+            Get Started
+            <svg class="size-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M5 12h14m-6-6 6 6-6 6" /></svg>
+          </a>
         </div>
       </section>
 
@@ -963,9 +932,8 @@
         <div class="grid gap-12 lg:grid-cols-[1.15fr_0.8fr_0.8fr_420px] lg:gap-10">
           <!-- Brand -->
           <div>
-            <a href="index.html" class="flex items-center gap-3" aria-label="Foxdesk Trades home">
-              <img src="assets/logos/icon-black.png" alt="" class="size-9" />
-              <span class="text-[28px] font-bold tracking-[-0.03em] lg:text-[30px]">Foxdesk Trading</span>
+            <a href="index.html" class="flex items-center gap-3" aria-label="Civa Trades home">
+              <img src="assets/brand/logo-dark.png" alt="Civa Trades" class="h-9 w-auto lg:h-10" />
             </a>
             <p class="mt-6 max-w-[290px] text-base leading-relaxed">Trade global markets, follow live price movement and copy expert traders, all from one secure platform.</p>
             <div class="mt-10 flex items-center gap-6">
@@ -1001,7 +969,7 @@
           <div>
             <dl class="contact-card">
               <div><dt>Address:</dt><dd>Kemp House, City Road, London</dd></div>
-              <div><dt>Email:</dt><dd><a href="mailto:contact@foxdesktrades.com">contact@foxdesktrades.com</a></dd></div>
+              <div><dt>Email:</dt><dd><a href="mailto:contact@civatrades.com">contact@civatrades.com</a></dd></div>
               <div><dt>Phone:</dt><dd><a href="tel:+15673432446">+1 (567) 343 2446</a></dd></div>
               <div><dt>Opening Hours:</dt><dd>8am - 5pm | Mon - Fri</dd></div>
             </dl>
@@ -1014,20 +982,20 @@
         <div class="reg-list mt-12 lg:mt-14">
           <div class="reg-row">
             <div class="reg-logo"><img src="assets/images/financial-commission.png" alt="The Financial Commission" width="200" height="80" /></div>
-            <p>Foxdesk Trades is a member of The Financial Commission, an international organization engaged in the resolution of disputes within the financial services industry in the Forex market.</p>
+            <p>Civa Trades is a member of The Financial Commission, an international organization engaged in the resolution of disputes within the financial services industry in the Forex market.</p>
           </div>
           <div class="reg-row">
             <div class="reg-logo"><img src="assets/images/securities.png" alt="US Securities and Exchange Commission" width="250" height="80" /></div>
-            <p>Foxdesk Trades is regulated by the US Securities and Exchange Commission. The mission of the SEC is to protect traders; maintain fair, orderly, and efficient markets; and facilitate capital formation.</p>
+            <p>Civa Trades is regulated by the US Securities and Exchange Commission. The mission of the SEC is to protect traders; maintain fair, orderly, and efficient markets; and facilitate capital formation.</p>
           </div>
         </div>
 
         <!-- Legal text -->
         <div class="legal mt-10 lg:mt-12">
           <h3>Regulatory Information</h3>
-          <p>Foxdesk Trades is committed to providing traders with access to financial markets in a transparent and responsible trading environment. Our services are designed to support both beginner and experienced traders as they explore opportunities across multiple financial markets.</p>
+          <p>Civa Trades is committed to providing traders with access to financial markets in a transparent and responsible trading environment. Our services are designed to support both beginner and experienced traders as they explore opportunities across multiple financial markets.</p>
           <h3>Our Markets</h3>
-          <p>Foxdesk Trades provides access to a range of financial markets, including foreign exchange (Forex), cryptocurrencies, indices, and commodities, through a single trading account. The availability of specific instruments, trading conditions, and account features may vary depending on your jurisdiction and account type.</p>
+          <p>Civa Trades provides access to a range of financial markets, including foreign exchange (Forex), cryptocurrencies, indices, and commodities, through a single trading account. The availability of specific instruments, trading conditions, and account features may vary depending on your jurisdiction and account type.</p>
           <h3>Important Risk Disclosure</h3>
           <p>Trading financial instruments involves significant risk and may not be suitable for every investor. Forex, cryptocurrencies, indices, and commodities can experience substantial price fluctuations, and you may lose some or all of your invested capital. Trading with leverage or on margin can amplify both profits and losses.</p>
           <p>Before opening an account or entering into any transaction, you should carefully consider your financial circumstances, investment objectives, level of experience, and risk tolerance. You should only trade with money you can afford to lose and seek independent financial advice if necessary.</p>
@@ -1035,19 +1003,20 @@
           <p>All information provided on this website is for informational purposes only and does not constitute investment advice, a recommendation, an offer, or a solicitation to buy or sell any financial instrument or trading service. Information on this website should not be interpreted as a guarantee of future performance or returns.</p>
           <p>Market data, prices, analysis, and other information may change without notice. Past performance is not indicative of future results. You are responsible for your own trading decisions and should ensure that you understand the risks associated with the financial products and services you use.</p>
           <h3>Regulatory Status and Memberships</h3>
-          <p>Foxdesk Trades' regulatory status, applicable licences, and memberships in relevant financial organisations should be confirmed through the appropriate regulatory authorities. Any regulatory or membership claims displayed on this website must accurately reflect the legal entity providing the services and the jurisdictions in which it is authorised to operate.</p>
+          <p>Civa Trades' regulatory status, applicable licences, and memberships in relevant financial organisations should be confirmed through the appropriate regulatory authorities. Any regulatory or membership claims displayed on this website must accurately reflect the legal entity providing the services and the jurisdictions in which it is authorised to operate.</p>
           <h3>Company Information</h3>
-          <p>Foxdesk Trades is a trading brand operated by Foxdesk LLC, registered in [insert jurisdiction] under registration number [insert number, if applicable]. The services available to clients depend on the operating entity, applicable regulations, and the client's country of residence.</p>
+          <p>Civa Trades is a trading brand operated by Civa Trades LLC, registered in [insert jurisdiction] under registration number [insert number, if applicable]. The services available to clients depend on the operating entity, applicable regulations, and the client's country of residence.</p>
         </div>
 
         <div class="mt-24 flex flex-col justify-between gap-2 text-xs text-white/40 sm:flex-row lg:mt-20">
-          <p>Foxdesk Trading &copy; <span id="year">2026</span></p>
+          <p>Civa Trades &copy; <span id="year">2026</span></p>
           <p>All rights reserved</p>
         </div>
       </div>
     </footer>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/lenis@1.3.4/dist/lenis.min.js"></script>
     <script src="js/main.js"></script>
     <script src="js/market-globe.js"></script>
   </body>
