@@ -88,61 +88,6 @@ const revealObserver = new IntersectionObserver(
 );
 document.querySelectorAll(".reveal").forEach((el) => revealObserver.observe(el));
 
-// ---------- Hero "just made an investment" card ----------
-// Edit this list to change who rotates. `flag` is a country code (us, gb, mx, fr, de, ...).
-const investments = [
-  { avatar: "avatar-01", name: "Emily Carter", flag: "us", amount: "$2,200" },
-  { avatar: "avatar-02", name: "Oliver Hughes", flag: "gb", amount: "$5,000" },
-  { avatar: "avatar-03", name: "Sofia Hernández", flag: "mx", amount: "$1,450" },
-  { avatar: "avatar-04", name: "Lucas Moreau", flag: "fr", amount: "$12,000" },
-  { avatar: "avatar-05", name: "James Whitfield", flag: "ca", amount: "$3,750" },
-  { avatar: "avatar-06", name: "Charlotte Evans", flag: "gb", amount: "$8,300" },
-  { avatar: "avatar-07", name: "Isabella Rossi", flag: "it", amount: "$2,900" },
-  { avatar: "avatar-08", name: "Mateo García", flag: "mx", amount: "$6,100" },
-  { avatar: "avatar-09", name: "Hannah Schmidt", flag: "de", amount: "$15,000" },
-  { avatar: "avatar-10", name: "Daniel Brooks", flag: "us", amount: "$4,250" },
-  { avatar: "avatar-11", name: "Sophie van Dijk", flag: "nl", amount: "$9,800" },
-  { avatar: "avatar-12", name: "Liam O'Connor", flag: "ie", amount: "$1,750" },
-];
-const TOAST_MS = 7000; // how long each person shows (the progress bar runs for this long)
-
-const toast = document.getElementById("invest-toast");
-const toastBar = document.getElementById("toast-bar");
-const toastName = document.getElementById("toast-name");
-const toastFlag = document.getElementById("toast-flag");
-const toastAmount = document.getElementById("toast-amount");
-const toastAvatar = document.getElementById("toast-avatar");
-let current = 0;
-
-// preload avatars and flags so swaps never flash empty
-investments.forEach(({ avatar, flag }) => {
-  new Image().src = `assets/images/avatars/${avatar}.png`;
-  new Image().src = `https://flagcdn.com/${flag}.svg`;
-});
-
-// the bar fills over TOAST_MS; when it's full the card fades out and the next person fades in
-function showNextInvestor() {
-  toastBar.classList.remove("run");
-  void toastBar.offsetWidth; // restart the CSS fill animation
-  toastBar.classList.add("run");
-  setTimeout(() => {
-    toast.classList.add("is-hidden");
-    setTimeout(() => {
-      current = (current + 1) % investments.length;
-      const { avatar, name, flag, amount } = investments[current];
-      toastAvatar.src = `assets/images/avatars/${avatar}.png`;
-      toastName.textContent = name;
-      toastFlag.src = `https://flagcdn.com/${flag}.svg`;
-      toastAmount.textContent = amount;
-      toast.classList.remove("is-hidden");
-      showNextInvestor();
-    }, 400);
-  }, TOAST_MS);
-}
-
-toastBar.style.setProperty("--toast-ms", TOAST_MS + "ms");
-showNextInvestor();
-
 // ---------- Animated Civa logo marks (section 2 headline + section 11) ----------
 const foxes = [...document.querySelectorAll(".fox-live")];
 const calmMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
