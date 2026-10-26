@@ -1,6 +1,6 @@
 ---
 deployment:
   tasks:
-    - export DEPLOYPATH=/home/polyavtq/public_html/
-    # copy the site only; no --delete so cPanel folders (.well-known, cgi-bin) in public_html are never touched
+    - export DEPLOYPATH=/home/polyavtq/civatrade.online/
+    # copy the site only; no --delete so cPanel folders (.well-known, cgi-bin) in the docroot are never touched
     - /bin/rsync -a --exclude='.git' --exclude='.gitignore' --exclude='.cpanel.yml' --exclude='Civa Trades' --exclude='README.md' --exclude='*.cmd' ./ $DEPLOYPATH
