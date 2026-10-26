@@ -269,43 +269,6 @@
         </div>
       </section>
 
-      <!-- ============ SECTION 4b: MARKET SESSIONS GLOBE ============ -->
-      <section id="market-sessions" class="bg-black">
-        <div class="mx-auto max-w-[1440px] px-5 py-20 md:px-10 lg:py-28 xl:px-14">
-          <div class="reveal">
-            <h2 class="text-[40px] font-bold leading-[1.02] tracking-[-0.04em] sm:text-6xl lg:text-[80px]">
-              Follow the market<br />
-              <span class="text-[#a9a9a9]">around the world</span>
-            </h2>
-            <p class="mt-6 max-w-[700px] text-base leading-relaxed text-white/85 md:text-lg">
-              See which major exchanges are open right now, and when the next session starts, wherever you trade from.
-            </p>
-          </div>
-
-          <div class="reveal mt-12 lg:mt-16" style="--d: 120ms">
-            <!-- globe on the left, market panel always shown on the right (stacks below on smaller screens) -->
-            <div class="ms-layout">
-              <div class="ms-stage text-white" id="ms-stage">
-                <div class="corner tl">Market sessions<span>Major exchanges by trading hours</span></div>
-                <div class="corner tr" id="utc">--:-- UTC</div>
-                <div class="labels" id="labels"></div>
-                <div class="corner bl">Drag to turn, tap a market</div>
-                <div class="corner br" id="status"></div>
-              </div>
-              <div class="ms-side">
-                <aside class="panel" id="panel" aria-live="polite">
-                  <header>
-                    <div><h3 class="ptitle" id="pTitle">Region</h3><p id="pSub"></p></div>
-                  </header>
-                  <div class="body" id="pBody"></div>
-                  <footer>Session times are live from your clock; exchange holidays aren’t applied. Market data by TradingView.</footer>
-                </aside>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
       <!-- ============ SECTION 3: ABOUT / MISSION ============ -->
       <section id="about" class="bg-white text-cocoa">
         <div class="mx-auto max-w-[1440px] px-5 py-20 md:px-10 lg:py-28 xl:px-14">
@@ -357,6 +320,43 @@
                 replicate the trades of experienced investors. We are committed to providing a transparent, secure, and user-friendly platform.
                 Our core values include innovation, integrity, education, and customer focus.
               </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============ SECTION 4: MARKET SESSIONS GLOBE ============ -->
+      <section id="market-sessions" class="bg-black">
+        <div class="mx-auto max-w-[1440px] px-5 py-20 md:px-10 lg:py-28 xl:px-14">
+          <div class="reveal">
+            <h2 class="text-[40px] font-bold leading-[1.02] tracking-[-0.04em] sm:text-6xl lg:text-[80px]">
+              Follow the market<br />
+              <span class="text-[#a9a9a9]">around the world</span>
+            </h2>
+            <p class="mt-6 max-w-[700px] text-base leading-relaxed text-white/85 md:text-lg">
+              See which major exchanges are open right now, and when the next session starts, wherever you trade from.
+            </p>
+          </div>
+
+          <div class="reveal mt-12 lg:mt-16" style="--d: 120ms">
+            <!-- globe on the left, market panel always shown on the right (stacks below on smaller screens) -->
+            <div class="ms-layout">
+              <div class="ms-stage text-white" id="ms-stage">
+                <div class="corner tl">Market sessions<span>Major exchanges by trading hours</span></div>
+                <div class="corner tr" id="utc">--:-- UTC</div>
+                <div class="labels" id="labels"></div>
+                <div class="corner bl">Drag to turn, tap a market</div>
+                <div class="corner br" id="status"></div>
+              </div>
+              <div class="ms-side">
+                <aside class="panel" id="panel" aria-live="polite">
+                  <header>
+                    <div><h3 class="ptitle" id="pTitle">Region</h3><p id="pSub"></p></div>
+                  </header>
+                  <div class="body" id="pBody"></div>
+                  <footer>Session times are live from your clock; exchange holidays aren’t applied. Market data by TradingView.</footer>
+                </aside>
+              </div>
             </div>
           </div>
         </div>
@@ -462,7 +462,7 @@
         </div>
       </section>
 
-      <!-- ============ SECTION 4: TRADING INSTRUMENTS ============ -->
+      <!-- ============ SECTION 6: TRADING INSTRUMENTS ============ -->
       <section id="markets" class="bg-[#f3f3f3] text-cocoa">
         <div class="mx-auto max-w-[1440px] px-5 py-20 md:px-10 lg:py-24 xl:px-14">
           <h2 class="reveal text-center text-[32px] font-medium leading-[1.2] tracking-[-0.03em] md:text-[44px]">
@@ -585,40 +585,59 @@
         </div>
       </section>
 
-      <!-- ============ SECTION 6: WHY CHOOSE US ============ -->
-      <section class="bg-black text-white">
-        <div class="mx-auto max-w-[1240px] px-5 py-20 md:px-10 lg:py-28">
-          <div class="grid gap-10 lg:grid-cols-[0.9fr_1.1fr] lg:items-stretch lg:gap-20">
-            <div class="reveal relative aspect-[4/3] overflow-hidden rounded-3xl lg:aspect-auto">
-              <img src="assets/images/stock-trading-web.jpg" alt="Live stock prices and charts on a trading screen" loading="lazy" class="absolute inset-0 size-full object-cover" />
-            </div>
-            <div>
-            <div class="reveal">
-              <h2 class="text-[32px] font-medium leading-[1.2] tracking-[-0.03em] md:text-[40px]">Why traders choose Civa Trades</h2>
-              <p class="mt-4 text-base text-white/70 md:text-lg">Built on regulation, speed and support you can rely on.</p>
-            </div>
-            <div class="mt-8 grid gap-5 sm:grid-cols-2">
-            <article class="reveal why-card">
-              <svg class="why-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3 4.5 6v5.5c0 4.6 3.1 8.2 7.5 9.5 4.4-1.3 7.5-4.9 7.5-9.5V6L12 3Z"/><path d="m8.7 12.2 2.4 2.4 4.3-4.6"/></svg>
-              <h3 class="why-title">Regulated and accountable</h3>
-              <p class="why-text">We operate under the rules set by recognised regulators, with no compromise on keeping your investments safe.</p>
-            </article>
-            <article class="reveal why-card" style="--d: 100ms">
-              <svg class="why-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M13 2.5 5 13.5h6l-1 8 8-11h-6l1-8Z"/></svg>
-              <h3 class="why-title">Fast order execution</h3>
-              <p class="why-text">Place trades and see them filled with speed and precision, even when the markets are moving quickly.</p>
-            </article>
-            <article class="reveal why-card" style="--d: 200ms">
-              <svg class="why-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3.5" y="4" width="17" height="15" rx="1.5"/><circle cx="12" cy="11.5" r="3.5"/><circle cx="12" cy="11.5" r=".8"/><path d="M7 19v1.5M17 19v1.5"/></svg>
-              <h3 class="why-title">Your money stays yours</h3>
-              <p class="why-text">Client funds are held separately in some of the world&rsquo;s most secure banks. Not a cent sits on our balance sheet.</p>
-            </article>
-            <article class="reveal why-card" style="--d: 300ms">
-              <svg class="why-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.2 8A9 9 0 1 1 3 12"/><path d="M12 7.5V12l3 1.8"/><path d="M3 4.5V8h3.5"/></svg>
-              <h3 class="why-title">Support around the clock</h3>
-              <p class="why-text">Our dedicated team is available day and night to help with any question or concern about your account.</p>
-            </article>
-            </div>
+      <!-- ============ SECTION 7: WHY CHOOSE US ============ -->
+      <section id="why-us" class="bg-white text-cocoa">
+        <div class="mx-auto max-w-[1440px] px-5 py-20 md:px-10 lg:py-28 xl:px-14">
+          <div class="reveal">
+            <h2 class="text-[40px] font-bold leading-[1.02] tracking-[-0.04em] sm:text-6xl lg:text-[80px]">Why traders choose<br />Civa Trades</h2>
+            <p class="mt-6 text-base md:text-lg">Built on regulation, speed and support you can rely on.</p>
+          </div>
+
+          <div class="why-grid mt-12 grid gap-5 lg:mt-16">
+            <img src="assets/why/why-chart.jpg" alt="Green and red candlestick chart on a trading screen" loading="lazy" class="reveal aspect-[4/3] w-full rounded-3xl object-cover sm:aspect-[16/9] lg:aspect-auto lg:h-full" />
+
+            <!-- pills stay on one line: js/main.js hides any pill that would run past the card edge -->
+            <div class="grid grid-cols-1 gap-5 sm:grid-cols-2">
+              <article class="reveal why-card">
+                <div class="why-row">
+                  <img src="assets/why/icon-1.webp" alt="" class="why-icon" />
+                  <div>
+                    <h3 class="why-title">Regulated and accountable</h3>
+                    <p class="why-text">We operate under the rules set by recognised regulators, with no compromise on keeping your investments safe.</p>
+                  </div>
+                </div>
+                <div class="why-pills" data-fit-pills><span>Regulated</span><span>Audited</span><span>Investor-safe</span></div>
+              </article>
+              <article class="reveal why-card" style="--d: 100ms">
+                <div class="why-row">
+                  <img src="assets/why/icon-2.webp" alt="" class="why-icon" />
+                  <div>
+                    <h3 class="why-title">Fast order execution</h3>
+                    <p class="why-text">Place trades and see them filled with speed and precision, even when the markets are moving quickly.</p>
+                  </div>
+                </div>
+                <div class="why-pills" data-fit-pills><span>Instant fills</span><span>Low latency</span><span>Precise</span></div>
+              </article>
+              <article class="reveal why-card" style="--d: 200ms">
+                <div class="why-row">
+                  <img src="assets/why/icon-3.webp" alt="" class="why-icon" />
+                  <div>
+                    <h3 class="why-title">Your money stays yours</h3>
+                    <p class="why-text">Client funds are held separately in some of the world&rsquo;s most secure banks. Not a cent sits on our balance sheet.</p>
+                  </div>
+                </div>
+                <div class="why-pills" data-fit-pills><span>Segregated</span><span>Tier-1 banks</span><span>Protected</span></div>
+              </article>
+              <article class="reveal why-card" style="--d: 300ms">
+                <div class="why-row">
+                  <img src="assets/why/icon-4.webp" alt="" class="why-icon" />
+                  <div>
+                    <h3 class="why-title">Support around the clock</h3>
+                    <p class="why-text">Our dedicated team is available day and night to help with any question or concern about your account.</p>
+                  </div>
+                </div>
+                <div class="why-pills" data-fit-pills><span>24/7</span><span>Live chat</span><span>Expert team</span></div>
+              </article>
             </div>
           </div>
         </div>
@@ -637,7 +656,26 @@
             </p>
           </div>
 
-          <img src="assets/images/copy-trading-trophy.webp" alt="Silver and orange trophy with a star, representing expert traders" loading="lazy" class="reveal float-y mx-auto w-full max-w-[340px] lg:mr-[40px] lg:ml-auto lg:max-w-[470px]" style="--d: 120ms" />
+          <div class="reveal relative mx-auto w-full max-w-[405px] lg:mr-[110px] lg:ml-auto xl:mr-[150px]" style="--d: 120ms">
+            <!-- peach-to-orange frame; the cutout sits on its bottom edge -->
+            <div class="experts-frame">
+              <img src="assets/images/copy-trading-experts.webp" alt="An experienced trader on his phone beside an expert with a laptop" loading="lazy" class="experts-img" />
+            </div>
+            <div class="float-card float-y -top-6 right-3 lg:-right-[60px] xl:-right-[110px]">
+              <img src="assets/icons/advanced-analysis.svg" alt="" class="size-9 shrink-0" />
+              <div>
+                <p class="text-base font-semibold lg:text-lg">Advanced analysis</p>
+                <p class="text-[13px] text-[#5a4a40] lg:text-sm">Access to advanced charts</p>
+              </div>
+            </div>
+            <div class="float-card float-y -bottom-6 left-3 lg:bottom-auto lg:-left-[100px] lg:top-[70%]" style="--float-delay: -2s">
+              <img src="assets/icons/expert-accuracy.svg" alt="" class="size-9 shrink-0" />
+              <div>
+                <p class="text-base font-semibold lg:text-lg">Expert accuracy</p>
+                <p class="text-[13px] text-[#5a4a40] lg:text-sm">Sharp hits on all trades</p>
+              </div>
+            </div>
+          </div>
         </div>
       </section>
 
@@ -723,7 +761,41 @@
         </div>
       </section>
 
-      <!-- ============ SECTION 7: TESTIMONIAL ============ -->
+      <!-- ============ SECTION 10: NEWS (TradingView Top Stories) ============ -->
+      <section id="news" class="bg-black">
+        <div class="mx-auto max-w-[1440px] px-5 py-20 md:px-10 lg:py-28 xl:px-14">
+          <div class="reveal">
+            <h2 class="text-[40px] font-bold leading-[1.02] tracking-[-0.04em] sm:text-6xl lg:text-[80px]">
+              Stay updated with news<br />
+              <span class="text-[#a9a9a9]">moving the market</span>
+            </h2>
+            <p class="mt-6 max-w-[660px] text-base leading-relaxed text-white/85 md:text-lg">
+              Stay close to the headlines shaping the money market and investor sentiment.
+            </p>
+          </div>
+
+          <div class="reveal mt-12 rounded-[36px] bg-[#333333] p-3 md:p-5 lg:mt-16" style="--d: 120ms">
+            <div class="tv-panel h-[460px] lg:h-[420px]">
+              <div class="tradingview-widget-container h-full">
+                <div class="tradingview-widget-container__widget h-full"></div>
+                <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-timeline.js" async>
+                  {
+                    "feedMode": "all_symbols",
+                    "isTransparent": true,
+                    "displayMode": "regular",
+                    "width": "100%",
+                    "height": "100%",
+                    "colorTheme": "dark",
+                    "locale": "en"
+                  }
+                </script>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============ SECTION 11: TESTIMONIALS ============ -->
       <section id="testimonials" class="overflow-hidden bg-[#f3f2f0] text-cocoa">
         <div class="mx-auto max-w-[1240px] px-5 py-20 md:px-10 lg:py-[120px]">
           <div class="reveal text-center">
@@ -811,41 +883,7 @@
         </div>
       </section>
 
-      <!-- ============ SECTION 10: NEWS (TradingView Top Stories) ============ -->
-      <section id="news" class="bg-black">
-        <div class="mx-auto max-w-[1440px] px-5 py-20 md:px-10 lg:py-28 xl:px-14">
-          <div class="reveal">
-            <h2 class="text-[40px] font-bold leading-[1.02] tracking-[-0.04em] sm:text-6xl lg:text-[80px]">
-              Stay updated with news<br />
-              <span class="text-[#a9a9a9]">moving the market</span>
-            </h2>
-            <p class="mt-6 max-w-[660px] text-base leading-relaxed text-white/85 md:text-lg">
-              Stay close to the headlines shaping the money market and investor sentiment.
-            </p>
-          </div>
-
-          <div class="reveal mt-12 rounded-[36px] bg-[#333333] p-3 md:p-5 lg:mt-16" style="--d: 120ms">
-            <div class="tv-panel h-[460px] lg:h-[420px]">
-              <div class="tradingview-widget-container h-full">
-                <div class="tradingview-widget-container__widget h-full"></div>
-                <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-timeline.js" async>
-                  {
-                    "feedMode": "all_symbols",
-                    "isTransparent": true,
-                    "displayMode": "regular",
-                    "width": "100%",
-                    "height": "100%",
-                    "colorTheme": "dark",
-                    "locale": "en"
-                  }
-                </script>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <!-- ============ SECTION 11: START IN 3 STEPS ============ -->
+      <!-- ============ SECTION 12: START IN 3 STEPS ============ -->
       <section id="get-started" class="bg-white text-[#1a1a1a]">
         <div class="mx-auto flex max-w-[1440px] flex-col items-center px-5 pt-20 text-center md:px-10 lg:pt-28 xl:px-14">
           <!-- Animated Civa logo mark (idle sway, leans toward the cursor, hops on hover/tap) -->
@@ -926,7 +964,7 @@
       </template>
     </main>
 
-    <!-- ============ SECTION 12: FOOTER ============ -->
+    <!-- ============ SECTION 13: FOOTER ============ -->
     <footer class="footer-gradient text-cocoa">
       <div class="mx-auto max-w-[1440px] px-5 pb-10 pt-40 md:px-10 lg:pt-[200px] xl:px-14">
         <div class="grid gap-12 lg:grid-cols-[1.15fr_0.8fr_0.8fr_420px] lg:gap-10">

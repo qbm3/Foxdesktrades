@@ -229,3 +229,17 @@ document.querySelectorAll("[data-ipo-carousel]").forEach((root) => {
   root.addEventListener("pointerleave", start);
   new IntersectionObserver(([e]) => (e.isIntersecting ? start() : stop())).observe(root);
 });
+
+// ---------- "Why choose us" pills: one line only ----------
+// Shows as many pills as fit inside the card; any pill that would run past the edge is hidden (never wrapped).
+function fitPills(row) {
+  const pills = [...row.children];
+  pills.forEach((p) => (p.hidden = false));
+  for (let i = pills.length - 1; i > 0 && row.scrollWidth > row.clientWidth; i--) {
+    pills[i].hidden = true;
+  }
+}
+const pillRows = [...document.querySelectorAll("[data-fit-pills]")];
+const pillObserver = new ResizeObserver((entries) => entries.forEach((e) => fitPills(e.target)));
+pillRows.forEach((row) => pillObserver.observe(row));
+document.fonts.ready.then(() => pillRows.forEach(fitPills));

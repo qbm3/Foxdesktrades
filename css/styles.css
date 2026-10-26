@@ -652,7 +652,8 @@ html {
 .plan-price {
   margin-top: 26px;
   color: #ee6c2d;
-  font-size: 32px;
+  font-size: clamp(24px, 2.1vw, 32px); /* shrinks a little on laptops so every price stays on one line */
+  white-space: nowrap;
   font-weight: 700;
   letter-spacing: -0.04em;
 }
@@ -966,36 +967,87 @@ html {
   }
 }
 
-/* Section 6: why choose us */
+/* ---------- Section 7: why traders choose Civa Trades ---------- */
 .why-card {
-  color: var(--color-cocoa);
   display: flex;
   flex-direction: column;
-  padding: 28px;
-  border: 1px solid #e4e4e4;
-  border-radius: 20px;
-  background: #fff;
+  justify-content: space-between;
+  gap: 24px;
+  min-height: 252px;
+  padding: 24px;
+  border-radius: 24px;
+  background: #f3f3f3;
   /* hover uses `translate` so it doesn't fight the .reveal transform/delay */
   transition:
     opacity 0.7s cubic-bezier(0.2, 0.7, 0.2, 1) var(--d, 0ms),
     transform 0.7s cubic-bezier(0.2, 0.7, 0.2, 1) var(--d, 0ms),
     translate 0.3s ease,
-    box-shadow 0.3s ease,
-    border-color 0.3s ease;
+    box-shadow 0.3s ease;
 }
 .why-card:hover {
-  translate: 0 -6px;
-  border-color: rgb(255 98 1 / 0.45);
-  box-shadow: 0 18px 36px -16px rgb(255 98 1 / 0.35);
+  translate: 0 -4px;
+  box-shadow: 0 18px 36px -20px rgb(74 28 0 / 0.25);
+}
+.why-row {
+  display: flex;
+  gap: 20px;
+}
+@media (min-width: 1280px) {
+  .why-row {
+    gap: 30px;
+  }
 }
 .why-icon {
-  width: 32px;
-  height: 32px;
-  color: #ff6201;
+  flex: none;
+  width: 52px;
+  height: 52px;
   transition: transform 0.3s ease;
 }
+@media (min-width: 1280px) {
+  .why-icon {
+    width: 60px;
+    height: 60px;
+  }
+}
 .why-card:hover .why-icon {
-  transform: scale(1.12) rotate(-6deg);
+  transform: scale(1.06) rotate(-4deg);
+}
+.why-title {
+  font-size: 24px;
+  font-weight: 500;
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+}
+@media (min-width: 1280px) {
+  .why-title {
+    font-size: 28px;
+  }
+}
+.why-text {
+  margin-top: 10px;
+  color: #5a4a40;
+  font-size: 15px;
+  line-height: 1.75;
+}
+/* pills: always one line — js hides any pill that would run past the card edge */
+.why-pills {
+  display: flex;
+  flex-wrap: nowrap;
+  gap: 10px;
+  overflow: hidden;
+}
+.why-pills span {
+  flex: none;
+  padding: 4px 14px;
+  border: 1.5px solid #ff6201;
+  border-radius: 999px;
+  color: #ff6201;
+  font-size: 14px;
+  font-weight: 500;
+  white-space: nowrap;
+}
+.why-pills span[hidden] {
+  display: none;
 }
 @media (prefers-reduced-motion: reduce) {
   .why-card:hover,
@@ -1004,16 +1056,35 @@ html {
     transform: none;
   }
 }
-.why-title {
-  margin-top: 22px;
-  font-size: 19px;
-  font-weight: 500;
-  line-height: 1.25;
-  letter-spacing: -0.01em;
+
+/* ---------- Section 8: copy trading frame ---------- */
+.experts-frame {
+  position: relative;
+  aspect-ratio: 405 / 470;
+  overflow: hidden;
+  border-radius: 28px;
+  background: linear-gradient(180deg, #ffe6d5 0%, #ffc59c 55%, #ff8a3d 100%);
 }
-.why-text {
-  margin-top: 10px;
-  color: #5a4a40;
-  font-size: 14px;
-  line-height: 1.7;
+/* cutout stands on the bottom edge; the older man's cropped side meets the left edge */
+.experts-img {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  height: auto;
+}
+
+/* why-us grid: chart image column is narrower on small laptops so the cards keep room for their pills */
+.why-grid {
+  grid-template-columns: minmax(0, 1fr); /* columns follow the screen width, not the one-line pill rows */
+}
+@media (min-width: 1024px) {
+  .why-grid {
+    grid-template-columns: minmax(0, 340px) 1fr;
+  }
+}
+@media (min-width: 1400px) {
+  .why-grid {
+    grid-template-columns: minmax(0, 420px) 1fr;
+  }
 }
