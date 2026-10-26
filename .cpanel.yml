@@ -3,4 +3,6 @@ deployment:
   tasks:
     - export DEPLOYPATH=/home/polyavtq/civatrade.online/
     # copy the site only; no --delete so cPanel folders (.well-known, cgi-bin) in the docroot are never touched
-    - /bin/rsync -a --exclude='.git' --exclude='.gitignore' --exclude='.cpanel.yml' --exclude='Civa Trades' --exclude='README.md' --exclude='*.cmd' ./ $DEPLOYPATH
+    # -rlt + --chmod: don't copy the repo folder's 700 permissions onto the docroot (that made the site unreadable)
+    - /bin/rsync -rlt --chmod=D755,F644 --exclude='.git' --exclude='.gitignore' --exclude='.cpanel.yml' --exclude='Civa Trades' --exclude='README.md' --exclude='*.cmd' ./ $DEPLOYPATH
+    - /bin/chmod 755 $DEPLOYPATH
