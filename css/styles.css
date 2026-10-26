@@ -1,7 +1,28 @@
 /* Custom styles that are cleaner here than as Tailwind classes */
 
+/* ---------- Plus Jakarta Sans (variable font, weights 300–800, self-hosted) ---------- */
+/* font-display: block = hold text back for the moment it takes to load, instead of flashing Segoe UI/Arial first */
+@font-face {
+  font-family: "Plus Jakarta Sans";
+  font-style: normal;
+  font-weight: 300 800;
+  font-display: block;
+  src: url("../assets/fonts/plus-jakarta-sans-latin.woff2") format("woff2");
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122,
+    U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: "Plus Jakarta Sans";
+  font-style: normal;
+  font-weight: 300 800;
+  font-display: block;
+  src: url("../assets/fonts/plus-jakarta-sans-latin-ext.woff2") format("woff2");
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF,
+    U+2020, U+20A0-20AB, U+20AD-20C4, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+
 html {
-  scroll-behavior: smooth;
+  /* smooth scrolling is handled by Lenis (js/main.js); native smooth-scroll would fight it */
   scroll-padding-top: 110px; /* keeps anchored sections clear of the sticky header */
 }
 
@@ -149,7 +170,7 @@ html {
   }
 }
 
-/* ---------- Animated fox mascot (section 11) ---------- */
+/* ---------- Animated Civa logo mark (section 2 headline + section 11) ---------- */
 .fox-live {
   --fox: 132px; /* size of the fox; override per placement */
   position: relative;
@@ -193,11 +214,7 @@ html {
   inset: 0;
   width: 100%;
   height: 100%;
-}
-/* eyelids sit over the eye holes and sweep down for a quick blink */
-.fox-lid {
-  clip-path: inset(0 0 100% 0);
-  animation: foxBlink 5.2s infinite;
+  object-fit: contain;
 }
 .fox-shadow {
   position: absolute;
@@ -245,25 +262,6 @@ html {
     opacity: 0.7;
   }
 }
-@keyframes foxBlink {
-  0%,
-  88%,
-  100% {
-    clip-path: inset(0 0 100% 0);
-  }
-  90.5% {
-    clip-path: inset(0 0 0 0);
-  }
-  93% {
-    clip-path: inset(0 0 100% 0);
-  }
-  95% {
-    clip-path: inset(0 0 0 0);
-  }
-  97% {
-    clip-path: inset(0 0 100% 0);
-  }
-}
 @keyframes foxHop {
   0% {
     transform: scale(1, 1);
@@ -289,7 +287,6 @@ html {
 }
 @media (prefers-reduced-motion: reduce) {
   .fox-body,
-  .fox-lid,
   .fox-shadow {
     animation: none;
   }
@@ -390,6 +387,9 @@ html {
 }
 .try-link {
   color: #ff6201;
+  /* bigger tap area on phones without changing the look */
+  margin-top: 4px;
+  padding: 10px 6px;
 }
 .try-btn:hover,
 .try-link:hover {
@@ -652,7 +652,8 @@ html {
 .plan-price {
   margin-top: 26px;
   color: #ee6c2d;
-  font-size: 32px;
+  font-size: clamp(24px, 2.1vw, 32px); /* shrinks a little on laptops so every price stays on one line */
+  white-space: nowrap;
   font-weight: 700;
   letter-spacing: -0.04em;
 }
@@ -763,6 +764,12 @@ html {
     #120602 91%,
     #2b2b2b 100%
   );
+}
+.social {
+  /* 44px tap area around the 24px icon */
+  display: inline-flex;
+  padding: 10px;
+  margin: -10px;
 }
 .social img {
   width: 24px;
@@ -960,36 +967,87 @@ html {
   }
 }
 
-/* Section 6: why choose us */
+/* ---------- Section 7: why traders choose Civa Trades ---------- */
 .why-card {
-  color: var(--color-cocoa);
   display: flex;
   flex-direction: column;
-  padding: 28px;
-  border: 1px solid #e4e4e4;
-  border-radius: 20px;
-  background: #fff;
+  justify-content: space-between;
+  gap: 24px;
+  min-height: 252px;
+  padding: 24px;
+  border-radius: 24px;
+  background: #f3f3f3;
   /* hover uses `translate` so it doesn't fight the .reveal transform/delay */
   transition:
     opacity 0.7s cubic-bezier(0.2, 0.7, 0.2, 1) var(--d, 0ms),
     transform 0.7s cubic-bezier(0.2, 0.7, 0.2, 1) var(--d, 0ms),
     translate 0.3s ease,
-    box-shadow 0.3s ease,
-    border-color 0.3s ease;
+    box-shadow 0.3s ease;
 }
 .why-card:hover {
-  translate: 0 -6px;
-  border-color: rgb(255 98 1 / 0.45);
-  box-shadow: 0 18px 36px -16px rgb(255 98 1 / 0.35);
+  translate: 0 -4px;
+  box-shadow: 0 18px 36px -20px rgb(74 28 0 / 0.25);
+}
+.why-row {
+  display: flex;
+  gap: 20px;
+}
+@media (min-width: 1280px) {
+  .why-row {
+    gap: 30px;
+  }
 }
 .why-icon {
-  width: 32px;
-  height: 32px;
-  color: #ff6201;
+  flex: none;
+  width: 52px;
+  height: 52px;
   transition: transform 0.3s ease;
 }
+@media (min-width: 1280px) {
+  .why-icon {
+    width: 60px;
+    height: 60px;
+  }
+}
 .why-card:hover .why-icon {
-  transform: scale(1.12) rotate(-6deg);
+  transform: scale(1.06) rotate(-4deg);
+}
+.why-title {
+  font-size: 24px;
+  font-weight: 500;
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+}
+@media (min-width: 1280px) {
+  .why-title {
+    font-size: 28px;
+  }
+}
+.why-text {
+  margin-top: 10px;
+  color: #5a4a40;
+  font-size: 15px;
+  line-height: 1.75;
+}
+/* pills: always one line — js hides any pill that would run past the card edge */
+.why-pills {
+  display: flex;
+  flex-wrap: nowrap;
+  gap: 10px;
+  overflow: hidden;
+}
+.why-pills span {
+  flex: none;
+  padding: 4px 14px;
+  border: 1.5px solid #ff6201;
+  border-radius: 999px;
+  color: #ff6201;
+  font-size: 14px;
+  font-weight: 500;
+  white-space: nowrap;
+}
+.why-pills span[hidden] {
+  display: none;
 }
 @media (prefers-reduced-motion: reduce) {
   .why-card:hover,
@@ -998,18 +1056,37 @@ html {
     transform: none;
   }
 }
-.why-title {
-  margin-top: 22px;
-  font-size: 19px;
-  font-weight: 500;
-  line-height: 1.25;
-  letter-spacing: -0.01em;
+
+/* ---------- Section 8: copy trading frame ---------- */
+.experts-frame {
+  position: relative;
+  aspect-ratio: 405 / 470;
+  overflow: hidden;
+  border-radius: 28px;
+  background: linear-gradient(180deg, #ffe6d5 0%, #ffc59c 55%, #ff8a3d 100%);
 }
-.why-text {
-  margin-top: 10px;
-  color: #5a4a40;
-  font-size: 14px;
-  line-height: 1.7;
+/* cutout stands on the bottom edge; the older man's cropped side meets the left edge */
+.experts-img {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  height: auto;
+}
+
+/* why-us grid: chart image column is narrower on small laptops so the cards keep room for their pills */
+.why-grid {
+  grid-template-columns: minmax(0, 1fr); /* columns follow the screen width, not the one-line pill rows */
+}
+@media (min-width: 1024px) {
+  .why-grid {
+    grid-template-columns: minmax(0, 340px) 1fr;
+  }
+}
+@media (min-width: 1400px) {
+  .why-grid {
+    grid-template-columns: minmax(0, 420px) 1fr;
+  }
 }
 
 /* Header nav: frosted glass over whatever scrolls beneath it */

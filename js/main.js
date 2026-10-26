@@ -143,7 +143,7 @@ function showNextInvestor() {
 toastBar.style.setProperty("--toast-ms", TOAST_MS + "ms");
 showNextInvestor();
 
-// ---------- Animated foxes (section 2 headline + section 11) ----------
+// ---------- Animated Civa logo marks (section 2 headline + section 11) ----------
 const foxes = [...document.querySelectorAll(".fox-live")];
 const calmMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
@@ -163,6 +163,34 @@ window.addEventListener("pointermove", (e) => {
     });
   });
 });
+
+// ---------- Lenis smooth scroll ----------
+// Skipped for visitors who turn off motion in their system settings.
+// Phones keep their native touch scrolling (Lenis only smooths mouse wheel / trackpad).
+if (window.Lenis && !calmMotion) {
+  const lenis = new Lenis({
+    lerp: 0, // 0 = use the timed glide below instead of Lenis's default follow mode
+    duration: 1.0, // seconds each scroll glides for — raise for floatier, lower for snappier
+    easing: (t) => 1 - Math.pow(1 - t, 4), // fast start, long soft landing at the end
+    wheelMultiplier: 1,
+  });
+  window.lenis = lenis; // handy for testing in the browser console
+  const raf = (time) => {
+    lenis.raf(time);
+    requestAnimationFrame(raf);
+  };
+  requestAnimationFrame(raf);
+
+  // in-page links (#section) glide there too, stopping below the sticky header
+  document.querySelectorAll('a[href^="#"]').forEach((link) => {
+    link.addEventListener("click", (e) => {
+      const target = link.getAttribute("href").length > 1 && document.querySelector(link.getAttribute("href"));
+      if (!target) return;
+      e.preventDefault();
+      lenis.scrollTo(target, { offset: -110 });
+    });
+  });
+}
 
 // happy hop on hover or tap
 foxes.forEach((fox) => {
@@ -201,3 +229,17 @@ document.querySelectorAll("[data-ipo-carousel]").forEach((root) => {
   root.addEventListener("pointerleave", start);
   new IntersectionObserver(([e]) => (e.isIntersecting ? start() : stop())).observe(root);
 });
+
+// ---------- "Why choose us" pills: one line only ----------
+// Shows as many pills as fit inside the card; any pill that would run past the edge is hidden (never wrapped).
+function fitPills(row) {
+  const pills = [...row.children];
+  pills.forEach((p) => (p.hidden = false));
+  for (let i = pills.length - 1; i > 0 && row.scrollWidth > row.clientWidth; i--) {
+    pills[i].hidden = true;
+  }
+}
+const pillRows = [...document.querySelectorAll("[data-fit-pills]")];
+const pillObserver = new ResizeObserver((entries) => entries.forEach((e) => fitPills(e.target)));
+pillRows.forEach((row) => pillObserver.observe(row));
+document.fonts.ready.then(() => pillRows.forEach(fitPills));

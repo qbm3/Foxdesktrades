@@ -7,3 +7,6 @@ desktop.ini
 
 # dependencies (if we add the Tailwind CLI later)
 node_modules/
+
+# Tailwind standalone CLI (130 MB binary - download it, don't commit it; see README)
+.tools/
