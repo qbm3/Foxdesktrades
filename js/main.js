@@ -24,55 +24,70 @@ document.querySelectorAll(".dropdown-toggle").forEach((btn) => {
 document.addEventListener("click", () => {
   document.querySelectorAll(".dropdown.open").forEach((d) => d.classList.remove("open"));
 });
+// moving onto another menu closes the one opened by a click, so it doesn't reappear when the mouse leaves
+document.querySelectorAll(".dropdown").forEach((item) => {
+  item.addEventListener("pointerenter", () => {
+    document.querySelectorAll(".dropdown").forEach((other) => {
+      if (other === item) return;
+      other.classList.remove("open");
+      other.querySelector(".dropdown-toggle")?.setAttribute("aria-expanded", "false");
+      if (other.contains(document.activeElement)) document.activeElement.blur();
+    });
+  });
+});
 
 // ---------- "Live account" widgets (one template, used in several cards) ----------
 const widgetTpl = document.getElementById("live-widget-tpl");
-document.querySelectorAll("[data-widget]").forEach((slot) => {
-  slot.appendChild(widgetTpl.content.cloneNode(true));
-});
+if (widgetTpl) {
+  document.querySelectorAll("[data-widget]").forEach((slot) => {
+    slot.appendChild(widgetTpl.content.cloneNode(true));
+  });
+}
 
-// ---------- Testimonial slider ----------
+// ---------- Testimonial slider (home page only) ----------
 const tWrap = document.querySelector(".tc-wrap");
-const tViewport = tWrap.querySelector(".tc-viewport");
-const tTrack = tWrap.querySelector(".tc-track");
-const tCards = [...tTrack.children];
-const tPrev = document.getElementById("t-prev");
-const tNext = document.getElementById("t-next");
-let tCurrent = 0;
+if (tWrap) {
+  const tViewport = tWrap.querySelector(".tc-viewport");
+  const tTrack = tWrap.querySelector(".tc-track");
+  const tCards = [...tTrack.children];
+  const tPrev = document.getElementById("t-prev");
+  const tNext = document.getElementById("t-next");
+  let tCurrent = 0;
 
-// how many cards fit beside the rating card decides how far the track can move
-function layoutTestimonials() {
-  const gap = parseFloat(getComputedStyle(tTrack).columnGap) || 0;
-  const step = tCards[0].offsetWidth + gap;
-  const room = tViewport.clientWidth - parseFloat(getComputedStyle(tViewport).paddingLeft);
-  const visible = Math.max(1, Math.floor((room + gap + 1) / step));
-  const last = Math.max(0, tCards.length - visible);
-  tCurrent = Math.min(tCurrent, last);
-  tTrack.style.transform = `translateX(${-tCurrent * step}px)`;
-  tCards.forEach((card, i) => card.setAttribute("aria-hidden", i < tCurrent || i >= tCurrent + visible));
-  tPrev.disabled = tCurrent === 0;
-  tNext.disabled = tCurrent === last;
+  // how many cards fit beside the rating card decides how far the track can move
+  function layoutTestimonials() {
+    const gap = parseFloat(getComputedStyle(tTrack).columnGap) || 0;
+    const step = tCards[0].offsetWidth + gap;
+    const room = tViewport.clientWidth - parseFloat(getComputedStyle(tViewport).paddingLeft);
+    const visible = Math.max(1, Math.floor((room + gap + 1) / step));
+    const last = Math.max(0, tCards.length - visible);
+    tCurrent = Math.min(tCurrent, last);
+    tTrack.style.transform = `translateX(${-tCurrent * step}px)`;
+    tCards.forEach((card, i) => card.setAttribute("aria-hidden", i < tCurrent || i >= tCurrent + visible));
+    tPrev.disabled = tCurrent === 0;
+    tNext.disabled = tCurrent === last;
+  }
+
+  function goTo(step) {
+    tCurrent = Math.max(0, tCurrent + step);
+    layoutTestimonials();
+  }
+
+  tPrev.addEventListener("click", () => goTo(-1));
+  tNext.addEventListener("click", () => goTo(1));
+
+  // swipe on touch screens
+  let touchX = null;
+  tTrack.addEventListener("touchstart", (e) => (touchX = e.touches[0].clientX), { passive: true });
+  tTrack.addEventListener("touchend", (e) => {
+    if (touchX === null) return;
+    const dx = e.changedTouches[0].clientX - touchX;
+    if (Math.abs(dx) > 50) goTo(dx < 0 ? 1 : -1);
+    touchX = null;
+  });
+
+  new ResizeObserver(layoutTestimonials).observe(tViewport);
 }
-
-function goTo(step) {
-  tCurrent = Math.max(0, tCurrent + step);
-  layoutTestimonials();
-}
-
-tPrev.addEventListener("click", () => goTo(-1));
-tNext.addEventListener("click", () => goTo(1));
-
-// swipe on touch screens
-let touchX = null;
-tTrack.addEventListener("touchstart", (e) => (touchX = e.touches[0].clientX), { passive: true });
-tTrack.addEventListener("touchend", (e) => {
-  if (touchX === null) return;
-  const dx = e.changedTouches[0].clientX - touchX;
-  if (Math.abs(dx) > 50) goTo(dx < 0 ? 1 : -1);
-  touchX = null;
-});
-
-new ResizeObserver(layoutTestimonials).observe(tViewport);
 
 // ---------- Reveal sections as they scroll into view ----------
 const revealObserver = new IntersectionObserver(

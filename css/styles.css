@@ -36,15 +36,20 @@ html {
 .dropdown-menu {
   position: absolute;
   top: calc(100% + 18px);
-  left: -16px;
-  min-width: 200px;
+  left: -24px;
+  width: max-content; /* panel grows to fit the longest one-line description */
+  max-width: 480px;
   display: flex;
   flex-direction: column;
-  padding: 8px;
-  border-radius: 12px;
-  background: #363636;
-  border: 1px solid rgb(255 255 255 / 0.08);
-  box-shadow: 0 20px 40px rgb(0 0 0 / 0.45);
+  gap: 4px;
+  padding: 16px 12px;
+  border-radius: 22px;
+  /* frosted glass: lets a little of each section's colour show through */
+  background: rgb(255 255 255 / 0.8);
+  -webkit-backdrop-filter: blur(24px) saturate(160%);
+  backdrop-filter: blur(24px) saturate(160%);
+  border: 1px solid rgb(255 255 255 / 0.5);
+  box-shadow: 0 24px 48px -12px rgb(0 0 0 / 0.35);
   opacity: 0;
   visibility: hidden;
   transform: translateY(6px);
@@ -57,16 +62,43 @@ html {
   inset: -20px 0 auto 0;
   height: 20px;
 }
+/* each entry: bold title + one-line description */
 .dropdown-menu a {
-  padding: 10px 12px;
-  border-radius: 8px;
-  font-size: 15px;
-  color: rgb(255 255 255 / 0.8);
-  transition: background 0.15s, color 0.15s;
+  display: block;
+  padding: 12px 18px;
+  border-radius: 14px;
+  transition: background 0.15s;
 }
-.dropdown-menu a:hover {
-  background: rgb(255 255 255 / 0.08);
-  color: #fff;
+.dropdown-menu a:hover,
+.dropdown-menu a:focus-visible {
+  background: rgb(0 0 0 / 0.06);
+  outline: none;
+}
+.dropdown-menu__title {
+  display: block;
+  color: #1a1a1a;
+  font-size: 17px;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  transition: color 0.15s;
+}
+.dropdown-menu a:hover .dropdown-menu__title,
+.dropdown-menu a:focus-visible .dropdown-menu__title {
+  color: #ff6201;
+}
+.dropdown-menu__desc {
+  display: block;
+  margin-top: 4px;
+  color: #555;
+  font-size: 15px;
+  line-height: 1.45;
+  white-space: nowrap; /* one line, like the reference */
+}
+/* keyboard users: open the panel while focus is inside it */
+.dropdown:focus-within .dropdown-menu {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
 }
 .dropdown:hover .dropdown-menu,
 .dropdown.open .dropdown-menu {
@@ -77,6 +109,15 @@ html {
 .dropdown:hover .chev,
 .dropdown.open .chev {
   transform: rotate(180deg);
+}
+/* only one panel at a time: hovering a menu hides any other that is open from a click or keyboard focus */
+:has(> .dropdown:hover) > .dropdown:not(:hover) .dropdown-menu {
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(6px);
+}
+:has(> .dropdown:hover) > .dropdown:not(:hover) .chev {
+  transform: none;
 }
 
 /* ---------- Hero ---------- */
@@ -581,15 +622,16 @@ html {
   }
 }
 
-/* ---------- Section 9: plan cards ---------- */
+/* ---------- Section 9: plan cards (also plans.html) ---------- */
 .plan-card {
+  scroll-margin-top: 130px; /* plans.html#standard etc. land below the sticky header */
   display: flex;
   flex-direction: column;
   overflow: hidden;
   border: 1px solid #5a3320;
   border-radius: 32px;
   background: #363636;
-  transition: transform 0.3s, border-color 0.3s;
+  transition: transform 0.3s, border-color 0.3s, box-shadow 0.3s;
 }
 .plan-card:hover {
   transform: translateY(-4px);
@@ -665,6 +707,31 @@ html {
 }
 .plan-btn:hover {
   background: #e0601f;
+}
+
+/* light version of the plan cards (plans.html) */
+.plans-light .plan-card {
+  border-color: #e2e2e2;
+  background: #fff;
+}
+.plans-light .plan-card:hover {
+  border-color: #ff6201;
+  box-shadow: 0 24px 48px -24px rgb(74 28 0 / 0.25);
+}
+.plans-light .plan-head {
+  background: #fff1e8;
+}
+.plans-light .plan-name {
+  color: #4a1c00;
+}
+.plans-light .plan-list li {
+  color: #4d4d4d;
+}
+.plans-light .plan-list li::before {
+  background-color: #fff1e8;
+}
+.plans-light .plan-btn {
+  color: #fff;
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -1036,6 +1103,11 @@ html {
   .why-grid {
     grid-template-columns: minmax(0, 340px) 1fr;
   }
+  /* the chart photo is portrait: let the cards set the row height and the photo fill it */
+  .why-grid > img {
+    contain: size;
+    align-self: stretch;
+  }
 }
 @media (min-width: 1400px) {
   .why-grid {
@@ -1045,9 +1117,750 @@ html {
 
 /* Header nav: frosted glass over whatever scrolls beneath it */
 .nav-glass {
+  position: relative;
+  z-index: 0;
+  border-bottom: 1px solid rgb(255 255 255 / 0.14);
+  box-shadow: inset 0 1px 0 rgb(255 255 255 / 0.12), 0 8px 24px -12px rgb(0 0 0 / 0.4);
+}
+/* The blur sits on a pseudo-element, not the nav itself: an element with backdrop-filter stops its
+   children from blurring what's behind it, and the dropdown panels inside need to do that. */
+.nav-glass::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
   background: linear-gradient(180deg, rgb(255 255 255 / 0.06), rgb(255 255 255 / 0.02)), rgb(24 24 24 / 0.72);
   -webkit-backdrop-filter: blur(20px) saturate(170%);
   backdrop-filter: blur(20px) saturate(170%);
-  border-bottom: 1px solid rgb(255 255 255 / 0.14);
-  box-shadow: inset 0 1px 0 rgb(255 255 255 / 0.12), 0 8px 24px -12px rgb(0 0 0 / 0.4);
+  pointer-events: none;
+}
+
+/* =====================================================================
+   About page (about.html)
+   ===================================================================== */
+.about-pill {
+  display: inline-block;
+  padding: 10px 20px;
+  border-radius: 8px;
+  color: #ff6201;
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+}
+.about-h2 {
+  font-size: 30px;
+  font-weight: 600;
+  line-height: 1.25;
+  letter-spacing: -0.01em;
+}
+@media (min-width: 768px) {
+  .about-h2 {
+    font-size: 40px;
+  }
+}
+.about-copy {
+  max-width: 514px;
+  color: #4d4d4d;
+  font-size: 16px;
+  line-height: 1.75;
+}
+@media (min-width: 768px) {
+  .about-copy {
+    font-size: 18px;
+    line-height: 32px;
+  }
+}
+.about-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 14px 40px;
+  border-radius: 8px;
+  background: #ff6201;
+  color: #fff;
+  font-size: 16px;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  filter: drop-shadow(0 12px 27px rgb(255 98 1 / 0.25));
+  transition: background-color 0.2s;
+}
+.about-cta:hover {
+  background: #e85f00;
+}
+.about-cta--pill {
+  padding: 16px 30px 16px 40px;
+  border-radius: 9999px;
+}
+.about-cta img {
+  margin: 0 3.5px; /* 17x12 arrow sits in a 24px icon box */
+  transition: transform 0.2s;
+}
+.about-cta:hover img {
+  transform: translateX(3px);
+}
+
+/* hero stats: number above label */
+.about-stat {
+  display: flex;
+  flex-direction: column-reverse;
+  gap: 4px;
+}
+.about-stat dd {
+  color: #ff6201;
+  font-size: 32px;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  line-height: 1.26;
+}
+.about-stat dt {
+  color: #fff;
+  font-size: 18px;
+  letter-spacing: 0.02em;
+}
+.about-stat-divider {
+  display: none;
+  width: 2px;
+  height: 50px;
+  flex-shrink: 0;
+  background: linear-gradient(#fed7bf, #ff6201);
+}
+@media (min-width: 640px) {
+  .about-stat-divider {
+    display: block;
+  }
+}
+
+/* orange 60px icon tile */
+.about-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 60px;
+  height: 60px;
+  flex-shrink: 0;
+  border-radius: 12px;
+  background: #ff6201;
+}
+
+.purpose-card {
+  min-height: 233px;
+  padding: 23px;
+  border: 1px solid #ccc;
+  border-radius: 24px;
+  background: #fff;
+}
+.purpose-card h3 {
+  margin-top: 30px;
+  font-size: 24px;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+}
+.purpose-card p {
+  max-width: 340px;
+  margin-top: 8px;
+  color: #4d4d4d;
+  font-size: 14px;
+  line-height: 22px;
+}
+@media (min-width: 1280px) {
+  .purpose-card h3 {
+    font-size: 28px;
+  }
+}
+
+.principle-card {
+  min-height: 307px;
+  padding: 24px;
+  border-radius: 16px;
+  background: #262626;
+}
+.principle-card h3 {
+  margin-top: 30px;
+  font-size: 28px;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+}
+.principle-card p {
+  max-width: 318px;
+  margin-top: 20px;
+  color: #b2b2b2;
+  font-size: 16px;
+  line-height: 26px;
+}
+.values-list {
+  display: grid;
+  grid-template-rows: repeat(3, auto);
+  grid-auto-flow: column;
+  justify-content: start;
+  column-gap: 40px;
+  row-gap: 14px;
+  margin-top: 20px;
+}
+.values-list li {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  font-size: 16px;
+  line-height: 24px;
+}
+.values-list li::before {
+  content: "";
+  width: 8px;
+  height: 8px;
+  margin: 0 1.66px; /* rotated square fills an 11.3px box */
+  background: #ff6201;
+  transform: rotate(45deg);
+}
+
+/* ---------- About: top stocks carousel ---------- */
+.stock-marquee {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  overflow: hidden;
+  /* soft fade at both ends */
+  -webkit-mask-image: linear-gradient(to right, transparent, #000 10%, #000 90%, transparent);
+  mask-image: linear-gradient(to right, transparent, #000 10%, #000 90%, transparent);
+}
+.stock-track {
+  display: flex;
+  width: max-content;
+  animation: stock-scroll 40s linear infinite;
+}
+.stock-track--reverse {
+  animation-direction: reverse;
+}
+.stock-marquee:hover .stock-track {
+  animation-play-state: paused;
+}
+/* the list is in the track twice, so moving it by half its width loops seamlessly */
+@keyframes stock-scroll {
+  to {
+    transform: translateX(-50%);
+  }
+}
+.stock-chip {
+  display: flex;
+  flex-shrink: 0;
+  align-items: center;
+  gap: 14px;
+  margin-right: 20px; /* margin, not gap: keeps both halves of the track the same width */
+  padding: 16px 24px 16px 18px;
+  border: 1px solid #ececec;
+  border-radius: 16px;
+  background: #fff;
+}
+/* one-colour logo (Simple Icons SVG) painted brand orange */
+.stock-chip__logo {
+  width: 36px;
+  height: 36px;
+  flex-shrink: 0;
+  background: #ff6201;
+  -webkit-mask: no-repeat center / contain;
+  mask: no-repeat center / contain;
+}
+.stock-chip__name {
+  display: block;
+  font-size: 18px;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  line-height: 1.2;
+}
+.stock-chip__ticker {
+  display: block;
+  margin-top: 2px;
+  color: #6b6b6b;
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+}
+@media (prefers-reduced-motion: reduce) {
+  .stock-track {
+    animation: none;
+  }
+  .stock-marquee {
+    overflow-x: auto;
+  }
+}
+
+.join-step span {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 64px;
+  height: 64px;
+  margin: 0 auto;
+  border: 2px solid #ff6201;
+  border-radius: 9999px;
+  background: rgb(255 98 1 / 0.2);
+  color: #ff6201;
+  font-size: 28px;
+  font-weight: 800;
+  letter-spacing: -0.01em;
+}
+.join-step h3 {
+  margin-top: 20px;
+  font-size: 24px;
+  font-weight: 800;
+  letter-spacing: -0.01em;
+}
+.join-step p {
+  margin-top: 10px;
+  font-size: 14px;
+}
+
+/* ---------- Why-us page (why-us.html) variants ---------- */
+.about-copy--dark {
+  color: #b2b2b2;
+}
+/* 4-across cards: smaller title so it fits on one line */
+.purpose-card--compact h3 {
+  font-size: 24px;
+}
+.about-stat--lg dd {
+  font-size: 40px;
+  letter-spacing: -0.02em;
+}
+.about-stat--lg dt {
+  color: #4a1c00;
+}
+@media (min-width: 1024px) {
+  .about-stat--lg dd {
+    font-size: 48px;
+  }
+}
+/* laptop photo: its edges aren't pure black, so fade them out instead of relying on the section gradient */
+.why-laptop {
+  -webkit-mask-image: radial-gradient(closest-side, #000 70%, transparent);
+  mask-image: radial-gradient(closest-side, #000 70%, transparent);
+}
+@media (min-width: 1024px) {
+  .why-laptop {
+    -webkit-mask-image: linear-gradient(to right, transparent, #000 30%);
+    mask-image: linear-gradient(to right, transparent, #000 30%);
+  }
+}
+
+/* ---------- Copy-trading page (copy-trading.html): FAQ accordion ---------- */
+.faq-item {
+  border-radius: 20px;
+  background: #fff;
+}
+.faq-item summary {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  min-height: 88px;
+  padding: 20px;
+  font-size: 18px;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  line-height: 1.3;
+  cursor: pointer;
+  list-style: none;
+}
+.faq-item summary::-webkit-details-marker {
+  display: none;
+}
+/* Figma chevron: 22x13 glyph centred in a 40px box */
+.faq-item summary::after {
+  content: "";
+  flex-shrink: 0;
+  width: 40px;
+  height: 40px;
+  background: url(../assets/copy-trading/chevron-down.svg) no-repeat center / 22.0427px 13.0641px;
+  transition: transform 0.25s;
+}
+.faq-item[open] summary::after {
+  transform: rotate(180deg);
+}
+.faq-item summary:focus-visible {
+  outline: 2px solid #ff6201;
+  outline-offset: 4px;
+  border-radius: 20px;
+}
+.faq-item p {
+  max-width: 860px;
+  padding: 0 20px 28px;
+  color: #4d4d4d;
+  font-size: 16px;
+  line-height: 1.7;
+}
+/* smooth open/close where the browser supports animating details content */
+@supports (interpolate-size: allow-keywords) {
+  .faq-item {
+    interpolate-size: allow-keywords;
+  }
+  .faq-item::details-content {
+    height: 0;
+    overflow: clip;
+    transition: height 0.3s ease, content-visibility 0.3s allow-discrete;
+  }
+  .faq-item[open]::details-content {
+    height: auto;
+  }
+}
+@media (min-width: 1024px) {
+  .faq-item summary {
+    min-height: 120px;
+    padding: 25px;
+    font-size: 28px;
+  }
+  .faq-item p {
+    padding: 0 25px 32px;
+    margin-top: -8px;
+  }
+}
+
+/* ---------- Futures page (futures.html) ---------- */
+/* market cards: photo cropped inside a fixed 265x185 frame (crop offsets are % of the frame) */
+.market-card {
+  padding: 15px 15px 28px;
+  border-radius: 16px;
+  background: #fff;
+}
+.market-card__img {
+  position: relative;
+  overflow: hidden;
+  aspect-ratio: 265 / 185;
+  border-radius: 10px;
+  background: #fff;
+}
+.market-card__img img {
+  position: absolute;
+  max-width: none;
+  object-fit: cover;
+}
+.market-card h3 {
+  margin-top: 30px;
+  font-size: 24px;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+}
+.market-card p {
+  margin-top: 12px;
+  color: #4d4d4d;
+  font-size: 16px;
+  line-height: 26px;
+}
+@media (min-width: 1280px) {
+  .market-card {
+    min-height: 372px;
+  }
+  .market-card h3 {
+    font-size: 28px;
+  }
+}
+
+/* ---------- Careers page (careers.html) ---------- */
+.job {
+  scroll-margin-top: 110px; /* #job links land below the sticky header */
+}
+.job__title {
+  margin-top: 16px;
+  font-size: 26px;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  line-height: 1.25;
+}
+.job__summary {
+  max-width: 640px;
+  color: #4d4d4d;
+  font-size: 16px;
+  line-height: 1.75;
+}
+.job__reqs {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+/* orange diamond bullets, same as the About page values list */
+.job__reqs li {
+  display: flex;
+  align-items: baseline;
+  gap: 16px;
+  font-size: 16px;
+  line-height: 24px;
+}
+.job__reqs li::before {
+  content: "";
+  flex-shrink: 0;
+  width: 8px;
+  height: 8px;
+  margin: 0 1.66px;
+  background: #ff6201;
+  transform: translateY(-1px) rotate(45deg);
+}
+.job__note {
+  margin-top: 14px;
+  color: #6b6b6b;
+  font-size: 13px;
+  line-height: 1.6;
+}
+.job-meta {
+  display: grid;
+  gap: 20px;
+  margin-top: 40px;
+}
+.job-meta__item {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+.job-meta__icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+  flex-shrink: 0;
+  border: 1px solid #e2e2e2;
+  border-radius: 12px;
+  background: #fff;
+  color: #ff6201;
+}
+.job-meta dt {
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+.job-meta dd {
+  margin-top: 2px;
+  color: #4d4d4d;
+  font-size: 15px;
+}
+@media (min-width: 640px) {
+  .job-meta {
+    grid-template-columns: repeat(3, max-content);
+    gap: 0;
+  }
+  .job-meta__item {
+    padding: 0 40px;
+    border-left: 1px solid #e2e2e2;
+  }
+  .job-meta__item:first-child {
+    padding-left: 0;
+    border-left: 0;
+  }
+}
+@media (min-width: 1024px) {
+  .job__title {
+    font-size: 32px;
+  }
+}
+
+/* ---------- Contact page (contact.html) ---------- */
+.contact-form {
+  padding: 28px;
+  border: 1px solid #e2e2e2;
+  border-radius: 24px;
+  background: #fff;
+}
+.contact-form__title {
+  font-size: 24px;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+}
+.contact-form label {
+  display: block;
+  margin-bottom: 8px;
+  font-size: 14px;
+  font-weight: 600;
+}
+.contact-form__optional {
+  color: #8a8a8a;
+  font-weight: 400;
+}
+.contact-form input,
+.contact-form textarea {
+  display: block;
+  width: 100%;
+  padding: 12px 16px;
+  border: 1px solid #d9d9d9;
+  border-radius: 12px;
+  background: #fff;
+  color: #1a1a1a;
+  font: inherit;
+  font-size: 15px;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+.contact-form textarea {
+  min-height: 140px;
+  resize: vertical;
+}
+.contact-form input::placeholder,
+.contact-form textarea::placeholder {
+  color: #9a9a9a;
+}
+.contact-form input:focus,
+.contact-form textarea:focus {
+  border-color: #ff6201;
+  outline: none;
+  box-shadow: 0 0 0 3px rgb(255 98 1 / 0.15);
+}
+/* only flag a field after the visitor has tried to send */
+.contact-form.was-validated :invalid {
+  border-color: #d93025;
+}
+.contact-form__status {
+  margin-top: 14px;
+  color: #4d4d4d;
+  font-size: 14px;
+  line-height: 1.6;
+}
+.contact-form__status:empty {
+  display: none;
+}
+
+.contact-map {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  border: 1px solid #e2e2e2;
+  border-radius: 24px;
+  background: #fff;
+}
+.contact-map iframe {
+  display: block;
+  width: 100%;
+  flex: 1;
+  min-height: 320px;
+  border: 0;
+  filter: grayscale(0.7) contrast(1.05); /* soften the OSM colours to sit with the brand palette */
+}
+.contact-map__caption {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px 20px;
+  padding: 20px 24px;
+  border-top: 1px solid #e2e2e2;
+}
+.contact-map__label {
+  font-size: 16px;
+  font-weight: 600;
+}
+.contact-map__address {
+  margin-top: 2px;
+  color: #4d4d4d;
+  font-size: 14px;
+}
+
+.contact-card-item {
+  display: flex;
+  flex-direction: column;
+  padding: 24px;
+  border: 1px solid #e2e2e2;
+  border-radius: 24px;
+  background: #fff;
+}
+.contact-card-item h3 {
+  margin-top: 24px;
+  font-size: 22px;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+}
+.contact-card-item p {
+  margin-top: 8px;
+  margin-bottom: 20px;
+  color: #4d4d4d;
+  font-size: 14px;
+  line-height: 22px;
+  overflow-wrap: anywhere;
+}
+.contact-card-item__link {
+  margin-top: auto;
+  color: #ff6201;
+  font-size: 15px;
+  font-weight: 600;
+}
+.contact-card-item__link:hover {
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+@media (min-width: 1024px) {
+  .contact-form {
+    padding: 36px;
+  }
+}
+
+/* ---------- Side image on a soft orange panel (copy-trading.html, futures.html) ---------- */
+/* cut-out artwork with a transparent background, shown beside a block of text */
+.side-visual {
+  width: 100%;
+  max-width: 560px;
+  margin-inline: auto;
+}
+@media (min-width: 1024px) {
+  .side-visual {
+    margin-right: 40px;
+  }
+}
+.side-visual__panel {
+  padding: 32px;
+  border-radius: 32px;
+  background: linear-gradient(180deg, #fde9db 0%, #f6b585 60%, #ef8f4c 100%);
+}
+.side-visual__panel img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+/* FAQ cards on a white section */
+.faq-item--tint {
+  background: #f3f3f3;
+}
+
+/* ---------- Support page (support.html) ---------- */
+/* portrait team photo, cropped to a 4:5 card (5:6 on desktop) and kept on the agent's face */
+.support-photo {
+  width: 100%;
+  max-width: 560px;
+  margin-inline: auto;
+  overflow: hidden;
+  border-radius: 32px;
+  aspect-ratio: 4 / 5;
+}
+@media (min-width: 1024px) {
+  .support-photo {
+    margin-right: 40px;
+    aspect-ratio: 5 / 6;
+  }
+}
+.support-photo img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 30% 55%;
+}
+
+/* ---------- Live-trading page (live-trading.html) ---------- */
+/* terminal GIF in a dark frame with a soft orange glow */
+.live-shot {
+  width: 100%;
+  max-width: 760px;
+  margin-inline: auto;
+  padding: 8px;
+  border-radius: 20px;
+  background: #1a1a1a;
+  box-shadow: 0 30px 80px -30px rgb(255 98 1 / 0.45);
+}
+.live-shot img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: 12px;
+}
+/* TradingView chart on a white card */
+.live-chart-panel {
+  overflow: hidden;
+  padding: 8px;
+  border: 1px solid #e2e2e2;
+  border-radius: 24px;
+  background: #fff;
 }

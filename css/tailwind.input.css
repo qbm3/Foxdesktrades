@@ -6,6 +6,15 @@
 
 /* files Tailwind scans for class names */
 @source "../index.html";
+@source "../about.html";
+@source "../why-us.html";
+@source "../copy-trading.html";
+@source "../futures.html";
+@source "../careers.html";
+@source "../contact.html";
+@source "../support.html";
+@source "../plans.html";
+@source "../live-trading.html";
 @source "../js";
 
 @theme {

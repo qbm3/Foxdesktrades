@@ -21,3 +21,13 @@ The Tailwind CLI lives at `.tools/tailwindcss.exe` (not committed — 130 MB). O
 `tailwindcss-windows-x64.exe` from https://github.com/tailwindlabs/tailwindcss/releases/tag/v4.1.11 and save it there.
 
 Text, image, link, `styles.css` and `main.js` changes never need a rebuild.
+
+## Cache-busting (do this when you change CSS or JS)
+
+Every page links its CSS and JS with a version tag, e.g. `css/styles.css?v=20261108`. Browsers keep old copies of
+these files, so after changing any file in `css/` or `js/`, bump the tag on **all** pages (use today's date) —
+otherwise returning visitors get the new HTML with the old styles/scripts:
+
+```sh
+sed -i '' 's/?v=20261108/?v=NEWDATE/g' *.html      # macOS; on Windows use VS Code "Replace in files"
+```
