@@ -203,3 +203,59 @@ const pillRows = [...document.querySelectorAll("[data-fit-pills]")];
 const pillObserver = new ResizeObserver((entries) => entries.forEach((e) => fitPills(e.target)));
 pillRows.forEach((row) => pillObserver.observe(row));
 document.fonts.ready.then(() => pillRows.forEach(fitPills));
+
+// ---------- Scroll parallax (CTA blocks) ----------
+// Each [data-speed] layer drifts against the scroll by its own amount, measured from the centre of its section,
+// so layers with bigger speeds look closer. Positive = moves up faster than the page, negative = lags behind.
+const pxLayers = [...document.querySelectorAll("[data-speed]")].map((el) => ({
+  el,
+  speed: parseFloat(el.dataset.speed) || 0,
+  box: el.closest("[data-parallax]") || el.parentElement,
+}));
+if (pxLayers.length && !calmMotion) {
+  let pxFrame = null;
+  const pxUpdate = () => {
+    pxFrame = null;
+    pxLayers.forEach(({ el, speed, box }) => {
+      const r = box.getBoundingClientRect();
+      if (r.bottom < -200 || r.top > innerHeight + 200) return; // off screen: skip the work
+      const fromCentre = r.top + r.height / 2 - innerHeight / 2;
+      el.style.transform = `translate3d(0, ${(fromCentre * speed).toFixed(1)}px, 0)`;
+    });
+  };
+  const pxQueue = () => {
+    if (!pxFrame) pxFrame = requestAnimationFrame(pxUpdate);
+  };
+  window.addEventListener("scroll", pxQueue, { passive: true });
+  window.addEventListener("resize", pxQueue);
+  pxUpdate();
+}
+
+// ---------- Count-up numbers ----------
+// <dd data-count="200" data-suffix="+">200+</dd>: the final text is in the HTML, so it reads right without JS.
+const counters = [...document.querySelectorAll("[data-count]")];
+if (counters.length && !calmMotion) {
+  const runCount = (el) => {
+    const end = parseFloat(el.dataset.count);
+    const decimals = parseInt(el.dataset.decimals || "0", 10);
+    const suffix = el.dataset.suffix || "";
+    const fmt = (n) => n.toLocaleString("en-US", { minimumFractionDigits: decimals, maximumFractionDigits: decimals }) + suffix;
+    const start = performance.now();
+    const tick = (now) => {
+      const t = Math.min(1, (now - start) / 1600);
+      el.textContent = fmt(end * (1 - Math.pow(1 - t, 3)));
+      if (t < 1) requestAnimationFrame(tick);
+    };
+    requestAnimationFrame(tick);
+  };
+  const countObserver = new IntersectionObserver(
+    (entries) =>
+      entries.forEach((entry) => {
+        if (!entry.isIntersecting) return;
+        countObserver.unobserve(entry.target);
+        runCount(entry.target);
+      }),
+    { threshold: 0.6 }
+  );
+  counters.forEach((el) => countObserver.observe(el));
+}

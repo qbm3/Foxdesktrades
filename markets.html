@@ -1,0 +1,547 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Markets | Civa Trades</title>
+    <meta
+      name="description"
+      content="Trade stocks, ETFs, bonds, metals and IPOs with Civa Trades. Follow live prices across global markets from one account."
+    />
+    <link rel="icon" type="image/png" href="assets/brand/icon-orange.png" />
+    <link rel="canonical" href="https://civatrade.com/markets.html" />
+    <meta name="theme-color" content="#2b2b2b" />
+
+    <!-- Link previews (WhatsApp, Telegram, Facebook, LinkedIn, X...). Image must be an absolute URL. -->
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Civa Trades" />
+    <meta property="og:title" content="Markets on Civa Trades - Every market, one account" />
+    <meta
+      property="og:description"
+      content="Build wealth with smart trade insights. Fund your wallet, follow live market movement and copy professional traders with Civa Trades."
+    />
+    <meta property="og:url" content="https://civatrade.com/markets.html" />
+    <meta property="og:image" content="https://civatrade.com/assets/images/civa-meta.jpg" />
+    <meta property="og:image:type" content="image/jpeg" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="613" />
+    <meta property="og:image:alt" content="Civa Trades homepage: Build Wealth with Smart Trade Insights" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Markets on Civa Trades - Every market, one account" />
+    <meta
+      name="twitter:description"
+      content="Build wealth with smart trade insights. Fund your wallet, follow live market movement and copy professional traders with Civa Trades."
+    />
+    <meta name="twitter:image" content="https://civatrade.com/assets/images/civa-meta.jpg" />
+
+    <!-- Font: Plus Jakarta Sans, self-hosted (assets/fonts) and fetched first so the page never flashes a fallback font -->
+    <link rel="preload" href="assets/fonts/plus-jakarta-sans-latin.woff2" as="font" type="font/woff2" crossorigin />
+
+    <!-- Tailwind, compiled from css/tailwind.input.css (rebuild after adding new classes — see README) -->
+    <link rel="stylesheet" href="css/tailwind.css?v=20261110f" />
+    <!-- Lenis smooth scroll -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lenis@1.3.4/dist/lenis.css" />
+    <link rel="stylesheet" href="css/styles.css?v=20261110f" />
+  </head>
+
+  <body class="bg-ink font-sans text-white antialiased">
+    <!-- ============ HEADER: ticker + nav ============ -->
+    <header class="sticky top-0 z-50">
+      <!-- Ticker (TradingView ticker tape) -->
+      <div class="ticker h-10 overflow-hidden bg-black">
+        <div class="tradingview-widget-container">
+          <div class="tradingview-widget-container__widget"></div>
+          <script
+            type="text/javascript"
+            src="https://s3.tradingview.com/external-embedding/embed-widget-ticker-tape.js"
+            async
+          >
+            {
+              "symbols": [
+                { "proName": "FOREXCOM:SPXUSD", "title": "S&P 500" },
+                { "proName": "FOREXCOM:NSXUSD", "title": "US 100" },
+                { "proName": "OANDA:XAUUSD", "title": "Gold" },
+                { "proName": "BITSTAMP:BTCUSD", "title": "Bitcoin" },
+                { "proName": "BITSTAMP:ETHUSD", "title": "Ethereum" },
+                { "proName": "FX:EURUSD", "title": "EUR/USD" },
+                { "proName": "NASDAQ:AAPL", "title": "Apple" },
+                { "proName": "NASDAQ:TSLA", "title": "Tesla" },
+                { "proName": "NASDAQ:NVDA", "title": "Nvidia" }
+              ],
+              "showSymbolLogo": true,
+              "isTransparent": true,
+              "displayMode": "regular",
+              "colorTheme": "dark",
+              "locale": "en"
+            }
+          </script>
+        </div>
+      </div>
+
+      <!-- Nav -->
+      <nav class="nav-glass">
+        <div class="mx-auto flex h-16 max-w-[1440px] items-center justify-between px-5 md:px-10 xl:px-14">
+          <a href="index.html" class="shrink-0" aria-label="Civa Trades home">
+            <img src="assets/brand/logo-white.png" alt="Civa Trades" class="h-7 w-auto md:h-8" />
+          </a>
+
+          <ul class="hidden items-center gap-6 text-[15px] text-white/80 lg:flex xl:gap-10 xl:text-[17px]">
+            <li class="dropdown relative">
+              <button class="dropdown-toggle flex items-center gap-1.5 transition hover:text-white" aria-expanded="false">
+                Company
+                <svg class="chev size-4 transition" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 11.17l3.71-3.94a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z" clip-rule="evenodd"/></svg>
+              </button>
+              <div class="dropdown-menu">
+                <a href="about.html"><span class="dropdown-menu__title">About us</span><span class="dropdown-menu__desc">Who we are and what drives us.</span></a>
+                <a href="why-us.html"><span class="dropdown-menu__title">Why Civa Trades</span><span class="dropdown-menu__desc">What makes our platform different.</span></a>
+                <a href="careers.html"><span class="dropdown-menu__title">Careers</span><span class="dropdown-menu__desc">Join the team building the future of trading.</span></a>
+                <a href="contact.html"><span class="dropdown-menu__title">Contact</span><span class="dropdown-menu__desc">Talk to our support team or visit our office.</span></a>
+              </div>
+            </li>
+            <li class="dropdown relative">
+              <button class="dropdown-toggle flex items-center gap-1.5 transition hover:text-white" aria-expanded="false">
+                Trading
+                <svg class="chev size-4 transition" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 11.17l3.71-3.94a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z" clip-rule="evenodd"/></svg>
+              </button>
+              <div class="dropdown-menu">
+                <a href="live-trading.html"><span class="dropdown-menu__title">Live trading</span><span class="dropdown-menu__desc">Trade global markets with real-time prices and charts.</span></a>
+                <a href="copy-trading.html"><span class="dropdown-menu__title">Copy experts</span><span class="dropdown-menu__desc">Automatically copy the trades of proven traders.</span></a>
+                <a href="futures.html"><span class="dropdown-menu__title">Futures</span><span class="dropdown-menu__desc">Trade commodities, indices, forex and crypto futures.</span></a>
+                <a href="plans.html"><span class="dropdown-menu__title">Investment plans</span><span class="dropdown-menu__desc">Grow your wallet with structured investment plans.</span></a>
+                <a href="portfolio-management.html"><span class="dropdown-menu__title">Portfolio management</span><span class="dropdown-menu__desc">Let our team build and manage your portfolio.</span></a>
+              </div>
+            </li>
+            <li class="dropdown relative">
+              <button class="dropdown-toggle flex items-center gap-1.5 transition hover:text-white" aria-expanded="false">
+                Markets
+                <svg class="chev size-4 transition" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 11.17l3.71-3.94a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z" clip-rule="evenodd"/></svg>
+              </button>
+              <div class="dropdown-menu">
+                <a href="stocks.html"><span class="dropdown-menu__title">Stocks</span><span class="dropdown-menu__desc">Buy and sell shares in leading global companies.</span></a>
+                <a href="metals.html"><span class="dropdown-menu__title">Metals</span><span class="dropdown-menu__desc">Trade gold, silver and other precious metals.</span></a>
+                <a href="etfs.html"><span class="dropdown-menu__title">ETFs</span><span class="dropdown-menu__desc">Diversify with funds that track whole markets.</span></a>
+                <a href="bonds.html"><span class="dropdown-menu__title">Bonds</span><span class="dropdown-menu__desc">Add steady, income-focused assets to your portfolio.</span></a>
+                <a href="ipos.html"><span class="dropdown-menu__title">IPOs</span><span class="dropdown-menu__desc">Get in early on newly listed companies.</span></a>
+              </div>
+            </li>
+            <li><a href="contact.html" class="transition hover:text-white">Contact</a></li>
+            <li><a href="support.html" class="transition hover:text-white">Support</a></li>
+          </ul>
+
+          <div class="flex items-center gap-3 md:gap-5">
+            <a href="https://app.civatrade.com/login" class="hidden whitespace-nowrap rounded-md bg-white/20 px-5 py-2 text-[15px] font-medium text-white transition hover:bg-white/30 sm:inline-block">Login</a>
+            <a href="https://app.civatrade.com/register" class="whitespace-nowrap rounded-md bg-white px-5 py-2 text-[15px] font-medium text-ink transition hover:bg-white/90">Sign Up</a>
+            <button id="menu-btn" class="-mr-2 p-2 lg:hidden" aria-label="Open menu" aria-expanded="false" aria-controls="mobile-menu">
+              <svg class="size-7" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8"><path stroke-linecap="round" d="M4 7h16M4 12h16M4 17h16" /></svg>
+            </button>
+          </div>
+        </div>
+
+        <!-- Mobile menu -->
+        <div id="mobile-menu" class="hidden border-t border-white/10 lg:hidden">
+          <div class="flex flex-col gap-1 px-5 py-4 text-lg text-white/85">
+            <a href="about.html" class="rounded-md px-3 py-2.5 hover:bg-white/10">Company</a>
+            <a href="live-trading.html" class="rounded-md px-3 py-2.5 hover:bg-white/10">Trading</a>
+            <a href="markets.html" class="rounded-md px-3 py-2.5 hover:bg-white/10">Markets</a>
+            <a href="contact.html" class="rounded-md px-3 py-2.5 hover:bg-white/10">Contact</a>
+            <a href="support.html" class="rounded-md px-3 py-2.5 hover:bg-white/10">Support</a>
+            <a href="https://app.civatrade.com/login" class="mt-2 rounded-md bg-white/15 px-3 py-3 text-center">Login</a>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+
+    <main>
+      <!-- ============ MARKETS 1: HERO (text-only, like the other inner pages) ============ -->
+      <section class="relative isolate overflow-hidden bg-black">
+        <!-- blurred orange glow, same as the other inner pages -->
+        <img src="assets/about/hero-bg.png" alt="" aria-hidden="true" class="pointer-events-none absolute left-1/2 top-[170px] -z-10 h-[1024px] w-[1536px] max-w-none -translate-x-1/2 object-cover blur-[100px]" />
+
+        <div class="mx-auto max-w-[1440px] px-5 pb-20 pt-14 md:px-10 lg:pb-[120px] lg:pt-20 xl:px-20">
+          <div class="relative z-10 lg:max-w-[902px]">
+            <span class="about-pill fade-up bg-brand/12">Markets</span>
+            <h1 class="fade-up mt-[30px] text-[38px] font-extrabold leading-[1.1] tracking-[-0.03em] sm:text-5xl lg:text-[56px] xl:text-[64px] xl:leading-[70px]" style="--d: 80ms">
+              Every market,<br />
+              <span class="text-[#b2b2b2]">one account.</span>
+            </h1>
+            <p class="fade-up mt-4 max-w-[640px] text-base leading-7 text-[#ccc] md:text-lg" style="--d: 160ms">
+              Stocks, ETFs, bonds, metals and new listings, all with live prices and all from your Civa Trades account.
+            </p>
+            <div class="fade-up mt-[30px] flex flex-wrap gap-4" style="--d: 240ms">
+              <a href="https://app.civatrade.com/register" class="btn-glow inline-block rounded-lg bg-brand px-10 py-3.5 text-base font-semibold tracking-[-0.01em] transition hover:bg-brand-dark">Start trading</a>
+              <a href="#all-markets" class="inline-block rounded-lg border border-white/30 bg-white/15 px-10 py-3.5 text-base font-semibold tracking-[-0.01em] transition hover:bg-white/25">Browse markets</a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============ MARKETS 2: DESCRIPTION + PHOTO ============ -->
+      <section class="bg-white text-cocoa">
+        <div class="mx-auto grid max-w-[1440px] items-center gap-14 px-5 py-20 md:px-10 lg:grid-cols-2 lg:gap-12 lg:py-[120px] xl:px-20">
+          <div class="reveal">
+            <span class="about-pill bg-brand/10">Global markets</span>
+            <h2 class="about-h2 mt-8">Build a portfolio across<br class="hidden sm:inline" /> the world’s markets</h2>
+            <p class="about-copy mt-5">
+              Mix household-name shares with funds, bonds and precious metals, or get in early on companies coming to market. Follow live prices and move between markets without switching apps or accounts.
+            </p>
+            <ul class="job__reqs mt-8">
+              <li>Shares in leading global companies</li>
+              <li>ETFs, bonds and precious metals</li>
+              <li>Live prices on every market</li>
+            </ul>
+            <a href="https://app.civatrade.com/register" class="about-cta mt-[50px]">
+              Open an account
+              <img src="assets/about/icon-arrow-right.svg" alt="" width="17" height="12" />
+            </a>
+          </div>
+
+          <div class="reveal side-photo" style="--d: 100ms">
+            <img src="assets/markets/market-screens.jpg" alt="Trading screen showing market indices and a live price chart" width="1200" height="799" loading="lazy" />
+          </div>
+        </div>
+      </section>
+
+      <!-- ============ MARKETS 3: ALL MARKETS ============ -->
+      <section id="all-markets" class="scroll-mt-[110px] bg-[#f3f3f3] text-cocoa">
+        <div class="mx-auto max-w-[1440px] px-5 py-20 md:px-10 lg:py-[120px] xl:px-20">
+          <div class="reveal mx-auto flex max-w-[690px] flex-col items-center text-center">
+            <span class="about-pill bg-brand/10">Explore</span>
+            <h2 class="about-h2 mt-5">Choose your market</h2>
+            <p class="mt-3 text-base leading-6 text-[#4d4d4d]">Each market has its own page with live prices and the details you need to get started.</p>
+          </div>
+
+          <div class="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-3 lg:mt-[60px]">
+            <article class="reveal contact-card-item" style="--d: 0ms">
+              <span class="about-icon text-white"><svg class="size-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M4 19.5h16M7 16v-4M12 16V7M17 16v-6" /></svg></span>
+              <h3>Stocks</h3>
+              <p>Buy and sell shares in leading global companies, from big tech to everyday brands.</p>
+              <a href="stocks.html" class="contact-card-item__link">Explore stocks <span aria-hidden="true">&rarr;</span></a>
+            </article>
+            <article class="reveal contact-card-item" style="--d: 100ms">
+              <span class="about-icon text-white"><svg class="size-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M12 3.5a8.5 8.5 0 1 0 8.5 8.5H12V3.5Z" /><path stroke-linecap="round" stroke-linejoin="round" d="M15 3.9A8.5 8.5 0 0 1 20.1 9H15V3.9Z" /></svg></span>
+              <h3>ETFs</h3>
+              <p>Diversify with funds that track whole markets, sectors or commodities in a single trade.</p>
+              <a href="etfs.html" class="contact-card-item__link">Explore ETFs <span aria-hidden="true">&rarr;</span></a>
+            </article>
+            <article class="reveal contact-card-item" style="--d: 200ms">
+              <span class="about-icon text-white"><svg class="size-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M4 9.5 12 5l8 4.5M5.5 10v7M10 10v7M14 10v7M18.5 10v7M4 19.5h16" /></svg></span>
+              <h3>Bonds</h3>
+              <p>Add steady, income-focused assets such as government and corporate bonds.</p>
+              <a href="bonds.html" class="contact-card-item__link">Explore bonds <span aria-hidden="true">&rarr;</span></a>
+            </article>
+            <article class="reveal contact-card-item" style="--d: 0ms">
+              <span class="about-icon text-white"><svg class="size-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M7 9h10l3 9H4l3-9Z" /><path stroke-linecap="round" stroke-linejoin="round" d="M9.5 9 11 5h2l1.5 4" /></svg></span>
+              <h3>Metals</h3>
+              <p>Trade gold, silver, platinum and other metals without holding physical bars.</p>
+              <a href="metals.html" class="contact-card-item__link">Explore metals <span aria-hidden="true">&rarr;</span></a>
+            </article>
+            <article class="reveal contact-card-item" style="--d: 100ms">
+              <span class="about-icon text-white"><svg class="size-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M6 16V11a6 6 0 1 1 12 0v5l1.5 2h-15L6 16Z" /><path stroke-linecap="round" d="M10 20.5a2 2 0 0 0 4 0" /></svg></span>
+              <h3>IPOs</h3>
+              <p>Get in early on high-growth companies before and after they go public.</p>
+              <a href="ipos.html" class="contact-card-item__link">Explore IPOs <span aria-hidden="true">&rarr;</span></a>
+            </article>
+            <article class="reveal contact-card-item" style="--d: 200ms">
+              <span class="about-icon text-white"><svg class="size-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M7 3.5h10M7 20.5h10M8 3.5c0 4 8 5 8 8.5s-8 4.5-8 8.5M16 3.5c0 4-8 5-8 8.5" /></svg></span>
+              <h3>Futures</h3>
+              <p>Trade commodities, indices, forex and crypto futures from the same account.</p>
+              <a href="futures.html" class="contact-card-item__link">Explore futures <span aria-hidden="true">&rarr;</span></a>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============ MARKETS 4: LIVE PRICES (TradingView, light theme) ============ -->
+      <section id="market-prices" class="scroll-mt-[110px] bg-white text-cocoa">
+        <div class="mx-auto max-w-[1440px] px-5 py-20 md:px-10 lg:py-[120px] xl:px-20">
+          <div class="reveal flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
+            <div>
+              <span class="about-pill bg-brand/10">Live prices</span>
+              <h2 class="about-h2 mt-5">Markets at a glance</h2>
+              <p class="mt-3 max-w-[560px] text-base leading-6 text-[#4d4d4d]">
+                Switch between markets to see how prices have moved over the past year.
+              </p>
+            </div>
+            <a href="https://app.civatrade.com/register" class="btn-glow shrink-0 self-start rounded-lg bg-brand px-10 py-3.5 text-base font-semibold tracking-[-0.01em] text-white transition hover:bg-brand-dark md:self-auto">Open an account</a>
+          </div>
+
+          <div class="reveal live-chart-panel mt-10 h-[520px] lg:mt-[60px] lg:h-[560px]" style="--d: 120ms">
+            <div class="tradingview-widget-container h-full">
+              <div class="tradingview-widget-container__widget h-full"></div>
+              <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-market-overview.js" async>
+                {
+                  "colorTheme": "light",
+                  "dateRange": "12M",
+                  "showChart": true,
+                  "locale": "en",
+                  "isTransparent": true,
+                  "showSymbolLogo": true,
+                  "showFloatingTooltip": false,
+                  "width": "100%",
+                  "height": "100%",
+                  "plotLineColorGrowing": "rgba(255, 98, 1, 1)",
+                  "plotLineColorFalling": "rgba(255, 98, 1, 1)",
+                  "gridLineColor": "rgba(240, 243, 250, 0)",
+                  "scaleFontColor": "rgba(106, 109, 120, 1)",
+                  "belowLineFillColorGrowing": "rgba(255, 98, 1, 0.12)",
+                  "belowLineFillColorFalling": "rgba(255, 98, 1, 0.12)",
+                  "belowLineFillColorGrowingBottom": "rgba(255, 98, 1, 0)",
+                  "belowLineFillColorFallingBottom": "rgba(255, 98, 1, 0)",
+                  "symbolActiveColor": "rgba(255, 98, 1, 0.12)",
+                  "tabs": [
+                    {
+                      "title": "Stocks",
+                      "symbols": [
+                        {
+                          "s": "NASDAQ:AAPL",
+                          "d": "Apple"
+                        },
+                        {
+                          "s": "NASDAQ:MSFT",
+                          "d": "Microsoft"
+                        },
+                        {
+                          "s": "NASDAQ:NVDA",
+                          "d": "Nvidia"
+                        },
+                        {
+                          "s": "NYSE:JPM",
+                          "d": "JPMorgan Chase"
+                        },
+                        {
+                          "s": "NYSE:KO",
+                          "d": "Coca-Cola"
+                        }
+                      ]
+                    },
+                    {
+                      "title": "ETFs",
+                      "symbols": [
+                        {
+                          "s": "AMEX:SPY",
+                          "d": "SPDR S&P 500 ETF"
+                        },
+                        {
+                          "s": "NASDAQ:QQQ",
+                          "d": "Invesco QQQ"
+                        },
+                        {
+                          "s": "AMEX:GLD",
+                          "d": "SPDR Gold Shares"
+                        }
+                      ]
+                    },
+                    {
+                      "title": "Metals",
+                      "symbols": [
+                        {
+                          "s": "OANDA:XAUUSD",
+                          "d": "Gold"
+                        },
+                        {
+                          "s": "OANDA:XAGUSD",
+                          "d": "Silver"
+                        },
+                        {
+                          "s": "OANDA:XPTUSD",
+                          "d": "Platinum"
+                        }
+                      ]
+                    },
+                    {
+                      "title": "Bonds",
+                      "symbols": [
+                        {
+                          "s": "NASDAQ:TLT",
+                          "d": "20+ Year Treasury ETF"
+                        },
+                        {
+                          "s": "AMEX:LQD",
+                          "d": "Corporate Bond ETF"
+                        },
+                        {
+                          "s": "EUREX:FGBL1!",
+                          "d": "Euro Bund Futures"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              </script>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============ MARKETS 5: START TRADING IN 3 STEPS (same section as index.html#get-started) ============ -->
+      <section id="get-started" class="bg-[#f3f3f3] text-[#1a1a1a]">
+        <div class="mx-auto flex max-w-[1440px] flex-col items-center px-5 pt-20 text-center md:px-10 lg:pt-28 xl:px-14">
+          <!-- Animated Civa logo mark (idle sway, leans toward the cursor, hops on hover/tap) -->
+          <div class="fox-live reveal" id="fox-live" aria-hidden="true">
+            <div class="fox-lean">
+              <div class="fox-body">
+                <img src="assets/brand/icon-duo.png" alt="" />
+              </div>
+            </div>
+            <span class="fox-shadow"></span>
+          </div>
+          <h2 class="reveal mt-8 text-[32px] font-semibold tracking-[-0.03em] md:text-[44px]" style="--d: 60ms">Start trading in 3 steps</h2>
+          <p class="reveal mt-3 max-w-[500px] text-base leading-relaxed md:text-[17px]" style="--d: 120ms">
+            Create an account, fund your wallet, grow your wealth. It's as easy as that with Civa Trades.
+          </p>
+
+          <ol class="mt-12 grid w-full max-w-[880px] gap-5 sm:grid-cols-3 lg:mt-16">
+            <li class="reveal step-card" style="--d: 0ms">
+              <h3 class="step-title">Register</h3>
+              <p class="step-text">Open your account and set up your profile.</p>
+              <img src="assets/steps/register.webp" alt="Civa Trades registration screen on a phone" loading="lazy" class="step-phone" />
+            </li>
+            <li class="reveal step-card" style="--d: 120ms">
+              <h3 class="step-title">Deposit</h3>
+              <p class="step-text">Fund your wallet to choose a trading plan.</p>
+              <img src="assets/steps/deposit.webp" alt="Select deposit method screen on a phone" loading="lazy" class="step-phone" />
+            </li>
+            <li class="reveal step-card" style="--d: 240ms">
+              <h3 class="step-title">Trade &amp; Invest</h3>
+              <p class="step-text">Invest, copy trades and grow your portfolio.</p>
+              <img src="assets/steps/trade-invest.webp" alt="Nvidia stock chart screen on a phone" loading="lazy" class="step-phone" />
+            </li>
+          </ol>
+
+
+          <a href="https://app.civatrade.com/register" class="reveal btn-glow mt-12 inline-flex items-center gap-3 rounded-full bg-brand px-10 py-4 text-base font-medium text-white transition hover:bg-brand-dark lg:mt-14">
+            Get Started
+            <svg class="size-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M5 12h14m-6-6 6 6-6 6" /></svg>
+          </a>
+        </div>
+      </section>
+      <!-- cta-block -->
+      <!-- ============ FILLER: ARTICLE CARDS ============ -->
+      <section class="bg-white text-cocoa">
+        <div class="cta-wrap">
+          <div class="reveal mx-auto flex max-w-[690px] flex-col items-center text-center">
+            <span class="about-pill bg-brand/10">Investing basics</span>
+            <h2 class="about-h2 mt-5">Start with the essentials</h2>
+          </div>
+          <div class="mt-10 grid gap-14 md:grid-cols-2 lg:mt-[60px] lg:gap-10">
+          <article class="reveal article-card" style="--d: 0ms">
+            <div class="article-card__pic"><img src="assets/cta/wallet-coins.jpg" alt="Wallet with dollar bills and coins on a marble table" width="1000" height="565" loading="lazy" /></div>
+            <h3 class="article-card__title">How much money do I need to start investing?</h3>
+            <div class="article-card__rule" aria-hidden="true"></div>
+            <p class="article-card__text">Less than you might think. Start with an amount you’re comfortable with, build the habit, and remember that all investing comes with risk.</p>
+            <a href="plans.html" class="cta-btn">Compare plans</a>
+          </article>
+          <article class="reveal article-card" style="--d: 100ms">
+            <div class="article-card__pic"><img src="assets/cta/chart-tablet.jpg" alt="Investor holding a coffee and checking a price chart on a tablet" width="1000" height="565" loading="lazy" /></div>
+            <h3 class="article-card__title">How do I follow the markets in real time?</h3>
+            <div class="article-card__rule" aria-hidden="true"></div>
+            <p class="article-card__text">Live prices and charts show how a market is moving right now. Learn what to look for before you place your first trade.</p>
+            <a href="live-trading.html" class="cta-btn">Learn more</a>
+          </article>
+          </div>
+        </div>
+      </section>
+
+    </main>
+
+    <!-- ============ SECTION 13: FOOTER ============ -->
+    <footer class="footer-gradient text-cocoa">
+      <div class="mx-auto max-w-[1440px] px-5 pb-10 pt-40 md:px-10 lg:pt-[200px] xl:px-14">
+        <div class="grid gap-12 lg:grid-cols-[1.15fr_0.8fr_0.8fr_420px] lg:gap-10">
+          <!-- Brand -->
+          <div>
+            <a href="index.html" class="flex items-center gap-3" aria-label="Civa Trades home">
+              <img src="assets/brand/logo-dark.png" alt="Civa Trades" class="h-9 w-auto lg:h-10" />
+            </a>
+            <p class="mt-6 max-w-[290px] text-base leading-relaxed">Trade global markets, follow live price movement and copy expert traders, all from one secure platform.</p>
+          </div>
+
+          <!-- Resources -->
+          <div>
+            <h2 class="text-[28px] font-bold tracking-[-0.02em] lg:text-[30px]">Resources</h2>
+            <ul class="footer-links mt-7">
+              <li><a href="partners.html">Partners and advertising</a></li>
+              <li><a href="about.html">About us and the company</a></li>
+              <li><a href="services.html">Services and projects</a></li>
+              <li><a href="contact.html">Contact us online</a></li>
+            </ul>
+          </div>
+
+          <!-- Company -->
+          <div>
+            <h2 class="text-[28px] font-bold tracking-[-0.02em] lg:text-[30px]">Company</h2>
+            <ul class="footer-links mt-7">
+              <li><a href="about.html">About</a></li>
+              <li><a href="contact.html">Contact</a></li>
+              <li><a href="faqs.html">FAQs</a></li>
+            </ul>
+          </div>
+
+          <!-- Contact + regulators -->
+          <div>
+            <dl class="contact-card">
+              <div><dt>Address:</dt><dd>71 South Wacker Drive, Chicago, IL</dd></div>
+              <div><dt>Email:</dt><dd><a href="mailto:contact@civatrade.com">contact@civatrade.com</a></dd></div>
+              <div><dt>Phone:</dt><dd><a href="tel:+15673432446">+1 (567) 343 2446</a></dd></div>
+              <div><dt>Opening Hours:</dt><dd>8am - 5pm | Mon - Fri</dd></div>
+            </dl>
+          </div>
+        </div>
+
+        <hr class="mt-16 border-cocoa/20 lg:mt-20" />
+
+        <!-- Regulators -->
+        <div class="reg-list mt-12 lg:mt-14">
+          <div class="reg-row">
+            <div class="reg-logo"><img src="assets/images/financial-commission.png" alt="The Financial Commission" width="200" height="80" /></div>
+            <p>Civa Trades is a member of The Financial Commission, an international organization engaged in the resolution of disputes within the financial services industry in the Forex market.</p>
+          </div>
+          <div class="reg-row">
+            <div class="reg-logo"><img src="assets/images/securities.png" alt="US Securities and Exchange Commission" width="250" height="80" /></div>
+            <p>Civa Trades is regulated by the US Securities and Exchange Commission. The mission of the SEC is to protect traders; maintain fair, orderly, and efficient markets; and facilitate capital formation.</p>
+          </div>
+        </div>
+
+        <!-- Legal text -->
+        <div class="legal mt-10 lg:mt-12">
+          <h3>Regulatory Information</h3>
+          <p>Civa Trades is committed to providing traders with access to financial markets in a transparent and responsible trading environment. Our services are designed to support both beginner and experienced traders as they explore opportunities across multiple financial markets.</p>
+          <h3>Our Markets</h3>
+          <p>Civa Trades provides access to a range of financial markets, including foreign exchange (Forex), cryptocurrencies, indices, and commodities, through a single trading account. The availability of specific instruments, trading conditions, and account features may vary depending on your jurisdiction and account type.</p>
+          <h3>Important Risk Disclosure</h3>
+          <p>Trading financial instruments involves significant risk and may not be suitable for every investor. Forex, cryptocurrencies, indices, and commodities can experience substantial price fluctuations, and you may lose some or all of your invested capital. Trading with leverage or on margin can amplify both profits and losses.</p>
+          <p>Before opening an account or entering into any transaction, you should carefully consider your financial circumstances, investment objectives, level of experience, and risk tolerance. You should only trade with money you can afford to lose and seek independent financial advice if necessary.</p>
+          <h3>General Disclaimer</h3>
+          <p>All information provided on this website is for informational purposes only and does not constitute investment advice, a recommendation, an offer, or a solicitation to buy or sell any financial instrument or trading service. Information on this website should not be interpreted as a guarantee of future performance or returns.</p>
+          <p>Market data, prices, analysis, and other information may change without notice. Past performance is not indicative of future results. You are responsible for your own trading decisions and should ensure that you understand the risks associated with the financial products and services you use.</p>
+          <h3>Regulatory Status and Memberships</h3>
+          <p>Civa Trades' regulatory status, applicable licences, and memberships in relevant financial organisations should be confirmed through the appropriate regulatory authorities. Any regulatory or membership claims displayed on this website must accurately reflect the legal entity providing the services and the jurisdictions in which it is authorised to operate.</p>
+          <h3>Company Information</h3>
+          <p>Civa Trades is a trading brand operated by CIVC PARTNERS LLC. The services available to clients depend on the operating entity, applicable regulations, and the client's country of residence.</p>
+        </div>
+
+        <div class="mt-24 flex flex-col justify-between gap-2 text-xs text-white/40 sm:flex-row lg:mt-20">
+          <p>Civa Trades &copy; <span id="year">2026</span></p>
+          <p>All rights reserved</p>
+        </div>
+      </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/lenis@1.3.4/dist/lenis.min.js"></script>
+    <script src="js/main.js?v=20261110f"></script>
+    <!-- Smartsupp Live Chat script -->
+    <script type="text/javascript">
+      var _smartsupp = _smartsupp || {};
+      _smartsupp.key = '982066c507d2eb529d15e29e24718c0dc6a4e4f9';
+      // phones and tablets: lift the chat bubble 100px off the bottom edge
+      if (window.matchMedia('(max-width: 991.98px)').matches) { _smartsupp.offsetY = 100; }
+      window.smartsupp||(function(d) {
+        var s,c,o=smartsupp=function(){ o._.push(arguments)};o._=[];
+        s=d.getElementsByTagName('script')[0];c=d.createElement('script');
+        c.type='text/javascript';c.charset='utf-8';c.async=true;
+        c.src='https://www.smartsuppchat.com/loader.js?';s.parentNode.insertBefore(c,s);
+      })(document);
+    </script>
+  </body>
+</html>

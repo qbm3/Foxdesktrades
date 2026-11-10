@@ -21,3 +21,28 @@ if (contactForm) {
     status.textContent = `Your email app should open with your message ready to send. If it doesn't, email us at ${to}.`;
   });
 }
+
+// "Request a call" forms (inner pages). Same idea as above: opens the visitor's email app, ready to send.
+document.querySelectorAll("[data-call-form]").forEach((form) => {
+  const status = form.querySelector(".call-form__status");
+  form.addEventListener("submit", (e) => {
+    e.preventDefault();
+    form.classList.add("was-validated");
+    if (!form.checkValidity()) {
+      form.reportValidity();
+      return;
+    }
+    const f = (name) => form.elements[name].value.trim();
+    const body = [
+      "Please call me back.",
+      "",
+      `Name: ${f("name")}`,
+      `Email: ${f("email")}`,
+      `Phone: ${f("phone")}`,
+      `Page: ${document.title}`,
+    ].join("\n");
+    const to = form.dataset.mailto;
+    window.location.href = `mailto:${to}?subject=${encodeURIComponent(`Call request from ${f("name")}`)}&body=${encodeURIComponent(body)}`;
+    status.textContent = `Your email app should open with your request ready to send. If it doesn't, email us at ${to}.`;
+  });
+});

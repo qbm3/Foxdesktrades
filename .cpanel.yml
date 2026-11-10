@@ -4,10 +4,10 @@ deployment:
     # - export DEPLOYPATH=/home/polyavtq/civatrade.online/
     - export DEPLOYPATH=/home/civatrad/public_html/
 
-    # this host has no rsync, so copy the public site files with cp (only the pages, css, js and assets;
+    # this host has no rsync, so copy the public site files with cp (the pages, .htaccess, css, js and assets;
     # existing docroot files such as .well-known and cgi-bin are left alone)
-    - /bin/cp -R *.html css js assets $DEPLOYPATH
+    - /bin/cp -R *.html .htaccess css js assets $DEPLOYPATH
     # keep the docroot and copied files readable by the web server
     - /bin/chmod 755 $DEPLOYPATH
     - /bin/chmod -R u=rwX,go=rX ${DEPLOYPATH}css ${DEPLOYPATH}js ${DEPLOYPATH}assets
-    - /bin/chmod 644 ${DEPLOYPATH}*.html
+    - /bin/chmod 644 ${DEPLOYPATH}*.html ${DEPLOYPATH}.htaccess

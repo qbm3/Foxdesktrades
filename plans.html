@@ -38,10 +38,10 @@
     <link rel="preload" href="assets/fonts/plus-jakarta-sans-latin.woff2" as="font" type="font/woff2" crossorigin />
 
     <!-- Tailwind, compiled from css/tailwind.input.css (rebuild after adding new classes — see README) -->
-    <link rel="stylesheet" href="css/tailwind.css?v=20261109s" />
+    <link rel="stylesheet" href="css/tailwind.css?v=20261110f" />
     <!-- Lenis smooth scroll -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lenis@1.3.4/dist/lenis.css" />
-    <link rel="stylesheet" href="css/styles.css?v=20261109s" />
+    <link rel="stylesheet" href="css/styles.css?v=20261110f" />
   </head>
 
   <body class="bg-ink font-sans text-white antialiased">
@@ -108,6 +108,7 @@
                 <a href="copy-trading.html"><span class="dropdown-menu__title">Copy experts</span><span class="dropdown-menu__desc">Automatically copy the trades of proven traders.</span></a>
                 <a href="futures.html"><span class="dropdown-menu__title">Futures</span><span class="dropdown-menu__desc">Trade commodities, indices, forex and crypto futures.</span></a>
                 <a href="plans.html"><span class="dropdown-menu__title">Investment plans</span><span class="dropdown-menu__desc">Grow your wallet with structured investment plans.</span></a>
+                <a href="portfolio-management.html"><span class="dropdown-menu__title">Portfolio management</span><span class="dropdown-menu__desc">Let our team build and manage your portfolio.</span></a>
               </div>
             </li>
             <li class="dropdown relative">
@@ -281,6 +282,26 @@
         </div>
       </section>
 
+      <!-- cta-block -->
+      <!-- ============ CTA: REQUEST A CALL ============ -->
+      <section class="call-cta" data-parallax>
+        <div class="call-cta__bg" data-speed="-0.12" aria-hidden="true"><img src="assets/cta/laptop-charts.jpg" alt="" width="1920" height="1280" loading="lazy" /></div>
+        <div class="cta-wrap">
+          <h2 class="reveal call-cta__title">Request <span class="cta-kicker">a call</span></h2>
+          <p class="reveal call-cta__text" style="--d: 80ms">Our team is ready to call you back, answer your questions and help you choose the right way to invest. Leave your details and we’ll be in touch.</p>
+          <form class="reveal call-form" data-call-form data-mailto="contact@civatrade.com" novalidate style="--d: 160ms">
+            <label class="sr-only" for="call-name">Your name</label>
+            <input id="call-name" name="name" type="text" placeholder="Your name" autocomplete="name" required />
+            <label class="sr-only" for="call-email">Your email</label>
+            <input id="call-email" name="email" type="email" placeholder="Your email" autocomplete="email" required />
+            <label class="sr-only" for="call-phone">Your phone number</label>
+            <input id="call-phone" name="phone" type="tel" placeholder="Your phone number" autocomplete="tel" required />
+            <button type="submit" class="cta-btn">Request a call</button>
+            <p class="call-form__status" role="status" aria-live="polite"></p>
+          </form>
+        </div>
+      </section>
+
       <!-- ============ PLANS 4: START TRADING IN 3 STEPS (same section as index.html#get-started) ============ -->
       <section id="get-started" class="bg-white text-[#1a1a1a]">
         <div class="mx-auto flex max-w-[1440px] flex-col items-center px-5 pt-20 text-center md:px-10 lg:pt-28 xl:px-14">
@@ -409,7 +430,8 @@
     </footer>
 
     <script src="https://cdn.jsdelivr.net/npm/lenis@1.3.4/dist/lenis.min.js"></script>
-    <script src="js/main.js?v=20261109s"></script>
+    <script src="js/contact.js?v=20261110f"></script>
+    <script src="js/main.js?v=20261110f"></script>
     <!-- Smartsupp Live Chat script -->
     <script type="text/javascript">
       var _smartsupp = _smartsupp || {};
